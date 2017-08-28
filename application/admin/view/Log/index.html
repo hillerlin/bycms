@@ -1,0 +1,163 @@
+ <!-- 头部 -->
+	{include file='public/header'}
+<!-- 头部 --> 
+	
+			<div class="content">
+				<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
+				<div class="edit_title">{$meta_title|default=""}</div>
+				<div class="table">
+					<div class="edit">
+						<div class="edit_left ">
+							<a href="{:U('add')}" class="add cur">新增</a>
+							<a  data-url="{:U('del')}" class="delete cur">删除</a>
+						</div>
+						<div class="search_right">
+							<input type="text" value="{:input('title')}"/>
+							<div class="search_btn"></div>
+						</div>
+					</div>
+					<table class="list_table">
+					    <tr><th> <input class="checkbox check-all" type="checkbox">
+											
+                                                </th>
+										<th>id</th><th class="">用户名称</th>
+		
+
+
+		<th class="">日志内容</th>
+		<th class="">创建时间</th>
+		<th class="">操作</th>
+				
+                                            </tr>
+				       {volist name="res.list" id="vo"}
+
+                                            <tr class="even gradeC">
+                                               <td> 
+											<input class="ids row-selected" type="checkbox" name="id[]" value="{$vo.id}">
+                                                </td>
+									<td>{$vo.id} </td>	<td><a href="{:U('auth/edit?id='.$vo['id'])}">{$vo.uid|get_username}</a> </td>
+		
+
+
+			<td>{$vo.title}
+		
+			</td>
+			<td>{$vo.create_time|time_format}</td>
+			<td class="list_opr">
+		
+                                     <span class="opr_box">
+									 <a href="{:url('edit?id='.$vo['id'])}" class="edit_btn cur">编辑</a>
+									 <a data-url="{:url('del?id='.$vo['id'])}" class="del_btn cur">删除</a>
+								
+                                        </span>          
+                </td>
+                                            </tr>
+											
+										{/volist}
+					</table>
+					<!--分页-->
+					<ul class="pagination">
+						  {$res.page}
+					</ul>
+				</div>
+				<!--/*弹出层s*/-->
+				<div class="mask_container" style="display: none;">
+					<div class="mask">
+						<div class="name_del">你确定要删除这条记录吗？</div>
+						<div class="name_btn">
+							<div class="cancel cur">取消</div>
+							<div class="sure cur">确定</div>
+						</div>
+					</div>    	
+			    </div>
+				
+				<!--/*弹出层e*/-->
+			</div>
+		</div>
+	    <script>
+			$(function(){
+				initPage();
+				window.onresize=function(){
+					initPage();
+				}
+				bindEvent();
+			});
+			
+			function initPage(){
+				var contentWidth = $(window).width() -261;
+				$(".content").width(contentWidth);
+				$(".nav_tree").css("min-height",'715px');
+				$(".nav_tree").attr("min-height",715);
+				$(".content").css("min-height",($(window).height() - 86) + 'px');
+				$(".content").attr("min-height",($(window).height() - 86));
+				$(".table").css("height",'715px');
+				$(".table").css("min-height",($(window).height() - 86) + 'px')
+				$(".mask_container").height($(window).height());
+				if($(".nav_tree").height() > $(".table").height()){
+					$(".table").css("min-height",$(".nav_tree").height());
+					$(".table").height($(".nav_tree").height() - 110);
+				}
+				$(".content").removeClass("none");
+			}
+			
+			function bindEvent(){
+				$(".p_menue").on('click',function(){
+					if($(this).parent(".menue").hasClass("down")){
+						$(this).parent(".menue").removeClass("down").addClass("up");
+					}else{
+						$(this).parent(".menue").removeClass("up").addClass("down");
+					}
+					calculateHeight();
+				});
+				$(".c_menue_item").on("click",function(){
+					if(!$(this).hasClass("checked")){
+						$(".nav_tree_list .c_menue_item").removeClass("checked");
+						$(this).addClass("checked");
+					}
+				})
+				
+				$(".page_num").click(function(){
+					$(this).addClass("current_page").siblings().removeClass("current_page");
+				});
+			}
+			
+			function openMask(){
+				$(".mask_container").show();
+			}
+			function closeMask(){
+				$(".mask_container").hide();
+			}
+			function calculateHeight(){
+				var currentRightHeight = $(".table").height();
+				var currentNavHeight = $(".nav_tree").height();
+				if(currentRightHeight < currentNavHeight){
+					$(".table").height(currentNavHeight);
+				}else{
+					if(currentNavHeight > $(".nav_tree").attr("min-height")){
+						$(".table").height(currentNavHeight);
+					}else{
+						$(".table").height($(".nav_tree").attr("min-height"));
+					}
+				}
+			}
+	$(".search_btn").click(function(){
+		var url ="{:url('index')}";
+        var query  = $('.search_right input').val();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+		if(query){
+			query = 'title=' +query + "&" + query;
+        }
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+		</script>	
+		
+	 <!-- 头部 -->
+	{include file='public/footer'}
+<!-- 头部 --> 
+

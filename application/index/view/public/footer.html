@@ -1,0 +1,6 @@
+<div class="footer">
+	 <p>{volist name="footer" id="vo" key="k"}
+			<a href="{:url('about/cate?id='.$vo['id'])}">{$vo.title}</a>  {if condition="$k lt 4"}| {/if}
+                {/volist}</p>
+	<p> Powered by <a href="http://www.yershop.com/" style="color:#f30" target="_blank">byCmsV1.0</a>  @yershop 2014-2017 </p>
+	</div>

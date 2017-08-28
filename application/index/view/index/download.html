@@ -1,0 +1,116 @@
+{include file="public/header" /} 
+
+	<div class="nav_bar in_width">
+			<a href="javascript:void(0);">首页</a>
+			<span>&gt;</span>
+			
+		<span >下载</span>
+		</div>
+
+		<div class="content">
+			<div class="content_in in_width">
+				<div class="fl main_left">
+			
+					<div class="brd">
+					    <a href="http://www.yershop.com/" > <img src="__IMG__/brd.png" width="850px"></a>
+					</div>
+
+					<!--图片新闻-->
+					<div class="pic_news fl">
+						<div class="pic_news_title">最新下载</div>
+						<div class="pic_news_content">
+							 {By:read  model_id="3" name="vo" order="id desc" limit="10"}
+							<div class="pic_news_img_wrap">
+								<a href="{:url('article/detail?id='.$vo['id'])}"><img src="{$vo.cover_id|get_cover_path}" style="height:85px;width:85px;"/></a>
+								<a class="pic_news_link" href="{:url('article/detail?id='.$vo['id'])}">{$vo.title|substr_cn="39"}</a>
+							</div>
+						    {/By:read}
+						</div>
+					</div>
+					<!--图片新闻end-->
+					
+					<!--四大模块-->
+					<div class="four_module fl">
+						
+						{volist name="tree" id="vo" offset="0" length="2"} 
+						<div class="module_wrapper">
+							<div class="module_title">
+								<span class="module_title_l">{$vo.title}</span>
+							    <a href="{:url('article/lists?id='.$vo['id'])}" class="module_title_more">更多<<</a>
+							</div>
+							
+							<ul class="module_news_list">
+								  {volist name="vo['item']" id="vo1"  }
+
+								     <li><a  class="active" href="{:url('article/detail?id='.$vo1['id'])}">{$vo1.title|substr_cn="59"}    </a>
+								   {/volist}
+							</ul> 
+							  
+		                 
+						</div>
+						 {/volist}
+						
+						
+						
+					</div>
+					<!--四大模块end-->
+					<div class="clear"></div>
+				</div>
+				<div class="fl content_right">
+					
+					<div class="rank_div">
+						<div class="rank_title">排行
+							
+						</div>
+						<ul class="rank_list">
+						  {By:read  model_id="3" name="vo" order="view desc" limit="10"}
+			              <li><a href="{:url('article/detail?id='.$vo['id'])}">{$vo.title|substr_cn="49"}    </a>
+				         </li>
+		                  {/By:read}
+						</ul>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	
+		{include file="public/footer" /}
+	</body>
+
+	<script>
+		$(function(){
+			//轮播初始化
+			var text = $($(".slider_imgwrap li").get(0)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			var interval = setInterval(sliderImg,3000);
+			//轮播点击页面跳转
+			$(".slider_num").click(function(){
+		        clearInterval(interval);
+				sliderImg(this);
+				interval = setInterval(sliderImg,3000);
+			})
+		});
+		function sliderImg(obj){
+			var index;
+			if(obj != null){
+				var $this = $(obj);
+				var index = $this.index(".slider_num");
+				showPageByIndex(index);
+			}else{
+				var index = $(".current").index(".slider_num");
+				var max = $(".slider_num").length;
+				var nextindex = (index +1)%max;
+				showPageByIndex(nextindex);
+			}
+		}
+		function showPageByIndex(index){
+			$($(".slider_num").get(index)).addClass("current").siblings().removeClass("current");
+			var width = $(".slider_imgwrap li img").width();
+			var left = index * (-width);
+			var text = $($(".slider_imgwrap li").get(index)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			$(".slider_imgwrap").animate({"left":left + 'px'},1000);
+		}
+
+	</script>
+</html>

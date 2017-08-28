@@ -1,0 +1,194 @@
+ <!-- 头部 -->
+	{include file='public/header'}
+<!-- 头部 -->  
+			<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>	
+  <script type="text/javascript" src="__COMMON__/jquery.colorpicker.js"></script>	
+			<div class="content">
+			<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
+					<div class="edit_title"><i class="fa fa-{$now.font|default=''}"></i>{$meta_title|default=""}</div>
+				<div class="edit_box">
+				
+					<div class="edit_tab">
+				{foreach name="groups" item="vo"}
+			      <div class="tab_option {eq name='type' value='$key'}on{/eq}"><a href="{:U('?group='.$key)}">{$vo}配置</a></div>
+		     	{/foreach}
+					</div>
+					<div class="edit_content">
+							 <form class="group-form"  action="{:url('')}" method="post">
+							 <div class="edit_content_tab">
+						 	{volist name="list" id="config"} 
+						  	{switch name="config.type"}
+			                {case value="string"}
+						    <div class="input_title">{$config.title}<span>({$config.remark})</span></div>
+							<input type="text" name="config[{$config.name}]" class="input_box" value="{$config.value}"/>
+							{/case}	
+						    {case value="textarea"}
+						    <div class="input_title">{$config.title}<span>({$config.remark})</span></div>
+							<textarea name="config[{$config.name}]"/>{$config.value}</textarea>
+							{/case}	
+                           {case value="radio"}
+						    <div class="input_title">{$config.title}<span>({$config.remark})</span></div>
+							<input type="radio" name="config[{$config.name}]" value="{$config.value}"/>
+							{/case}	
+							 {case value="select"}
+						    <div class="input_title">{$config.title}<span>({$config.remark})</span></div>
+							<select name="config[{$config.name}]">
+				              {volist name=":parse_config_attr($config['extra'])" id="vo"}
+					           <option value="{$key}" {eq name="config.value" value="$key"}selected{/eq}>{$vo}</option>
+				           {/volist}
+			              </select>
+							
+							{/case}	
+							 {case value="color"}
+						    <div class="input_title">{$config.title}<span>({$config.remark})</span></div>
+							 <input  class="input_box" type="text" name="config[{$config.name}]" value="{$config.value}" id="{$config.name}" style="color:{$config.value}"/>
+							<script>
+							$("#{$config.name}").colorpicker({
+								fillcolor:true,
+								success:function(o,color){
+									$(o).css("color",color);
+								}
+							});</script>
+							{/case}	
+				      	  {case value="picture"}
+						   <div class="upload_div">
+								<div class="input_title">{$config.title}<span>({$config.remark})</span></div>
+								<div class="upload_btn_group">
+									<div class="upload_btn">上传图片</div>
+									<input type="file" class="upload_file" id="{$config.name}"/>
+							 	</div>
+								<div class="upload_imgs h50">
+									<input type="hidden" name="config[{$config.name}]"  value="{$config.value}"	>
+									  <span class="upload_imgs_wrap upload-pre-img-{$config.name} ">
+							          {notempty name="$config.value"}  
+									  <div class="upload-pre-item"> 
+									    <img src="{$config.value|get_cover_path}"/>
+						                </div>
+									  {/notempty}
+									</span>
+								</div>
+							</div>										
+					    <script type="text/javascript">
+
+
+
+				    /* 初始化上传插件 */
+					$("#{$config.name}").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__COMMON__/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传图片",
+				        "uploader"        : "{:url('File/uploadPicture',array('session_id'=>session_id()))}",
+				        "width"           : 120,
+				        'removeTimeout'	  : 1,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : uploadPicture{$config.name},
+				        'onFallback' : function() {
+				            alert('未检测到兼容版本的Flash.');
+				        }
+				    });
+					function uploadPicture{$config.name}(file, data){
+				    	var data = $.parseJSON(data);
+				    	var src = '';
+				        if(data.status){
+				        	src = data.url || data.path;
+							$("input[name='config[{$config.name}]']").val(data.id);
+				        	$('.upload-pre-img-{$config.name}').html(
+				        		' <div class="upload-pre-item"><img src="' +data.src + '"/> </div>'
+				        	);
+				        } 
+				    }
+					</script>
+                     {/case}
+
+					 
+					 {/switch}
+					{/volist}	
+						</div>
+						<div class="edit_content_tab none">
+							
+						</div>
+						<div class="btn_group">
+						    <input type="hidden" name="id" value="{$info.id|default=""}">
+							<div class="confirm_btn">确认</div>
+							<div class="cancel_btn">返回</div>
+						</div></form> 
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	
+    <script>		
+	    $(function(){
+				initPage();
+				window.onresize=function(){
+					initPage();
+				}
+				bindEvent();
+			});
+			
+			function initPage(){
+			
+				$(".nav_tree").css("min-height",($(window).height() - 86) + 'px');
+				
+				$(".nav_tree").attr("min-height",$(window).height() - 86);
+				
+
+				var currentRightHeight = $(".content").height();
+				var currentNavHeight = $(".nav_tree").height();
+				if(currentRightHeight < currentNavHeight){
+					if($(".tips_msg:hidden").length > 0){
+						$(".edit_box").css("height",$(".content").height() + (currentNavHeight - currentRightHeight));
+					}else{
+						$(".edit_box").css("height",$(".edit_box").height() + (currentNavHeight - currentRightHeight));
+					}
+				}else{
+					$(".nav_tree").css("min-height",$(".nav_tree").height() + (currentRightHeight - currentNavHeight));
+				}
+			}
+			
+			function bindEvent(){
+				$(".p_menue").on('click',function(){
+					if($(this).parent(".menue").hasClass("down")){
+						$(this).parent(".menue").removeClass("down").addClass("up");
+						$(this).find("span").attr("class","folder_icon_on");
+					}else{
+						$(this).parent(".menue").removeClass("up").addClass("down");
+						$(this).find("span").attr("class","folder_icon");
+					}
+					
+				});
+				$(".c_menue_item").on("click",function(){
+					if(!$(this).hasClass("checked")){
+						$(".nav_tree_list .c_menue_item").removeClass("checked");
+						$(this).addClass("checked");
+					}
+				})
+				$(".close_tips").click(function(){
+					$(".tips_msg").hide();
+					
+				});
+				
+			}
+			
+			function calculateHeight(){
+				var currentRightHeight = $(".content").height();
+				var currentNavHeight = $(".nav_tree").height();
+				if(currentRightHeight < currentNavHeight){
+					if($(".tips_msg:hidden").length > 0){
+						$(".edit_box").css("height",$(".content").height() + (currentNavHeight - currentRightHeight));
+					}else{
+						$(".edit_box").css("height",$(".edit_box").height() + (currentNavHeight - currentRightHeight));
+					}
+				}else{
+					if(currentNavHeight > $(".nav_tree").attr("min-height")){
+						$(".edit_box").css("height",$(".edit_box").height() + (currentNavHeight - currentRightHeight));
+					}else{
+						$(".edit_box").css("height",$(".edit_box").height() + ( $(".nav_tree").attr("min-height") - currentRightHeight));
+					}
+				}
+			}</script>
+ <!-- 头部 -->
+	{include file='public/footer'}
+<!-- 头部 --> 

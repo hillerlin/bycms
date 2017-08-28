@@ -1,0 +1,427 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+img{
+	border: 0;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float:right;
+}
+.clear{
+	clear: both;
+}
+.cursor{
+	cursor: pointer;
+}
+a{
+	text-decoration: none;
+	color:#333333;
+}
+a:hover{
+	color: red;
+}
+.fs12{
+	font-size: 12px;
+}
+.fs13{
+	font-size: 13px;
+}
+.fs14{
+	font-size: 14px;
+}
+.fs16{
+	font-size: 16px;
+}
+.fs18{
+	font-size: 18px;
+}
+.fs20{
+	font-size: 20px;
+}
+.fs22{
+	font-size: 22px;
+}
+.fs24{
+	font-size: 24px;
+}
+.fs26{
+	font-size: 26px;
+}
+.none{
+	display: none;
+}
+body{
+	background-image: url(../images/bodybg.png);
+	background-repeat: repeat-x;
+}
+.nav{
+	width:100%;
+	height:77px;
+	background-color: #ffffff;
+	border-bottom:2px solid #FC464C;
+}
+.nav img{
+	float:left;
+	margin-left:22px;
+	margin-top:14px;
+	width:182px;
+	height:58px;
+}
+.in_width{
+	width:893px;
+	margin:0 auto;
+}
+.login_info{
+	height:14px;
+	margin-top:53px;
+}
+.login_info a{
+	float:left;
+	display: inline-block;
+	padding: 0 11px;
+	border-right:1px solid #565656;
+	font-size: 14px;
+	line-height: 14px;
+	height:14px;
+	color:#565656;
+}
+.login_info a:last-child{
+	border-right:0;
+}
+
+.main{
+	margin-top:34px;
+	overflow:hidden;
+}
+.left_tree{
+	display: inline-block;
+	float:left;
+	width:207px;
+	height:364px;
+}
+.main_title{
+	height:34px;
+	width:207px;
+}
+.main_title .ab_ch{
+	width:85px;
+	height:21px;
+	float:left;
+	margin-left:33px;
+	margin-top:3px;
+}
+.main_title .ab_en{
+	width:54px;
+	height:10px;
+	float:left;
+	margin-left:12px;
+	margin-top:13px;
+}
+.tree_list{
+	width:207px;
+	height:327px;
+	list-style: none;
+	background: url(../images/lf_bg.png) no-repeat 0px 0px;
+	padding-top: 8px;
+}
+.tree_list li{
+	width:207px;
+	height:31px;
+	background: url(../images/line_bg.png) no-repeat 26px 30px;
+	text-indent: 46px;
+	line-height:31px;
+	font-size: 15px;
+	position: relative;
+}
+.tree_list li.cur a{
+	font-weight: bold;
+	color:#FA4531;
+}
+.tree_list li.cur a:before{
+	content: "";
+	width:7px;
+	height:9px;
+	display: inline-block;
+	position: absolute;
+	top:10px;
+	left:33px;
+	background: url(../images/cur.png) no-repeat 0px 0px;
+}
+.right{
+	float:left;
+	width:658px;
+	margin-left:22px;
+}
+.right_content{
+	height:240px;
+	border-bottom:1px solid #E5E5E5;
+}
+.main_img{
+	width:658px;
+	height:169px;
+}
+/*注册*/
+.member .lft{
+	float:left;
+	width:629px;margin-left:1px;
+}
+.member .rgt{
+	float:left;
+}
+.member  h2{
+	font-size:24px;
+	margin-left:20px;
+	border-bottom:1px dashed #eee;
+	margin-bottom:26px;
+	height:33px;
+	line-height:33px;padding:9px 0;
+}
+.member  h2 span{
+	margin-left:31px;
+	
+}
+.member  h2 i{
+	font-size:13px;
+	font-style:normal;
+}
+.member  .ipt{
+	width:241px;
+	height:24px;
+}
+
+.member  .verify img{
+	width:109px;
+	height:24px;
+	vertical-align:bottom;
+}
+.member .form-group{
+	height:29px;
+	line-height:29px;
+	margin-bottom:22px;
+}
+.member .form-group label{
+	width:136px;
+	display:inline-block;
+	text-align:right;
+}
+.member .form-group .btn_sbt{
+	    width: 194px;
+   height: 42px;
+    text-align: center;
+    background: url(../images/spider.png) repeat-x -4px -138px;
+    color: #fff;
+    display: inline-block;
+}
+.member .xieyi img,.member .xieyi input,.member .xieyi a{
+	vertical-align:center;
+	display:inline-block;
+	
+}
+.member .form-group .agr{
+	color:#ff9999;
+	font-size:12px;
+}
+.member .form-group .read{
+	color:#333;
+	font-size:12px;
+	
+}
+.member .rgt  p{
+	height:25px;
+	line-height:25px;
+}
+.member .rgt a{
+	height:41px;
+	line-height:41px;
+	text-align:center;
+	width:48px;	
+	background: url(../images/spider.png) repeat-x -111px -61px;
+	display:block;
+	border:1px solid fff4f3;
+}
+.member .lft .login_a{
+	    height: 41px;
+    line-height: 41px;
+    text-align: center;
+    width: 48px;
+    background: url(../images/spider.png) repeat-x -111px -61px;
+    display: inline-block;
+    
+}
+.member .lft .line{
+	border-top:1px solid fff4f3;
+}
+}
+.member .lft .not{
+	color:#333;
+	font-size:12px;
+}
+
+.member .lft .reg_a{
+	height:41px;
+	line-height:41px;
+	text-align:center;
+	width:93px;	
+	    background: url(../images/spider.png) repeat-x -2px -62px;
+	display:inline-block;
+
+	display:block;
+	margin-left:135px;
+}
+.member .login-lft{
+	
+	width:554px;height:400px;
+}
+.member .login-lft .ipt{
+	width:211px;
+}
+.verify_input{
+	width:104px;
+	height:24px;
+}
+.member .rgt .login{
+	height:318px;width:318px;
+	line-height:318px;
+	text-align:center;
+	background:url(../images/txz.png) repeat-x 0px 0px;
+	display:inline-block;
+	border:1px solid fff4f3;
+}
+.member .rgt h3{
+	height:41px;
+	line-height:41px;
+	margin:20px 0;
+	font-size:17px;text-align:left;
+	margin-left:20px;
+	color:#692f2f;
+}
+.member .rgt .third-login{
+	height:31px;
+	line-height:31px;
+	margin-left:32px;
+	font-size:12px;padding:5px 0;
+}
+.member .rgt .third-login p{
+	height:31px;
+	line-height:31px;
+	text-align:left;
+	font-size:12px;
+}
+.member .rgt .pink{
+	color:#ff9999;
+}
+
+/*会员中心*/
+.w990 {
+    width: 990px;
+    margin: 0 auto;
+}
+.center_lft {
+      float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+    border: 1px solid #fff7f5;
+    width: 171px;
+	border-radius:5px;
+}
+  
+.center_lft  .item h2{
+    width: 184px;
+    height: 31px;
+    line-height: 31px;
+    font-size: 14px;
+    color: #fe4d4d;
+    position: relative;
+    background: url(../images/spider.png) repeat-x -133px -1px;
+}
+.center_lft  .item .admin{
+   width: 35px;
+    height: 23px;
+    line-height: 20px;
+    display: inline-block;
+    background: url(../images/spider.png) repeat-x -1px -2px;
+    margin: 6px 0;
+    position: absolute;
+}
+.center_lft  .item h2 span{
+     height: 24px;
+    line-height: 22px;
+    display: inline-block;
+    margin-left: 39px;
+   
+}
+.center_lft  ul li{
+   width:148px;
+   height:31px;  
+   line-height:31px;
+   font-size:14px;
+   color:#fe4d4d;position:relative;
+  
+}
+.center_lft  .item .pencil{
+    height: 29px;
+    width: 35px;
+    line-height: 31px;
+    display: inline-block;
+    background: url(../images/spider.png) repeat-x -40px 11px;  
+	position: absolute;
+   
+}
+.center_lft  .item .book{
+    height: 29px;
+    width: 35px;
+    line-height: 31px;
+    display: inline-block;
+    background: url(../images/spider.png) repeat-x -79px 11px;  
+	position: absolute;
+   
+}
+.center_lft  .item li span{
+    height: 43px;
+    line-height: 43px;
+    display: inline-block;
+    margin-left: 39px;
+	font-size:12px;
+	color:#666;
+	
+   
+   
+}
+
+.center_rgt {
+    float:left;
+	margin-top:10px;
+}
+
+.footer{
+	width:100%;
+	height:70px;
+	font-size: 14px;
+	color:#8c8a8a;
+}
+.footer a{
+	color:#8c8a8a;
+	padding: 0 8px;
+	height:15px;
+	line-height: 15px;
+	display: inline-block;
+	border-right:1px solid #8c8a8a;
+}
+.footer p:first-child{
+	margin-top:20px;
+	height:15px;
+	line-height: 15px;
+	text-align: center;
+}
+.footer p:first-child a:last-child{
+	border-right: none;
+}
+.footer p:last-child{
+	height:33px;
+	line-height: 33px;
+	text-align: center;
+}

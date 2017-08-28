@@ -1,0 +1,75 @@
+{include file="public/header" /} 
+
+   <div class="navigation">
+	 <p><span class="icon"></span><a href="{:url('index/index/index')}" class="index_a">首页</a>>
+			{foreach $pid as $vo}  
+			<a  class="cru_01" href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>>
+		{/foreach}
+			<span>{$info.title}</span></p>
+	</div>
+	<div class="wrap">
+	
+	<div class="lft">
+	  <ul>
+	  {volist name="res.list" id="vo"} 
+			  <li>
+             		<a class="thumb"><img class="thumb-img" src="{$vo.cover_id|get_cover_path}"></a>
+                    <div class="title"><a href="{:url('article/detail?id='.$vo['id'])}" >{$vo.title}</a>
+					</div>
+					  <div class="des">{$vo.content|substr_cn="170"}
+					</div>
+					 <div class="meta">
+					 
+					<span class="category"><a href="{:url('article/lists?id='.$vo['category_id'])}" rel="category tag">{$vo.category_id|get_category_title}</a></span>
+<span class="views" id="views-5149">浏览：{$vo.view}</span>
+<span class="date">{$vo.create_time|date="Y-m-d h:i",###}</span>
+<span class="more"><a href="{:url('article/detail?id='.$vo['id'])}" title="{$vo.category_id|get_category_title}">阅读全文 »</a></span></div>
+			</li>
+ {/volist}	
+	  </ul>
+	  <ul class="page">
+                                       {$res.page}
+                                        </ul>
+	</div>
+	<div class="rgt">
+	    <div class="box">	
+		 <h1>点击排行</h1>
+			  <ul class="">
+		       {volist name="rank" id="vo" key="k" }
+			      <li><a href="{:url('article/detail?id='.$vo['id'])}"><span>{$k}.</span>{$vo.title|substr_cn="29"}    </a>
+				   </li>
+				 
+		       {/volist}
+									
+								
+            </ul>
+         </div>	
+		 <div class="blank10"></div>
+		
+		<div class="box ad"> 
+              {volist name="adData" id="vo" }
+			      {if condition="$vo['place'] eq 2"} 
+             		<a href="{$vo.url|get_url}"> 
+					<img src="{$vo.cover_id|get_cover_path}"></a>
+				  {/if}
+		       {/volist}	
+	    </div>	
+
+		 <div class="blank10"></div>
+         <div class="box">
+		   <h1>最新投稿</h1>
+			  <ul class="">
+		        {volist name="rank" id="vo" key="k" }
+			      <li><a href="{:url('article/detail?id='.$vo['id'])}"><span>{$k}.</span>{$vo.title|substr_cn="29"}    </a>
+				   </li>
+		       {/volist}				
+            </ul>
+	     </div>
+	</div>
+	  
+    </div>
+
+	
+	{include file="public/footer" /}
+</body>
+</html>

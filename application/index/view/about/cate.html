@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{$meta_title}_yercms</title>
+		<link href="__CSS__/common.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div class="nav">
+			<div class="in_width">
+				<a href="{:url('index/index')}"><img src="{:C('LOGO')}"/></a>
+				<div class="login_info fr">
+					
+				{if condition="is_login()"}
+			
+					 {$UcenterMember.username},
+					
+					<a href="{:url('User/logout')}" class="tc_a">退出</a>
+		
+			{else/}
+					<a href="{:url('User/login')}" class="login_a">登录</a>
+					<a href="{:url('User/register')}" class="zc_a">注册</a>
+					<a href="{:url('index/index')}" class="zc_a">首页</a>
+			{/if}	
+				</div>
+			</div>
+		</div>
+		<div class="main in_width">
+			<div class="left_tree">
+				<div class="main_title">
+					<img src="__IMG__/ab_ch.png" class="ab_ch"/>
+					<img src="__IMG__/ab_en.png" class="ab_en"/>
+				</div>
+				<ul class="tree_list">
+					{volist name="footer" id="vo" key="k"} 
+		 <li {if condition="$vo['id'] eq $info['id']"} class="cur">
+		
+		 {else}>
+		 {/if}
+        	          
+			<a href="{:url('about/cate?id='.$vo['id'])}">{$vo.title}</a> 
+               
+			   </li>{/volist}
+				</ul>	
+			</div>
+			<div class="right">
+				<div class="right_content">
+					<img src="__IMG__/main.png" class="main_img"/>
+					{$info.content}
+				</div>
+				<div class="footer">
+			 		<p>
+			 		{volist name="footer" id="vo" key="k"} 
+					<a href="{:U('about/cate?id='.$vo['id'])}">{$vo.title}</a>
+			 		{/volist}
+		 			</p>
+					<p> Powered by yercms.cn @yershop 2014-2017 </p>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</body>
+</html>

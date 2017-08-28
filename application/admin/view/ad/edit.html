@@ -1,0 +1,87 @@
+ <!-- 头部 -->
+	{include file='public/header'}
+<!-- 头部 --> 
+			<div class="content">
+			<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
+				<div class="edit_title">{$meta_title|default=""}</div>
+				<div class="edit_box">
+					
+					<div class="edit_tab">
+						<div class="tab_option on">基础</div>
+						<div class="tab_option">高级</div>
+					</div>
+					<div class="edit_content">
+							 <form class="group-form"  action="{:url('')}" method="post">
+							 <div class="edit_content_tab">
+						    <div class="input_title">广告名称<span>(标题)</span></div>
+							<input type="text" name="title" class="input_box" value="{$info.title|default=""}"/>
+							<div class="input_title">链接<span>(链接)</span></div>
+						  <input type="text" id="user-weibo" class="input_box" name="url" value="{$info.url|default=""}">
+							  <div class="input_title">位置<span>(广告位置)</span></div>
+							<input type="text" name="place" class="input_box" value="{$info.place|default=""}"/>
+				      	<div class="upload_div">
+								<div class="input_title">图片<span>(图片名称)</span></div>
+								<div class="upload_btn_group">
+									<div class="upload_btn">上传图片</div>
+									<input type="file" class="upload_file" id="cover_id" />
+								</div>
+								<div class="upload_imgs">
+									<input type="hidden" name="cover_id" value="{$info.cover_id|default=""}"	>
+									<span class="upload_imgs_wrap cover_id">
+									  {notempty name="info['cover_id']"}
+							              <div class="upload-pre-item"> <img src="{$info.cover_id|get_cover_path}"/>
+						                </div>{/notempty}
+									
+									</span>
+									
+								</div>
+							</div>
+					<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>											
+					<script type="text/javascript">
+				    /* 初始化上传插件 */
+					$("#cover_id").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__COMMON__/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传图片",
+				        "uploader"        : "{:url('File/uploadPicture',array('session_id'=>session_id()))}",
+				        "width"           : 150,
+				        'removeTimeout'	  : 10,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : function(file, data){
+				    	var data = $.parseJSON(data);
+				    	var src = '';
+				        if(data.status){
+				        	$("input[name='cover_id']").val(data.id);
+				        	src = data.url || data.path;
+				        	$('.cover_id').html(' <div class="upload-pre-item"><img src="' + src + '"/> </div>');
+				         } 
+				       },
+				        'onFallback' : function() {
+				            alert('未检测到兼容版本的Flash.');
+				        }
+				    });
+					
+					</script>			
+						</div>
+						<div class="edit_content_tab none">
+							<div class="input_title">状态<span>(0-禁用，1-正常)</span></div>
+    <input type="text" name="status" class="input_box" value="{$info.status|default=""}"/>
+		
+						</div>
+						<div class="btn_group">
+						    <input type="hidden" name="id" value="{$info.id|default=""}">
+							<div class="confirm_btn">确认</div>
+							<div class="cancel_btn">返回</div>
+						</div></form> 
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	
+		 <script src="__JS__/edit.js"></script>
+
+<!-- 尾部 -->
+	{include file='public/footer'}
+    <!-- 尾部 --> 

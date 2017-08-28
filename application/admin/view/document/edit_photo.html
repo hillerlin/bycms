@@ -1,0 +1,318 @@
+ <!-- 头部 -->
+	{include file='public/sidebar'}
+<!-- 头部 --> 
+
+
+			<div class="content">
+			<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
+				
+				<div class="edit_box">
+					<div class="edit_title">当前位置:{foreach $ids as $vo}  
+			<a  class="cru_01" href="{:url('document/index?pid='.$vo)}">{$vo|get_category='title'}</a>>
+		{/foreach}{$meta_title|default=""}</div>
+					<div class="edit_tab">
+						<div class="tab_option on">基础</div>
+						<div class="tab_option">高级</div>
+					</div>
+					<div class="edit_content">
+							 <form class="group-form"  action="{:url('')}" method="post">
+							 <div class="edit_content_tab">
+						    <div class="input_title">标题to<span>(名称)</span></div>
+							<input type="text" name="title" class="input_box" value="{$info.title|default=""}"/>
+							
+								<div class="input_title">内容<span>(详细内容)</span></div>
+						  <textarea class="am-validate" id="content" name="content" required>{$info.content|default=""}</textarea>		
+                                     <link rel="stylesheet" href="__COMMON__/kindeditor/default/default.css" />
+			<script charset="utf-8" src="__COMMON__/kindeditor/kindeditor-min.js"></script>
+			<script charset="utf-8" src="__COMMON__/kindeditor/zh_CN.js"></script>
+			<script type="text/javascript">
+				var editor_content;
+				
+				KindEditor.ready(function(K) {
+					editor_content = K.create('textarea[name="content"]', {
+						allowFileManager : false,
+						themesPath: K.basePath,
+						width: '90%',
+						height: '300',
+						resizeType:1,
+						pasteType : 2,
+						urlType : 'absolute',
+						fileManagerJson : '{:url('fileManagerJson')}',
+						uploadJson : '{:url("Uploads/ke_upimg")}'
+					});
+				});
+
+				$(function(){
+					$('textarea[name="content"]').closest('form').submit(function(){
+						editor_content.sync();
+					});
+				})
+			</script>
+						  
+				      	<div class="upload_div">
+								<div class="input_title">图片<span>(图片名称)</span></div>
+								<div class="upload_btn_group">
+									<div class="upload_btn">上传图片</div>
+									<input type="file" class="upload_file" id="uploads"/>
+								</div>
+								<div class="upload_imgs">
+									<input type="hidden" name="cover_id" id="cover_id" value="{$info.cover_id|default=""}"	>
+									<span class="upload_imgs_wrap">
+									  {notempty name="info['cover_id']"}
+							              <div class="upload-pre-item"> <img src="{$info.cover_id|get_cover_path}"/>
+						                </div>{/notempty}
+									
+									</span>
+									
+								</div>
+							</div>
+					<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>											
+								<script type="text/javascript">
+				    /* 初始化上传插件 */
+					$(".upload_file").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__COMMON__/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传图片",
+				        "uploader"        : "{:url('File/uploadPicture',array('session_id'=>session_id()))}",
+				        "width"           : 150,
+				        'removeTimeout'	  : 10,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : uploadPicture,
+				        'onFallback' : function() {
+				            alert('未检测到兼容版本的Flash.');
+				        }
+				    });
+					function uploadPicture(file, data){
+				    	var data = $.parseJSON(data);
+				    	var src = '';
+				        if(data.status){
+				        	$("#cover_id").val(data.id);
+				        	src = data.url || data.path;
+				        	$('.upload_imgs_wrap').html(
+				        		'<img src="' + src + '"/>'
+				        	);
+				        } else {
+				        	updateAlert(data.info);
+				        	setTimeout(function(){
+				                $('#top-alert').find('button').click();
+				                $(that).removeClass('disabled').prop('disabled',false);
+				            },1500);
+				        }
+				    }
+					</script>			
+						</div>
+						<div class="edit_content_tab none">
+							 
+							  
+							  	<div class="upload_div">
+								<div class="input_title">相册<span>(图片)</span></div>
+								<div class="upload_btn_group">
+									<div class="upload_btn">上传图片</div>
+									<input type="file" class="upload_file" id="covers"/>
+								</div>
+								<div class="upload_imgs upload_file_covers">
+									<input type="hidden" name="covers" id="upload_file_covers" value="{$info.covers|default=""}"	>
+								 {notempty name="info['covers']"}
+						 {php}$list=explode(",",$info['covers']);	{/php}
+							{foreach name="list" item="vo" }  
+							<span class="upload_imgs_wrap"> 
+								
+								<img src="{$vo|get_cover_path}" data-id="{$vo}"/>
+						        
+								
+								<span class="close_img"  onclick='delPic(this);'></span>
+							
+							</span>
+						     {/foreach}	
+							{/notempty} 
+								</div>
+							</div>
+																
+								<script type="text/javascript">
+				    /* 初始化上传插件 */
+					$("#upload_file_covers").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__COMMON__/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传图片",
+				        "uploader"        : "{:url('File/uploadpicture',array('session_id'=>session_id()))}",
+				        "width"           : 150,
+				        'removeTimeout'	  : 10,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : uploadPicturecovers,
+				        'onFallback' : function() {
+				            alert('未检测到兼容版本的Flash.');
+				        }
+				    });
+			function uploadPicturecovers(file, data){
+				    	var data = $.parseJSON(data);
+				    	var src = '';
+				        if(data.status){
+				        src = data.url || data.path;
+							var upload_img = "<div class='upload-pre-item'><img src=" + src +" title='点击显示大图' data-id="+data.id+"> <span class='close' onclick='delPic(this);'></span></div>";
+                            picsbox = $(". upload_file_covers");
+							  picsbox.append(upload_img);
+                             setVal();
+				        } 
+				    }
+
+		  function delPic(obj){ //删除
+            $(obj).parents(".upload_imgs_wrap").remove();
+		    setVal();
+	     }
+	     function setVal(){ //取值
+		    var option = $(".upload_file_covers img");
+		    var result=new Array();
+		    option.each(function(i){
+		 	     result.push($(this).attr('data-id'));
+		   });
+           ids= result.join(',');
+           $('#covers').val(ids);
+	  }
+					</script>		
+				    </div>	
+							  <div class="input_title">排序<span>(越小越靠前)</span></div>
+							  <input type="text" name="sort" class="input_box" value="{$info.sort|default=""}"/>
+					
+					
+					
+						  <div class="input_title">创建时间<span>(创建时间)</span></div>
+							<input type="text" name="create_time" id="create_time" class="laydate-icon input_box" value="{notempty name='info.id'}
+							{$info.create_time|time_format}{/notempty}"/>
+				   <script type="text/javascript" src="__COMMON__/laydate/laydate.js"></script>		
+				 	<script>
+laydate({
+  elem: '#create_time',
+  format: 'YYYY-MM-DD hh:mm:ss', 
+  min: laydate.now(), //设定最小日期为当前日期//目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+  event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+});
+</script>
+
+ <div class="input_title">更新时间<span>(更新时间)</span></div>
+<input type="text" name="update_time" id="update_time" class="laydate-icon input_box" value="{notempty name='info.id'}{$info.update_time|time_format}{/notempty}"/>
+				 	
+	<script>
+laydate({
+  elem: '#update_time', 
+  format: 'YYYY-MM-DD hh:mm:ss', 
+  min: laydate.now(), //设定最小日期为当前日期//目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+  event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+});
+</script>
+</div>
+					
+				
+						<div class="btn_group"> 
+						<input type="hidden" name="category_id" value="{$info.category_id|default=""}">
+						 	<input type="hidden" name="model_id" value="{$cate.model_id|default=""}">
+							<input type="hidden" name="id" value="{$info.id|default=""}">
+							<div class="confirm_btn">确认</div>
+							<div class="cancel_btn">返回</div>
+						</div>
+						</form> 
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	  
+	
+	  <script>
+			  $("select[name='position']").val("{$info.position|default='0'}");
+			$(function(){
+				initPage();
+				window.onresize=function(){
+					initPage();
+				}
+				bindEvent();
+			});
+			
+			function initPage(){
+				
+				
+				$(".articlelist").attr("min-height",$(window).height() - 86);
+				$(".articlelist").css("min-height",($(window).height() - 86) + 'px');
+				
+				var currentRightHeight = $(".content").height();
+				var currentNavHeight = $(".nav_tree").height();
+				if(currentRightHeight < currentNavHeight){
+					$(".articlelist").css("min-height",currentNavHeight + 'px');
+					$(".articlelist").attr("min-height",currentNavHeight);
+				}else{
+					$(".nav_tree").css("min-height",currentRightHeight + 'px');
+				}
+				
+				
+			}
+			
+			function bindEvent(){
+				$(".tree_menue_first").on('click',function(){
+					if($(this).parent(".tree_menue").hasClass("down")){
+						$(this).parent(".tree_menue").removeClass("down").addClass("up");
+						$(this).find("span").attr("class","folder_icon_on");
+					}else{
+						$(this).parent(".tree_menue").removeClass("up").addClass("down");
+						$(this).find("span").attr("class","folder_icon");
+					}
+					
+				});
+				$(".tree_menue_second").on("hover",function(){
+					if(!$(this).hasClass("checked")){
+						$(".nav_tree_list .tree_menue_second").removeClass("checked");
+						$(this).addClass("checked");
+						$(this).parent().removeClass("up").addClass("down");
+						if($(this).parents(".tree_menue").find("ul").is(':visible')){
+						   $(this).parents(".tree_menue").find("ul").hide();
+						}
+						$(this).parent().find("ul").show();
+					}else{
+						//$(this).removeClass("checked");
+						//$(this).parent().removeClass("down").addClass("up");
+					}
+					
+				});
+				$(".tree_menue_third").on("click",function(){
+					if(!$(this).hasClass("checked")){
+						$(".nav_tree_list .tree_menue_third").removeClass("checked");
+						$(this).addClass("checked");
+					}
+				});
+				$(".tab_option").click(function(){
+					if(!$(this).hasClass("on")){
+						var index = $(".tab_option").index($(this));
+						$($(".edit_content_tab").get(index)).removeClass("none").siblings(".edit_content_tab").addClass("none");
+						$(this).addClass("on").siblings().removeClass("on");
+					}
+					
+				});
+				
+				/****树形菜单展开**/
+				$(".first_level .folder_icon").click(function(){
+					var parent= $(this).parents(".first_level_group").first();
+					if(parent.hasClass("closed")){
+						parent.removeClass("closed").addClass("opened");
+					}else if(parent.hasClass("opened")){
+						parent.removeClass("opened").addClass("closed");
+						parent.find(".second_level_group").removeClass("opened").addClass("closed");
+					}
+					
+				});
+				$(".second_level .folder_icon").click(function(){
+					var parent= $(this).parents(".second_level_group").first();
+					if(parent.hasClass("closed")){
+						parent.removeClass("closed").addClass("opened");
+					}else if(parent.hasClass("opened")){
+						parent.removeClass("opened").addClass("closed");
+					}
+					
+				});
+			}
+			
+			
+			
+		</script>	
+ <!-- 头部 -->
+	{include file='public/footer'}
+<!-- 头部 --> 

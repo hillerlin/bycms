@@ -1,0 +1,299 @@
+ <!-- 头部 -->
+	{include file='public/header'}
+<!-- 头部 --> 
+	
+			<div class="content" style="background:rgb(238, 238, 238)">
+				<div class="show_info ">
+				<div class="calc_goods_cate show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">总分类数</span>
+							<span class="num">{$info.category|default="0"}</span>
+						</div>
+					</div>
+					
+					<div class="pending_order show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">今日待处理订单</span>
+							<span class="num">{$info.order|default="0"}</span>
+						</div>
+					</div>
+					<div class="order_amount show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">订单交易额</span>
+							<span class="num">{$info.money|default="0"}</span>
+						</div>
+					</div>
+					<div class="goods_quantity show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">日志个数</span>
+							<span class="num">{$info.log|default="0"}</span>
+						</div>
+					</div>
+					<div class="user_amount show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">用户量</span>
+							<span class="num">{$info.user|default="0"}</span>
+						</div>
+					</div>
+				</div>
+			    <div class="show_info" style="margin-top:10px">
+				  <div class="imgs_tnums show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">总图片数</span>
+							<span class="num">{$info.category|default="0"}</span>
+						</div>
+					</div>
+					
+					<div class="ads_nums show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">广告个数</span>
+							<span class="num">{$info.ad|default="0"}</span>
+						</div>
+					</div>
+					<div class="catenums show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">分组个数</span>
+							<span class="num">{$info.group|default="0"}</span>
+						</div>
+					</div>
+					<div class="visitornums show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">访客个数</span>
+							<span class="num">{$info.visitor|default="0"}</span>
+						</div>
+					</div>
+					<div class="evaluatenums show_info_div left">
+						<div class="left_img">
+							<div></div>
+						</div>
+						<div class="right_text">
+							<span class="text_title">总评价个数</span>
+							<span class="num">{$info.comment|default="0"}</span>
+						</div>
+					</div>
+				</div>
+				
+			  <div class="charts_wrap" style="width:1178px;margin:10px auto;">
+						<div class="charts"></div>
+					</div>	
+
+
+					
+				<div class="container"> 
+	<div class="item">
+			<div class="tit">系统信息</div>
+			
+				<table>
+					<tbody>
+					<tr>
+						<th>yercms版本</th>
+						<td>v1.0</td>
+					</tr>
+					<tr>
+						<th>thinkphp版本</th>
+						<td>{$Think.VERSION}
+							
+						</td>
+				
+					</tr><tr>
+						<th>服务器操作系统</th>
+						<td>{$Think.const.PHP_OS}</td>
+					</tr>
+					
+					<tr>
+						<th>服务器解译引擎</th>
+						<td>{$_SERVER['SERVER_SOFTWARE']}</td>
+					</tr>
+					<tr>
+						<th>应用部署目录 </th>
+												<td>{:getcwd()}</td>
+					</tr>
+					<tr>
+						<th>上传限制</th>
+						<td>{:ini_get('upload_max_filesize')}</td>
+					</tr>
+					
+				</tbody></table>
+	
+</div>
+<div class="item">
+			<div class="tit">软件信息</div>
+				<table>
+					<tbody>
+					<tr>
+						<th>软件名称</th>
+						<td>yercms内容管理系统</td>
+					</tr>
+					<tr>
+						<th>更新时间</th>
+						<td>2017-05-10</td>
+					</tr>
+					
+					<tr>
+						<th>官方网址</th>
+						<td><a href="http://www.yershop.com" target="_blank">yershop.com</a></td>
+					</tr>
+					<tr>
+						<th>商业授权</th>
+						<td><a href="http://www.yershop.com" target="_blank">授权</a></td>
+					</tr>
+					<tr>
+						<th>版权所有</th>
+						<td>武汉贝云网络科技有限公司</td>
+					</tr>
+					<tr>
+						<th>使用帮助</th>
+						<td><a href="http://www.yershop.com/index/Develop/index.html" target="_blank">文档</a></td>
+					</tr>
+				</tbody></table>
+			</div>
+
+	</div>
+
+	
+
+               
+	</div>
+</div><script type="text/javascript" src="__JS__/jquery.min.js" ></script>
+		<script type="text/javascript" src="__JS__/highcharts/highcharts.js"></script>
+        <script type="text/javascript" src="__JS__/highcharts/exporting.js"></script>
+        <script type="text/javascript" src="__JS__/highcharts/highcharts-zh_CN.js"></script>
+        <script type="text/javascript" src="__JS__/highcharts/grid-light.js"></script>
+	     <script>
+        	$(function(){
+				initPage();
+				window.onresize=function(){
+					initPage();
+				}
+				bindEvent();
+			});
+				
+			function initPage(){
+				var content_width=$(window).width() - 200-40-10;
+				$(".show_info_div").width(content_width/5);
+				
+				var item_width=$(window).width()-200-20;
+				$(".item").width(item_width/2-8);
+				$(".charts").width(item_width);
+				$(".charts").height(330);
+				$(".charts_wrap").width(item_width);
+				if($(".nav_tree").height() > $(".content").height()){
+					$(".content").css("min-height",$(".nav_tree").height());
+					$(".charts_wrap").height(320);
+				}else{
+				
+				}
+				drawCharts();
+			}
+			
+			function bindEvent(){
+				$(".p_menue").on('click',function(){
+					if($(this).parent(".menue").hasClass("down")){
+						$(this).parent(".menue").removeClass("down").addClass("up");
+					    $(this).find("span").attr("class","folder_icon_on");
+					}else{
+						$(this).parent(".menue").removeClass("up").addClass("down");
+						$(this).find("span").attr("class","folder_icon");
+					}
+					
+				});
+				$(".c_menue_item").on("click",function(){
+					if(!$(this).hasClass("checked")){
+						$(".nav_tree_list .c_menue_item").removeClass("checked");
+						$(this).addClass("checked");
+					}
+				})
+			}
+		
+
+        function drawCharts(){
+				$('.charts').highcharts({
+				        chart: {
+				            type: 'areaspline',
+				        },
+				        title: {
+				            text: '最近七天用户数据统计表'
+				        },
+				        legend: {
+				            layout: 'vertical',
+				            align: 'left',
+				            verticalAlign: 'top',
+				            x: 150,
+				            y: 100,
+				            floating: true,
+				            borderWidth: 1,
+				            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+				        },
+				        xAxis: {
+				            categories: [
+				                '{$date[0]}',
+				                 '{$date[1]}',
+				                '{$date[2]}',
+				                '{$date[3]}',
+				               '{$date[4]}',
+				                 '{$date[5]}',
+				                 '{$date[6]}',
+				            ]
+				        },
+				        yAxis: {
+				            title: {
+				                text: '数量 个'
+				            }
+				        },
+				        tooltip: {
+				            shared: true,
+				            valueSuffix: ' '
+				        },
+				        credits: {
+				            enabled: false
+				        },
+				        plotOptions: {
+				            areaspline: {
+				                fillOpacity: 0.5
+				            }
+				        },
+				        series: [
+					        {
+					            name: '新增访客数',
+					            data: [{volist name='$list["visitor_list"]' id="vo" key="k" empty="221,232,435,56,76,879,768,65"}{$vo.num}{if condition="$k lt 7 AND $k gt 1 "},{/if}{/volist}],
+					        }, 
+					        {
+					            name: '新增用户数',
+					            data: [{volist name="$list['member_list']" id="vo" key="k" empty="321,132,45,456,176,879,768,65"}{$vo.num}{if condition="$k lt 7"},{/if}{/volist}],
+					        }
+				        ]
+				});
+			}	
+        </script>
+		
+	 <!-- 头部 -->
+	{include file='public/footer'}
+<!-- 头部 --> 
+

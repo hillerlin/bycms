@@ -1,0 +1,138 @@
+ <!-- 头部 -->
+	{include file='public/header'}
+<!-- 头部 --> 
+
+<div class="content">
+				<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
+				<div class="edit_title">{$meta_title|default=""}</div>
+				<div class="edit_box">
+					<div class="edit_tab">
+						<div class="tab_option on">基础</div>
+						<div class="tab_option">高级</div>
+					</div>
+					<div class="edit_content">
+						 <form class="group-form"  action="{:url('')}" method="post">
+						<div class="edit_content_tab">
+							<div class="input_title">名称<span>(模块名称)</span></div>
+							<input type="text" name="title" class="input_box" value="{$info.title|default=""}"/>
+
+							<div class="input_title">链接<span>(顶级模块不填)</span></div>
+						  <input type="text" id="user-weibo" class="input_box" name="url" value="{$info.url|default=""}">
+							<div class="input_title">上级节点<span>(所属节点)</span></div>
+						 <select name="pid" >
+      <option value="0">顶级模块</option>   
+	  {volist name="list" id="vo"}
+ <option value="{$vo.id}">{$vo.html|default=""}{$vo.title}</option>
+ {/volist}
+</select>
+			<div class="input_title">字体图标<span>(模块图标)</span></div>
+							<input type="text" name="font" class="input_box" value="{$info.font|default=""}"/>
+							<div class="input_title">分组<span>(所属分组)</span></div>
+            <select name="group_id" >
+               <option value="0">无</option>   
+	           {volist name="group_list" id="vo"}
+               <option value="{$vo.id}">{$vo.title|default=""}</option>
+              {/volist}
+            </select>
+							
+						</div>
+				       <div class="edit_content_tab none">
+						   <div class="input_title">排序<span>(越小越靠前)</span></div>
+							<input type="text" name="sort" class="input_box" value="{$info.sort|default=""}"/>
+						</div>
+						<div class="btn_group">
+						    <input type="hidden" name="id" value="{$info.id|default=""}">
+							<div class="confirm_btn">确认</div>
+							<div class="cancel_btn">返回</div>
+						</div>
+						</form> 
+					</div>
+				</div>
+			</div>
+		</div>
+
+     
+    <script type="text/javascript">
+    $("select[name='pid']").val("{$info.pid|default='0'}");
+	$("select[name='group_id']").val("{$info.group_id|default='1'}");
+    </script>
+   	<script>
+			
+			$(function(){
+				initPage();
+				window.onresize=function(){
+					initPage();
+				}
+				bindEvent();
+			});
+			
+			function initPage(){
+				$(".nav_tree").css("min-height",($(window).height() - 86) + 'px');
+				$(".content").css("min-height",($(window).height() - 86) + 'px');
+				$(".nav_tree").attr("min-height",$(window).height() - 86);
+				$(".content").attr("min-height",$(window).height() - 86);
+
+				var currentRightHeight = $(".content").height();
+				var currentNavHeight = $(".nav_tree").height();
+				if(currentRightHeight < currentNavHeight){
+					if($(".tips_msg:hidden").length > 0){
+						$(".edit_box").css("height",$(".content").height() + (currentNavHeight - currentRightHeight));
+					}else{
+						$(".edit_box").css("height",$(".edit_box").height() + (currentNavHeight - currentRightHeight));
+					}
+				}else{
+					$(".nav_tree").css("min-height",$(".nav_tree").height() + (currentRightHeight - currentNavHeight));
+				}
+			}
+			
+			function bindEvent(){
+				$(".p_menue").on('click',function(){
+					if($(this).parent(".menue").hasClass("down")){
+						$(this).parent(".menue").removeClass("down").addClass("up");
+					}else{
+						$(this).parent(".menue").removeClass("up").addClass("down");
+					}
+					calculateHeight();
+				});
+				$(".c_menue_item").on("click",function(){
+					if(!$(this).hasClass("checked")){
+						$(".nav_tree_list .c_menue_item").removeClass("checked");
+						$(this).addClass("checked");
+					}
+				})
+					$(".close_tips").click(function(){
+					$(".tips_msg").hide();
+					calculateHeight();
+				});
+				$(".tab_option").click(function(){
+					if(!$(this).hasClass("on")){
+						var index = $(".tab_option").index($(this));
+						$($(".edit_content_tab").get(index)).removeClass("none").siblings(".edit_content_tab").addClass("none");
+						$(this).addClass("on").siblings().removeClass("on");
+					}
+					calculateHeight();
+				});
+			}
+			
+			function calculateHeight(){
+				var currentRightHeight = $(".content").height();
+				var currentNavHeight = $(".nav_tree").height();
+				if(currentRightHeight < currentNavHeight){
+					if($(".tips_msg:hidden").length > 0){
+						$(".edit_box").css("height",$(".content").height() + (currentNavHeight - currentRightHeight));
+					}else{
+						$(".edit_box").css("height",$(".edit_box").height() + (currentNavHeight - currentRightHeight));
+					}
+				}else{
+					if(currentNavHeight > $(".nav_tree").attr("min-height")){
+						$(".edit_box").css("height",$(".edit_box").height() + (currentNavHeight - currentRightHeight));
+					}else{
+						$(".edit_box").css("height",$(".edit_box").height() + ( $(".nav_tree").attr("min-height") - currentRightHeight));
+					}
+				}
+			}
+			
+		</script>
+	 <!-- 尾部 -->
+	{include file='public/footer'}
+<!-- 尾部 --> 

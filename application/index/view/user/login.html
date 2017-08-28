@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>会员登录</title>
+		<link href="__CSS__/common.css" rel="stylesheet"/>
+		<script src="__COMMON__/jquery.min.js"/>	</script>
+	</head>
+	<body style="background-image:none">
+		<div class="nav">
+			<div class="in_width">
+				<a href="{:url('index/index')}"><img src="{:C('LOGO')}"/></a>
+				<div class="login_info fr">
+						{if condition="is_login()"}
+			
+					 {$UcenterMember.username},
+					
+					<a href="{:url('User/logout')}" class="tc_a">退出</a>
+		
+			{else/}
+					<a href="{:url('User/login')}" class="login_a">登录</a>
+					<a href="{:url('User/register')}" class="zc_a">注册</a>
+					<a href="{:url('index/index')}" class="zc_a">首页</a>
+			{/if}
+				</div>
+			</div>
+		</div>
+		<div class="main in_width">
+			<div class="member ">
+    
+    	<div class="lft login-lft">
+		<form method="post" action="{:url('user/login')}" class="form-login" name="myform">
+			 <h2>会员登录</h2><div class="form-group">
+			<label>用户名：</label><input type="text" id="username" class="ipt" name="username">
+		</div>
+        <div class="form-group">
+			<label>密码：</label><input type="password" id="password" class="ipt" name="password"  >
+		  
+		
+		</div>
+        
+		 <div class="form-group">
+			<label>验证码：</label><input type="text" class="verify_input" id="password" name="verify"  >
+			<span class="verify"><img class="verifyimg reloadverify" alt="点击切换"src="{:U('verify')}"/><span>
+		</div>
+		
+		
+	   <div class="form-group">
+			<label></label>
+		 <a  class="login_a  btn_sbt" ></a>
+		
+		</div>
+    
+     <div class="form-group line">
+			<label></label>
+		 <span class="not">您还没注册yerCms会员？</span>
+		
+		
+     	 <a href="{:url('user/register')}" class="reg_a"></a>
+       </div>
+     
+       
+       </form>
+    </div>
+	
+    <div class="rgt">
+       <div class="login form-group">
+	   <h3>使用外部通行证</h3>
+	      
+<div class="third-login">		 
+ <p class="pink">通行证介绍</p>
+	      <p>yerCms支持使用第三方账号登录。</p>  
+		  </div>
+      </div>
+	</div>
+	
+	</div>
+	 </div>
+	
+		<script type="text/javascript">
+		
+		$(".login_a").click(function(){
+    		var self = $(".form-login");
+    		$.post(self.attr("action"),self.serialize(),success,"json");
+    		return false;
+
+    		
+    	});
+		function success(data){
+    			if(data.code){
+    				window.location.href =data.url;
+    			} else {
+				   $(".tip").html(data.msg);
+    				//刷新验证码
+    				$(".reloadverify").click();
+    			}
+    		}
+$(function(){
+		var verifyimg = $(".verifyimg").attr("src");
+            $(".reloadverify,.reloadverify_a").click(function(){
+               if( verifyimg.indexOf('?')>0){
+                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+                }else{
+                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+                }
+            });
+});
+	</script>
+	{include file="public/footer" /}
+	

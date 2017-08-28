@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>会员注册</title>
+		<link href="__CSS__/common.css" rel="stylesheet"/>
+		<script src="__COMMON__/jquery.min.js"/>	</script>
+	</head>
+	<body style="background-image:none">
+		<div class="nav">
+			<div class="in_width">
+				<a href="{:url('index/index')}"><img src="{:C('LOGO')}"/></a>
+				<div class="login_info fr">
+				{if condition="is_login()"}
+			
+					 {$UcenterMember.username},
+					
+					<a href="{:url('User/logout')}" class="tc_a">退出</a>
+		
+			{else/}
+					<a href="{:url('User/login')}" class="login_a">登录</a>
+					<a href="{:url('User/register')}" class="zc_a">注册</a>
+					<a href="{:url('index/index')}" class="zc_a">首页</a>
+			{/if}
+				</div>
+			</div>
+		</div>
+		<div class="main in_width">
+			<div class="member">
+       
+   
+    
+ 
+    	<h2>会员注册<span><img src="__IMG__/icon1.png"/><i>填写信息</i><span></h2>
+    	<div class="lft">
+		<form method="post" action="{:url('user/register')}" class="form-login" name="myform">
+		<div class="form-group">
+			<label>用户名：</label><input type="text" id="username" class="ipt" name="username">
+		</div>
+        <div class="form-group">
+			<label>密码：</label><input type="password" id="password" class="ipt" name="password"  >
+		  
+		
+		</div>
+        <div class="form-group">
+			<label>确认密码：</label><input type="password" class="ipt" id="password" name="repassword"  >
+		  
+		
+		</div>
+		 <div class="form-group">
+			<label>邮箱：</label><input type="text" class="ipt" id="password" name="email"  >
+		  
+		
+		</div>
+		 <div class="form-group">
+			<label>验证码：</label><input type="text" class="verify_input" id="password" name="verify"  >
+			<span class="verify"><img class="verifyimg reloadverify" alt="点击切换"src="{:U('verify')}"/><span>
+		</div>
+		 <div class="form-group">
+			<label>生日：</label><input type="text" id="create_time" class="laydate-icon verify_input"  name="birthday"  >
+		 <script type="text/javascript" src="__COMMON__/laydate/laydate.js"></script>		
+				 	<script>
+laydate({
+  elem: '#create_time',
+  format: 'YYYY-MM-DD hh:mm:ss', 
+  min: laydate.now(), //设定最小日期为当前日期//目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+  event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+});
+</script>
+		</div>
+	   <div class="form-group">
+			<label></label>
+		 <a  class="btn_sbt" ></a>
+		
+		</div>
+       <div class="form-group xieyi">
+			<label></label>
+		 <input type="checkbox"  class="btn_sbt_agree"><a class="agr" onclick="show()">点此同意注册协议</a>
+		<img src="__IMG__/i.png"/><span class="read">请阅读协以</span>
+		</div>
+    
+        <div class="hr"><hr></div>
+       
+       </form>
+    </div>
+	
+    <div class="rgt">
+     <div class="reg form-group">
+	         <p>已经有了账号？</p>
+	         <p>请直接登录</p>
+        	<a href="{:url('User/login')}" class="login_a"></a></div>
+    </div>
+	</div>
+	
+	</div>
+		{include file="public/footer" /}
+		<script type="text/javascript">
+		$(".agr").click(function(){
+    		var self = $(".form-login");
+    		$.post(self.attr("action"),self.serialize(),success,"json");
+    		return false;
+
+    		
+    	});
+		$(".btn_sbt").click(function(){
+    		var self = $(".form-login");
+    		$.post(self.attr("action"),self.serialize(),success,"json");
+    		return false;
+
+    		
+    	});
+		function success(data){
+    			if(data.code){
+    				window.location.href =data.url;
+    			} else {
+				   alert(data.msg);
+    				//刷新验证码
+    				$(".reloadverify").click();
+    			}
+    		}
+$(function(){
+		var verifyimg = $(".verifyimg").attr("src");
+            $(".reloadverify,.reloadverify_a").click(function(){
+               if( verifyimg.indexOf('?')>0){
+                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+                }else{
+                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+                }
+            });
+});
+	</script>
+		</div>
+	</body>
+</html>

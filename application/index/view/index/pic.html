@@ -1,0 +1,152 @@
+{include file="public/header" /} 
+
+
+		<div class="content">
+			<div class="content_in in_width">
+			<div class="photos">
+				<div class="slide">
+                 <div class="bgimg">
+				<ul class="slider_imgwrap" style="left: -434px;">
+				  {By:slide  place="0" name="vo" order="sort desc" limit="8"}
+				   <li>	
+				 	<a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}" class="logo_img"/></a>
+					<span class="img_title">{$vo.title}</span>
+
+                   </li>
+				   {/By:slide}	
+				 </ul>  
+				 </div>
+      
+				<ul class="num">
+	              {By:slide  place="0" name="vo" order="sort desc" limit="8"}
+					<li class="slider_num {if condition="$i eq 1"}active{/if}">{$i}</li>
+				  {/By:slide}	
+					
+				</ul>  
+		        </div>
+		<script>
+		$(function(){
+			//轮播初始化
+			var text = $($(".slider_imgwrap li").get(0)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			var interval = setInterval(sliderImg,3000);
+			//轮播点击页面跳转
+			$(".slider_num").click(function(){
+		        clearInterval(interval);
+				sliderImg(this);
+				interval = setInterval(sliderImg,3000);
+			})
+		});
+		function sliderImg(obj){
+			var index;
+			if(obj != null){
+				var $this = $(obj);
+				var index = $this.index(".slider_num");
+				showPageByIndex(index);
+			}else{
+				var index = $(".active").index(".slider_num");
+				var max = $(".slider_num").length;
+				var nextindex = (index +1)%max;
+				showPageByIndex(nextindex);
+			}
+		}
+		function showPageByIndex(index){
+			$($(".slider_num").get(index)).addClass("active").siblings().removeClass("active");
+			var width = $(".slider_imgwrap li img").width();
+			var left = index * (-width);
+			var text = $($(".slider_imgwrap li").get(index)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			$(".slider_imgwrap").animate({"left":left + 'px'},1000);
+		}
+
+	</script>
+	
+				<div class="focus">
+                <h4>热点关注</h4>
+	           <ul> 
+			   {By:read  model_id="2" name="vo" order="view desc" limit="8"}
+				 <li>	
+				 <a href="{:url('article/detail?id='.$vo['id'])}"><img src="{$vo.cover_id|get_cover_path}" class="logo_img"></a><p>{$vo.title|substr_cn="12"}</p></li>
+				 
+				  {/By:read}
+				
+					
+				 </ul>  
+				</div>
+				
+				<div class="fl content_right">
+					
+						
+					<div class="rank_div" style="margin-top:0px;border: 1px solid #eee;">
+						<div class="rank_title"  style="margin-top:0px;border-bottom: 1px solid #eee;">最新
+							
+						</div>
+						<ul class="rank_list">
+						 			           	{By:read  model_id="2" name="vo" order="id desc" limit="10"}
+			              <li><a href="{:url('article/detail?id='.$vo['id'])}">{$vo.title|substr_cn="49"}    </a>
+				         </li>
+		                   {/By:read}
+		                  						</ul>
+					</div>
+				</div>
+				
+              </div>
+
+			  
+			</div>
+	{volist name="tree" id="vo"} 					
+		<div class="category">  <h4><span class="tit">{$vo.title}</span><span class="more"><a href="{:url('article/lists?id='.$vo['id'])}">更多 >></a></span></h4>
+		
+		<ul> 
+				{volist name="vo['item']" id="vo1" key="k" } <li>	
+				  <li><a href="{:url('article/detail?id='.$vo1['id'])}" ><img src="{$vo1.cover_id|get_cover_path}" class="logo_img"></a>	
+			      <p>{$vo.title}</p>
+				   </li>
+				   {/volist}
+				
+					
+				 </ul>  
+		</div>	
+		 {/volist}
+	</div>
+					
+	
+
+	<script>
+		$(function(){
+			//轮播初始化
+			var text = $($(".slider_imgwrap li").get(0)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			var interval = setInterval(sliderImg,3000);
+			//轮播点击页面跳转
+			$(".slider_num").click(function(){
+		        clearInterval(interval);
+				sliderImg(this);
+				interval = setInterval(sliderImg,3000);
+			})
+		});
+		function sliderImg(obj){
+			var index;
+			if(obj != null){
+				var $this = $(obj);
+				var index = $this.index(".slider_num");
+				showPageByIndex(index);
+			}else{
+				var index = $(".active").index(".slider_num");
+				var max = $(".slider_num").length;
+				var nextindex = (index +1)%max;
+				showPageByIndex(nextindex);
+			}
+		}
+		function showPageByIndex(index){
+			$($(".slider_num").get(index)).addClass("active").siblings().removeClass("active");
+			var width = $(".slider_imgwrap li img").width();
+			var left = index * (-width);
+			var text = $($(".slider_imgwrap li").get(index)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			$(".slider_imgwrap").animate({"left":left + 'px'},1000);
+		}
+
+	</script>
+
+	{include file="public/footer" /}

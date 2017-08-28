@@ -1,0 +1,60 @@
+﻿/*cssreset*/
+* {
+    vertical-align: baseline;
+    font-weight: inherit;
+     font: 14px "Microsoft YaHei",sans-serif;
+    font-style: inherit;
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+body {color: #333; font:14px "Microsoft YaHei",sans-serif; }
+img {border:none; display:block;}
+ul,ol ,li{list-style:none;}
+a {text-decoration:none; display:inline-block;color:#333}
+a:hover {text-decoration:none;}
+a,button{cursor:pointer;#333333}
+a,input,button,select,textarea{outline:none;}
+input,textarea {outline:none;}
+textarea {resize:none;}
+table{border-spacing: 0px;}
+/*分页*/
+.page{ float:right; padding:10px;overflow:hidden;clear:both;}
+
+ .page a{
+	  float:left;color: #aaaaaa;
+width: 36px;
+height: 36px;
+border: 1px solid #e6e6e6;
+line-height: 36px;
+text-align: center;padding:0px 2px;
+}
+ .page .num{
+	 border-left:none;
+}
+.page  .active{
+	border:1px solid #db4453;
+    color:#fff;
+	background:#F54343;
+ }
+
+.page .index{margin:0 7px 0 0;}
+.page .index {width:42px;}
+.page .prev {width:55px; }
+.page .next {width:55px; border-left:none;}
+.page .next{margin:0 7px 0 0;}
+.page .end {width:41px;}
+/*公共样式*/
+.fl{float:left;}
+.fr{float:right;}
+.w100{width:100%;}
+
+
+
+/***********************  分割线 ***************************/
+
+
+
+
+

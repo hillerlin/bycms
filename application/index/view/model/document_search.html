@@ -1,0 +1,94 @@
+{include file="public/header" /} 
+		<div class="nav_bar in_width">
+			<a href="javascript:void(0);">首页</a>
+			<span>&gt;</span>
+			
+		<span >{$meta_title}</span>
+		</div>
+		<div class="content">
+			<div class="content_in in_width">
+				<div class="fl main_left">
+					<ul class="ml_in_width ul_list">
+						{volist name="res.list" id="vo"} 
+						<li class="ul_item" href="{:url('article/detail?id='.$vo['id'])}">
+							<a class="left_img_link">
+								<img class="thumb-img" src="{$vo.cover_id|get_cover_path}">
+							</a>
+							<div class="right_item_content">
+								<div class="ul_item_title ric_width"><a href="{:url('article/detail?id='.$vo['id'])}" >{$vo.title}</a></div>
+								<div class="ul_item_content ric_width">{$vo.description|substr_cn="170"}</div>
+								<div class="ul_item_opr">
+									<span class="ul_item_opr_i ul_item_opr_cate"><a href="{:url('article/lists?id='.$vo['category_id'])}"><i></i>{$vo.category_id|get_category_title}</a></span>
+									<span class="ul_item_opr_i ul_item_opr_visit_num"><a><i></i>浏览：{$vo.view}</a></span>
+									<span class="ul_item_opr_i ul_item_opr_time"><a><i></i>{$vo.create_time|date="Y-m-d h:i",###}</a></span>
+									<span class="ul_item_opr_i ul_item_opr_comments"><a><i></i>{$vo.comments}</a></span>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</li>
+						 {/volist}	
+						
+					
+						
+					</ul>
+					
+						  {$res.page}
+					
+					<div class="clear"></div>
+				</div>
+				<div class="fl content_right">
+					  {notempty name="lists"}
+					<div class="cate_div">
+						<div class="cate_p">子分类</div>
+						{volist name="lists" id="vo"} 
+			     <span class="cate_c"><a href="{:url('article/lists?id='.$vo['id'])}">{$vo.id|get_category_title}   </a></span>
+				 				 
+		      {/volist}
+					
+			
+					</div>
+						{/notempty}	
+					<div class="rank_div">
+						<div class="rank_title black_color">点击排行
+							
+						</div>
+						<ul class="rank_list">
+						{By:read  model_id="1" name="vo" order="view desc" limit="10"}	
+			      <li><a href="{:url('article/detail?id='.$vo['id'])}"><span>{$i}.</span>{$vo.title|substr_cn="29"}    </a>
+				   </li>
+				 
+		        {/By:read}
+						</ul>
+					</div>
+					<div class="ad_img1">
+						  {By:ad place='2' name="vo"}
+             		 <a href="{$vo.url|get_url}" class="1"> 
+					 <img src="{$vo.cover_id|get_cover_path}"></a>
+		             {/By:ad}
+					</div>
+					<div class="latest_posts">
+						<div class="latest_posts_title">最新发布</div>
+						<ul class="latest_posts_list">
+						{By:read  model_id="1" name="vo" order="id desc" limit="10"}
+			      <li><a href="{:url('article/detail?id='.$vo['id'])}"><span>{$i}.</span>{$vo.title|substr_cn="29"}    </a>
+				   </li>
+		         {/By:read}	
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="footer_line in_width"></div>
+		{include file="public/footer" /}
+		
+		<script>
+			$(function(){
+				$(".pg_bar_con .pg_bar .pg_num").click(function(){
+					$(this).addClass("cur").siblings(".pg_num").removeClass("cur");
+				});
+			})
+		</script>
+	</body>
+</html>

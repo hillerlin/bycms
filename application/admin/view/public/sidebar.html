@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title>{$meta_title|default=""}|yershop后台管理</title>
+    <link rel="stylesheet" href="__CSS__/index.css" />
+	<link rel="stylesheet" href="__COMMON__/font-awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="__COMMON__/jquery.min.js" ></script>
+	<script>
+	var dialog_style ="{:C('DIALOG_STYLE')}";
+	var index_url="{:url('index/index')}";
+	$(".logo").click(function(){
+	   location.href=index_url;
+	});
+	</script>
+  <!--引入改进型easydialog弹窗 -->	
+{if condition="C('DIALOG_STYLE') eq '1'"}	
+		<link rel="stylesheet" href="__CSS__/global.css">
+	<link rel="stylesheet" href="__CSS__/animate.css">
+	<link rel="stylesheet" href="__CSS__/dialog.css">
+	<style>
+		body,html{
+			/*display: flex;
+			justify-content: center;
+			align-items: center;*/
+		}
+
+		.div-testDialog{
+			width: 500px;
+			height: auto;
+			margin: 50px auto;
+		}
+
+		.div-testDialog button{
+			margin:  10px;
+		}
+		@media screen and ( max-width: 460px){
+			.div-testDialog{
+				width: 90%;
+			}
+		}
+   </style>
+<script src="__JS__/dialog.js"></script>	
+{/if}
+<style>
+.top{
+	width: 100%;
+	height: 50px;
+	color: #ffffff;
+    background-color: {:C('COLOR')};padding:2px 0;
+}
+a{color:blue;text-decoration:none;cursor: pointer;}
+.nav_tree_list .menue .c_menue_item a{
+	text-decoration: none;
+	color:#000000;
+}
+.nav_tree_list .menue .c_menue_item.checked{
+	color: {:C('btn')};
+}
+.nav_tree_list .menue .c_menue_item:hover a{
+	color:#fff;
+}
+
+.nav_tree_list .menue .c_menue_item.checked a{
+    color: {:C('btn')};
+}.nav_tree_list .menue .c_menue_item:hover{
+	background-color: {:C('btn')};
+	color:#fff;
+}
+.p_menue{
+		background-color: {:C('COLOR')};
+		color:#fff;
+}
+.edit_tab .tab_option.on{
+		background-color: {:C('COLOR')};
+		color:#fff;
+}
+.page .active{
+	border:1px solid {:C('btn')};
+	background-color:{:C('btn')};
+	color: #ffffff;
+}
+.list_opr .edit_btn,.list_opr .del_btn{
+
+	color:bule;
+}
+tr th {
+    color: #000;
+    background-color:#e8f1f7;height:40px;
+}
+.article_table .article_table_header{
+      color: #000;
+    background-color:#e8f1f7;height:40px;
+}
+
+.edit_title{
+	color:#000;
+}
+.edit_tab .tab_option.on a{
+	
+	color: #fff;
+}
+.upload_btn_group .upload_btn{
+	background-color: {:C('COLOR')};
+}
+.edit_left .add{
+	background-color: {:C('COLOR')};	
+    color: #fff;
+}
+.edit_left .delete{
+		background-color:red;
+		color: #fff;
+}
+
+.confirm_btn{
+	background-color:#03a9f4;
+	color:#fff;
+}
+.confirm_btn:hover{
+	background-color:#10926B;
+}
+.cancel_btn{
+	background-color:red;
+	color:#000;
+	border:2px solid #eee;color:#fff;
+}
+.cancel_btn:hover{
+    background-color: #red;
+}
+.error{
+	background-color: #FF5722;
+}
+.search_btn{
+	background-color: {:C('btn')};
+	color:#fff;
+}
+</style>
+
+	</head>
+	<body>
+		<div class="top">
+			<div class="logo"></div>
+			<ul class="main_links"> 	<li><a href="{:url('index/index')}" >首页 </a></li>
+			 {present name="group"}    
+                        <!-- 欢迎语 -->
+						   {volist name="group" id="vo" empty=""}
+                            <li><a href="{$vo.id|get_group_url}">{$vo.title|default=""} </a></li>
+							{/volist}  
+					  <li><a href="{:site_url()}" target="_blank">前台</a></li>
+					  {/present}
+		
+
+			</ul>	
+			<div class="user_info">
+			<span class="user_info_desc"><span class="user_name cur">{:get_username()}</span><span>欢迎你</span></span>
+			
+				<a href="{:url('login/logout')}">退出</a>
+			</div>
+		</div>
+			<div class="main">
+			<div class="nav_tree">
+				
+				<div class="nav_tree_list">
+				  
+				
+					{volist name="cate_list" id="vo"}
+					<div class="tree_menue {php}if(in_checked($pid,$vo['id'])) {echo  'down' ;}else{echo  'up' ;}{/php}">
+						<div class="tree_menue_first cur">
+						 <a href="{:url('document/index?pid='.$vo['id'])}" class="tit">{$vo.title}</a></div>
+						 {volist name="vo['child']" id="vo1"}<div class="tree_menue_second_group down">
+							
+							    <div class="tree_menue_second cur {php}if(in_checked($pid,$vo1['id'])) {echo  'checked' ;}{/php}">
+							    <a href="{:url('document/index?pid='.$vo1['id'])}">|—{$vo1.title}</a>
+							    </div>
+							    <ul> {volist name="vo1['child']" id="vo2"}
+								<li class="tree_menue_third cur checked"><a href="{:url('document/index?pid='.$vo2['id'])}">|—{$vo2.title}</a></li> 
+								{/volist}
+								</ul>
+						</div> 
+						{/volist}
+					</div>
+					{/volist}
+				</div>
+			</div>	

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>{$meta_title|default=""}|yershop后台管理</title>
+		<link rel="stylesheet" href="__CSS__/index.css" />
+		<script type="text/javascript" src="__JS__/jquery.min.js" ></script>
+		<style>
+
+.top{
+	width: 100%;
+	height: 50px;
+	color: #ffffff;
+    background-color: {:C('COLOR')};padding:2px 0;
+}
+a{color:{:C('COLOR')};text-decoration:none;cursor: pointer;}
+.nav_tree_list .menue .c_menue_item a{
+	text-decoration: none;
+	color:#000000;
+}
+.nav_tree_list .menue .c_menue_item:hover{
+	background-color:  {:C('COLOR')};
+	color:#fff;
+}
+.nav_tree_list .menue .c_menue_item:hover a{
+	background-color: {:C('COLOR')};
+	color:#fff;
+}
+
+.nav_tree_list .menue .c_menue_item.checked{
+	background-color:  {:C('COLOR')};
+}
+.edit_left .add{
+	
+	background-color: {:C('COLOR')};
+}
+.edit_tab .tab_option.on{
+	background-color: {:C('COLOR')};
+	border-top:1px solid #dddddd;
+	border-right:1px solid #dddddd;
+	border-left:1px solid #dddddd;
+	border-bottom:1px solid #ffffff;
+	color: #fff;
+}
+.confirm_btn{
+	background-color:{:C('COLOR')};
+}
+</style>
+
+	</head>
+	<body>
+		<div class="top">
+			<div class="logo"></div>
+			<ul class="main_links">
+			<li><a href="{:url('index/index')}" target="_blank">首页 </a></li>  {present name="group"}    
+                        <!-- 欢迎语 -->
+						   {volist name="group" id="vo" empty=""}
+                            <li><a href="{$vo.id|get_group_url}">{$vo.title|default=""} </a></li>
+							{/volist}  
+							{/present}
+			<li><a href="{:site_url()}" target="_blank">前台 </a></li>
+
+			</ul>	
+			<div class="user_info">
+				<span class="user_info_desc"><span class="user_name cur">Lucky</span><span>欢迎你</span></span>
+				<span class="user_info_msg cur">
+					<span class="user_msg_num">10</span>
+					<ul class="user_msg_list">
+						<li class="user_msg_item space">
+							<div></div>
+						</li>	
+						<li class="user_msg_item clear">
+							<span class="msg_icon order_icon left"><i></i></span>
+							<span class="msg_title left">订单有6笔新订单</span>
+							<span class="msg_time left">10分钟前</span>
+						</li>
+						<li class="user_msg_item clear">
+							<span class="msg_icon info_icon left"><i></i></span>
+							<span class="msg_title left">有3个来自人事内部的消息</span>
+							<span class="msg_time left">16分钟前</span>
+						</li>
+						<li class="user_msg_item clear">
+							<span class="msg_icon meeting_icon left"><i></i></span>
+							<span class="msg_title left">上午开会消息存档</span>
+							<span class="msg_time left">15分钟前</span>
+						</li>
+						<li class="user_msg_item">
+							<span class="enter_list clear"><i class="left"></i><span class="left">进入列表...</span></span>
+						</li>
+					</ul>
+				</span>
+				<a class="exit" href="javascript:void(0);">退出</a>
+			</div>
+		</div>、
+			<div class="main">
+			<div class="nav_tree">
+				<div class="user_info_detail">
+					<img class="user_icon" src="{:get_user_cover()}"/>
+					<span class="user_name_left">{:get_username()}</span>
+				</div>
+				<div class="nav_tree_list">
+					{volist name="cate_list" id="vo"}
+					<div class="tree_menue {php}if(in_checked($pid,$vo['id'])) {echo  'down' ;}else{echo  'up' ;}{/php}">
+						<div class="tree_menue_first cur"><a>{$vo.title}</a></div>
+						 {volist name="vo['child']" id="vo1"}<div class="tree_menue_second_group down">
+							
+							    <div class="tree_menue_second cur {php}if(in_checked($pid,$vo1['id'])) {echo  'checked' ;}{/php}">
+							    <a href="{:url('document/index?pid='.$vo1['id'])}">{$vo1.title}</a>
+							    </div>
+							    <ul {php}if(in_checked($pid,$vo1['id'])) {echo  '' ;}else{echo  ' class="none"' ;}{/php}> {volist name="vo1['child']" id="vo2"}
+								<li class="tree_menue_third cur {php}if( $vo2['id']==$pid) {echo  ' checked' ;}{/php}"><a href="{:url('document/index?pid='.$vo2['id'])}">{$vo2.title}</a></li> 
+								{/volist}
+								</ul>
+							 
+                          
+						</div> 
+						{/volist}
+					</div>
+					{/volist}
+				</div>
+			</div>	

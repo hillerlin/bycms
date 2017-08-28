@@ -1,0 +1,104 @@
+ <!-- 头部 -->
+	{include file='public/header'}
+<!-- 头部 --> 
+			<div class="content">
+			<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
+				
+				<div class="edit_box">
+					<div class="edit_title">{$meta_title|default=""}</div>
+					<div class="edit_tab">
+						<div class="tab_option on">基础</div>
+						<div class="tab_option">高级</div>
+					</div>
+					<div class="edit_content">
+							 <form class="group-form"  action="{:url('')}" method="post">
+							 <div class="edit_content_tab">
+						    <div class="input_title">用户名称<span>(名称)</span></div>
+							<input type="text" name="username" class="input_box" value="{$info.username|default=""}"/>
+							<div class="input_title">密码<span>(明码必须加密后保存)</span></div>
+						  <input type="text" id="user-weibo" class="input_box" name="password" value="{$info.password|default=""}"><a class="btn" id="encrypt">加密</a>
+						<div class="input_title">邮箱<span>(用户邮箱)</span></div>
+                            <input type="text" name="email" class="input_box" value="{$info.email|default=""}"/>
+				      	<div class="upload_div">
+								<div class="input_title">图片<span>(图片名称)</span></div>
+								<div class="upload_btn_group">
+									<div class="upload_btn">上传图片</div>
+									<input type="file" class="upload_file" id="uploads"/>
+								</div>
+								<div class="upload_imgs">
+									<input type="hidden" name="cover_id" id="cover_id" value="{$info.cover_id|default=""}"	>
+									<span class="upload_imgs_wrap">
+									  {notempty name="info['cover_id']"}
+							              <div class="upload-pre-item"> <img src="{$info.cover_id|get_cover_path}"/>
+						                </div>{/notempty}
+									
+									</span>
+									
+								</div>
+							</div>
+					<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>											
+								<script type="text/javascript">
+				    /* 初始化上传插件 */
+					$(".upload_file").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__PUBLIC__/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传图片",
+				        "uploader"        : "{:url('File/uploadPicture',array('session_id'=>session_id()))}",
+				        "width"           : 150,
+				        'removeTimeout'	  : 10,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : uploadPicture,
+				        'onFallback' : function() {
+				            alert('未检测到兼容版本的Flash.');
+				        }
+				    });
+					function uploadPicture(file, data){
+				    	var data = $.parseJSON(data);
+				    	var src = '';
+				        if(data.status){
+				        	$("#cover_id").val(data.id);
+				        	src = data.url || data.path;
+				        	$('.upload_imgs_wrap').html(
+				        		'<img src="' + src + '"/>'
+				        	);
+				        } else {
+				        	updateAlert(data.info);
+				        	setTimeout(function(){
+				                $('#top-alert').find('button').click();
+				                $(that).removeClass('disabled').prop('disabled',false);
+				            },1500);
+				        }
+				    }
+					</script>			
+						</div>
+						<div class="edit_content_tab none">
+							<div class="input_title">状态<span>(0-禁用，1-正常)</span></div>
+                            <input type="text" name="status" class="input_box" value="{$info.status|default=""}"/>
+		
+						</div>
+						<div class="btn_group">
+						    <input type="hidden" name="id" value="{$info.id|default=""}">
+							<div class="confirm_btn">确认</div>
+							<div class="cancel_btn">返回</div>
+						</div></form> 
+					</div>
+				</div>
+			</div>
+		</div>
+       <script src="__JS__/edit.js"></script>
+	  <script>
+       $("#encrypt").click(function(){
+            var url = "{:url('encrypt')}";
+	        var pwd=$("input[name='password']").val();
+	        if(!pwd){
+	           alert("密码不能为空");
+	        }
+            $.post(url,{password:pwd},function(data){
+             $("input[name='password']").val(data);
+           });
+        });
+		</script>
+ <!-- 头部 -->
+	{include file='public/footer'}
+<!-- 头部 --> 

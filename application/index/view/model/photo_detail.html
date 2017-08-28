@@ -1,0 +1,375 @@
+{include file="public/header" /} 
+		<div class="nav_bar in_width"><span>&gt;</span>
+			<a href="{:url('index/index')}">首页</a>
+			<span>&gt;</span>
+				{foreach $pid as $vo}  
+			<a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a><span>&gt;</span>
+		{/foreach}
+		
+		<a href="{:url('article/lists?id='.$info['category_id'])}">{$info.category_id|get_category_title}</a><span>&gt;</span>
+			
+			
+			<span>{$info.title}</span>
+		</div>
+		<div class="content">
+			<div class="content_in in_width">
+				<div class="fl main_left">
+					<div class="photo_content">
+						<div class="ac_in_width photo_title">{$info.title}</div>
+						<div class="ac_in_width article_desc">
+							<span class="article_time">{$info.create_time|date="Y-m-d h:i",###}</span>
+							<span class="article_source">作者：{$info.uid|get_username}</span>
+							<a class="article_activity" href="javascript:void(0)">我有话要说（{$info.comments}人参与）</a>
+						</div>	
+						
+	                   <div class="photo_tool">
+							<div class="btn">
+								<span class="lft"></span>
+							    <span class="rgt"></span>
+								<span class="num">(<b>3</b>/{php}echo count($info['pictures']);{/php})</span>
+							</div>
+							<div class="share">
+							<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>	
+							</div>
+							
+	</div>
+						<div class="article_p">
+							 <div id="slides">
+    {foreach name="info['pictures']" item="vo1" key="k"} 
+								
+										<img src="{$vo1|get_cover_path}" attr-id="{$vo1}"/>
+								
+								  {/foreach}
+   
+  </div>
+  <script src="__JS__/jquery.slides.min.js"></script>
+   <script>
+    $(function(){
+      $("#slides").slidesjs({
+          width: 700,
+        height: 393,
+		 start: 1,  
+		previous: 'prev'  ,
+		 next: '32',
+	  callback: {
+      loaded: function(number) {
+		  $('.photo_content b').text(number); 
+		  $('.photo_content b').text(number); 
+		  $('#slides .slidesjs-previous').text("");
+		  $('#slides .slidesjs-next').text("");
+		  $('#slides img').removeClass("active");
+		  $('#slides img').eq(number-1).addClass("active");
+      },
+      start: function(number) {
+          $('.photo_content b').text(number); 
+		  $('#slides .slidesjs-previous').text("");
+		  $('#slides .slidesjs-next').text("");
+		  $('#slides img').removeClass("active");
+		  $('#slides img').eq(number-1).addClass("active");
+      },
+      complete: function(number) {
+          $('.photo_content b').text(number); 
+		  $('#slides .slidesjs-previous').text("");
+		  $('#slides .slidesjs-next').text("");
+		  $('#slides img').removeClass("active");
+		  $('#slides img').eq(number-1).addClass("active");
+      }
+    }
+      });
+    });
+  </script>
+	<div class="list">	
+	 
+	 <div class="pre"><a href="{:url('article/detail?id='.$pre['id'])}"><img src="{$pre.cover_id|get_cover='path'}" width="110" height="80"></a></div>
+     <div class="imgs">
+	  <span class="lft"></span>
+	  <div class="wrap">
+	    <ul>
+		    {foreach name="info['pictures']" item="vo1" key="k"} 
+								<li onmouseover="preview(this)">
+										<img src="{$vo1|get_cover_path}" class="slidesjs-slide" width="70" height="70" ></li>
+								
+								  {/foreach}
+		
+		</ul>
+      
+       </div> 
+	   <span class="rgt"></span>
+	 </div>
+	 <div class="next"><a href="{:url('article/detail?id='.$next['id'])}"><img src="{$next.cover_id|get_cover='path'}" width="110" height="80"></a></div>
+	</div>
+
+
+	</div>
+ <script>
+//向前按钮点击
+			$(".list .imgs .lft").click(function(){
+				if($(this).hasClass("disable")){
+					return false;
+				}
+				var reg = /\d+/;
+				var marleft = parseInt($(".list .imgs  ul").css("margin-left").match(reg)[0]);
+				var nums = $(".list .imgs  ul li").length;
+				if(nums <= 6){
+					$(".list .imgs .lft").addClass("disable");
+					$(this).addClass("disable");
+					return false;
+				}
+				var totallen = nums * (70);
+				var setLeft = 0;
+				
+				if((marleft - 312) <= 0){
+					setLeft = 0;
+					$(this).addClass("disable");
+				}else{
+					setLeft = -(marleft - 312);
+				}
+				$(".list .imgs .lft").removeClass("disable");
+				$(".list .imgs ul").animate({
+					"margin-left":setLeft + "px"
+				});
+			});
+			//向后按钮点击
+			$(".list .imgs .rgt").click(function(){
+				if($(this).hasClass("disable")){
+					return false;
+				}
+				var reg = /\d+/;
+				var marleft = parseInt($(".list .imgs  ul").css("margin-left").match(reg)[0]);
+				var nums = $(".list .imgs ul li").length;
+				
+				if(nums <= 6){
+					$(".list .imgs .rgt").addClass("disable");
+					$(this).addClass("disable");
+					return false;
+				}
+				
+				var totallen = nums * (70);
+				var setLeft = 0;
+				
+				if((marleft + 576) >= totallen){
+					setLeft = -(totallen - 312);
+					$(this).addClass("disable");
+				}else{
+					setLeft = -marleft - 312;
+				}
+				$(".list .imgs .rgt").removeClass("disable");
+				$(".list .imgs  ul").animate({
+					"margin-left":setLeft + "px"
+				},1000);
+			});
+  function preview(obj){
+			    var src=$(obj).find("img").attr("src");
+				$("img.active").attr("src",src);
+			}
+  </script>
+	
+					</div>
+					<div class="ac_in_width article_comment">
+						<div class="article_comment_title">新闻评论</div>
+						<div class="article_comment_div ac_in_width">
+							<div class="article_comment_user fl">
+								<img src="__IMG__/user_icon.png"/>
+								<span class="article_comment_user_name">匿名</span>
+							</div>
+							<div class="article_comment_box fl">
+								<i class="input_arrow"></i>
+								<textarea class="article_comment_input" placeholder="您的观点仅代表您本人，请文明发言，严禁散播谣言和诽谤他人"></textarea>
+								<div class="article_comment_tips">
+								{if condition="is_login() eq 0"}
+								<a href="{:url('user/login')}">登录</a>
+								<a href="{:url('user/register')};">注册</a>
+								{/if}
+								</div>
+								<div class="article_comment_btn">
+									<span class="article_comment_tip_span">Ctrl+Enter快捷提交</span>
+									<span class="article_comment_submit" onclick="submit()">马上发表</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ac_in_width article_comment_list">
+						<div class="article_comment_title">最新评论<span class="act_span1">(评论<span class="comment_nums">{$res["count"]}</span>条  <a href="javascript:void(0);">查看全部&gt;&gt;</a>)</span></div>
+					{volist name="res.list" id="vo"}  
+				  <div class="article_comment_item ac_in_width">
+					    	<div class="fl comment_item_user_warpper">
+					    		<img src="__IMG__/user_icon.png"/>
+					    	</div>
+					    	<div class="comment_item_content_div">
+					    		<div class="cicd_title">
+					    			<span class="cicd_username fl">{$vo.uid|get_username}</span>
+					    			<span class="cicd_place fl"></span>
+					    			<span class="cicd_time fr">{$vo.create_time|date="Y-m-d h:i",###}发表</span>
+					    		</div>
+					    		<div class="cicd_content">
+								 {if condition="$vo['pid'] gt 0"}
+								 @{$vo.pid|get_comment="content"}  
+								{/if}<p>&nbsp;&nbsp;&nbsp;&nbsp;{$vo.content}</p>
+					    		</div>
+					    		<div class="cicd_opr">
+					    			<div class="fr">
+						    			<a onclick="ding({$vo.id})" class="cicd_opr_ding">顶<span>({$vo.zan})</span></a>
+						    			<a onclick="reply(this,{$vo.id})" class="reply_btn">回复</a>
+						    			
+					    			</div>
+					    		</div>
+					    	</div>
+					    	<div class="clear"></div>
+					    </div>
+						{/volist}
+						{$res.page}
+					
+					    <div class="ac_in_width reply_div none">
+					    	<div class="article_reply_user fl">
+								<img src="__IMG__/user_icon.png"/>
+								<span class="article_reply_user_name">匿名</span>
+							</div>
+							<div class="article_reply_box fl">
+								<i class="input_arrow"></i>
+								<input name="c_id" type="hidden">
+								<textarea class="article_reply_input" placeholder="您的观点仅代表您本人，请文明发言，严禁散播谣言和诽谤他人"></textarea>
+								<div class="article_comment_tips">
+								{if condition="is_login() eq 0"}
+								<a href="{:url('user/login')}">登录</a>
+								<a href="{:url('user/register')};">注册</a>
+								{/if}
+								
+								</div>
+								<div class="article_comment_btn">
+									<span class="article_comment_tip_span">Ctrl+Enter快捷提交</span>
+									<span class="article_comment_submit" onclick="comment(this)">马上发表</span>
+								</div>
+							</div>
+					    </div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="fl content_right">
+					<div class="cate_div">
+						<div class="cate_p">子分类</div>
+						<div class="cate_c">国内</div>
+					</div>
+					<div class="rank_div">
+						<div class="rank_title black_color">点击排行
+						
+						</div>
+						<ul class="rank_list">
+						{By:read  model_id="2" name="vo" order="id desc" limit="10"}
+			      <li><a href="{:url('article/detail?id='.$vo['id'])}"><span>{$i}.</span>{$vo.title|substr_cn="29"}    </a>
+				   </li>
+		         {/By:read}
+						</ul>
+					</div>
+					<div class="ad_img1">
+					  {By:ad place='2' name="vo"}
+             		 <a href="{$vo.url|get_url}" class="1"> 
+					 <img src="{$vo.cover_id|get_cover_path}"></a>
+		             {/By:ad}
+					</div>
+					<div class="latest_posts">
+						<div class="latest_posts_title">点击排行</div>
+						<ul class="latest_posts_list">
+							 {By:read  model_id="2" name="vo" order="id desc" limit="10"}
+			      <li><a href="{:url('article/detail?id='.$vo['id'])}"><span>{$i}.</span>{$vo.title|substr_cn="29"}    </a>
+				   </li>
+		         {/By:read}
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		{include file="public/footer" /}
+		
+		<div class="mask none">
+			<div class="alert_success alert_div">
+				<div class="alert_header">提示</div>
+				<div class="alert_content"><i></i><span class="success">评论成功<span></div>
+				<div class="alert_btn">确定</div>
+				<span class="alert_close"></span>
+			</div>
+		</div>
+		<div class="mask none">
+			<div class="alert_error alert_div">
+				<div class="alert_header">提示</div>
+				<div class="alert_content"><i></i><span class="error">评论失败<span></div>
+				<div class="alert_btn">确定</div>
+				<span class="alert_close"></span>
+			</div>
+		</div>
+		<script>
+		   function comment(obj){
+			     
+				var c_id=$(obj).parents(".reply_div").find("input").val();
+				var content=$(obj).parents(".reply_div").find("textarea").val();
+				  var id="{$info.id}";
+			      var url="{:url('Comment/reply')}"
+		         $.post(url,{doc_id:id,content:content,pid:c_id},function(data){
+                  if(data.code){
+			        opensuccess(data);
+		          }else{
+		            openerror(data);
+		         }
+              });
+			}
+			 function reply(obj,c_id){
+			     if($(obj).parents(".article_comment_item").first().find(".reply_div").length != 0){
+						$(obj).parents(".article_comment_item").first().find(".reply_div").removeClass("none");
+						return false;
+					}
+					$("input[name='c_id']").val(c_id);
+					var clone = $(".article_comment_list .article_comment_title").siblings(".reply_div").clone();
+					clone.removeClass("none");
+					$(obj).parents(".comment_item_content_div").first().after(clone);
+			}
+			$(".mask .alert_div .alert_close").click(function(){
+			    $(this).parents(".mask").addClass("none");
+			});
+			$(".mask .alert_div .alert_btn").click(function(){
+			    $(this).parents(".mask").addClass("none");
+			});
+			$(".article_comment_submit").click(function(){
+				openerror();
+			})
+			function opensuccess(data){
+				$(".success").text(data.msg);
+				$(".alert_success").parents(".mask").removeClass("none");
+				 setTimeout(function(){
+                        if (data.url) {
+                            location.href=data.url;
+                        }
+             },1500);
+			}
+			function openerror(data){
+			    $(".error").text(data.msg);
+				$(".alert_error").parents(".mask").removeClass("none");
+			}
+			function submit(){
+			   var content=$(".article_comment_input").val();
+			   var id="{$info.id}";
+			   var url="{:url('Comment/add')}"
+		       $.post(url,{doc_id:id,content:content},function(data){
+                  if(data.code){
+			        opensuccess(data);
+		          }else{
+		            openerror(data);
+		         }
+              });
+		}
+		function ding(id){
+			  
+			   var url="{:url('Comment/update')}"
+		       $.post(url,{id:id},function(data){
+                if(data.code){
+			        opensuccess(data);
+		       }else{
+		            openerror(data);
+		       }
+              });
+		}
+
+		</script>
+	</body>
+</html>

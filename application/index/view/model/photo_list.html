@@ -1,0 +1,72 @@
+{include file="public/header" /} 
+
+	<div class="nav_bar in_width">
+			<a href="javascript:void(0);">首页</a>
+			<span>&gt;</span>
+			{foreach $ids as $vo}  
+			<a  class="cru_01" href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a><span>&gt;</span>
+		{/foreach}
+		<span >{$meta_title}</span>
+		</div>
+		<div class="content">
+			
+
+				 						
+		<div class="category" style="min-height:600px;">
+
+		
+		<ul>
+		       {volist name="res.list" id="vo"} 
+				  <li><a href="{:url('article/detail?id='.$vo['id'])}" >
+				  <img src="{$vo.cover_id|get_cover_path}" class="logo_img"></a>	
+			      <p>{$vo.title}</p>
+				   </li>
+				{/volist}
+					
+				 </ul>  
+
+				{$res.page}
+
+		</div>					
+	</div>
+					
+	
+
+	<script>
+		$(function(){
+			//轮播初始化
+			var text = $($(".slider_imgwrap li").get(0)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			var interval = setInterval(sliderImg,3000);
+			//轮播点击页面跳转
+			$(".slider_num").click(function(){
+		        clearInterval(interval);
+				sliderImg(this);
+				interval = setInterval(sliderImg,3000);
+			})
+		});
+		function sliderImg(obj){
+			var index;
+			if(obj != null){
+				var $this = $(obj);
+				var index = $this.index(".slider_num");
+				showPageByIndex(index);
+			}else{
+				var index = $(".active").index(".slider_num");
+				var max = $(".slider_num").length;
+				var nextindex = (index +1)%max;
+				showPageByIndex(nextindex);
+			}
+		}
+		function showPageByIndex(index){
+			$($(".slider_num").get(index)).addClass("active").siblings().removeClass("active");
+			var width = $(".slider_imgwrap li img").width();
+			var left = index * (-width);
+			var text = $($(".slider_imgwrap li").get(index)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			$(".slider_imgwrap").animate({"left":left + 'px'},1000);
+		}
+
+	</script>
+
+	{include file="public/footer" /}

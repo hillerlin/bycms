@@ -1,0 +1,86 @@
+{include file="public/header" /} 
+		<div class="nav_bar in_width">
+			<a href="javascript:void(0);">首页</a>
+			<span>&gt;</span>
+			{foreach $ids as $vo}  
+			<a  class="cru_01" href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a><span>&gt;</span>
+		{/foreach}
+		<span >{$meta_title}</span>
+		</div>
+		<div class="content">
+			<div class="content_in in_width">
+				<div class="fl main_left">
+					<ul class="ml_in_width ul_list">
+						{volist name="res.list" id="vo"} 
+						<li class="ul_item" href="{:url('article/detail?id='.$vo['id'])}">
+						
+							<div class="right_item_content">
+								<div class="ul_item_title ric_width"><a href="{:url('article/detail?id='.$vo['id'])}" >{$vo.title}</a></div>
+
+						</li>
+						 {/volist}	
+						
+					
+						
+					</ul>
+					
+						  {$res.page}
+					
+					<div class="clear"></div>
+				</div>
+				<div class="fl content_right">
+					  {notempty name="lists"}
+					<div class="cate_div">
+						<div class="cate_p">子分类</div>
+						{volist name="lists" id="vo"} 
+			     <span class="cate_c"><a href="{:url('article/lists?id='.$vo['id'])}">{$vo.id|get_category_title}   </a></span>
+				 				 
+		            {/volist}
+					
+				
+					</div>
+					{/notempty}	
+					<div class="rank_div">
+						<div class="rank_title black_color">点击排行
+						
+						</div>
+						<ul class="rank_list">
+						{volist name="rank" id="vo" key="k" }
+			      <li><a href="{:url('article/detail?id='.$vo['id'])}"><span>{$k}.</span>{$vo.title|substr_cn="29"}    </a>
+				   </li>
+				 
+		       {/volist}
+						</ul>
+					</div>
+					<div class="ad_img1">
+						  {By:ad place='2' name="vo"}
+             		 <a href="{$vo.url|get_url}" class="1"> 
+					 <img src="{$vo.cover_id|get_cover_path}"></a>
+		             {/By:ad}
+					</div>
+					<div class="latest_posts">
+						<div class="latest_posts_title">点击排行</div>
+						<ul class="latest_posts_list">
+						 {volist name="rank" id="vo" key="k" }
+			      <li><a href="{:url('article/detail?id='.$vo['id'])}"><span>{$k}.</span>{$vo.title|substr_cn="29"}    </a>
+				   </li>
+		       {/volist}	
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="footer_line in_width"></div>
+		{include file="public/footer" /}
+		
+		<script>
+			$(function(){
+				$(".pg_bar_con .pg_bar .pg_num").click(function(){
+					$(this).addClass("cur").siblings(".pg_num").removeClass("cur");
+				});
+			})
+		</script>
+	</body>
+</html>
