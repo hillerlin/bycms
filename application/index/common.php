@@ -11,7 +11,7 @@ use think\Db;
  * @return string
  */
 function get_category_title($id){
-   echo '1111';die;
+   
 	$map['id']=$id;
 	$info=Db::name("category")->where($map)->find();
     return $info['title'];  
