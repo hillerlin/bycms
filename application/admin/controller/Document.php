@@ -7,6 +7,7 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
+use xunsearch;
 class Document extends Admin{
     public function index(){     
         if($_POST){
@@ -81,11 +82,27 @@ class Document extends Admin{
     public function add($id=""){  
 	    if($_POST){
 		   $Document =  new \app\admin\model\Document;
+		   $Category= new \app\admin\model\Category;
+		   $cageObj=$Category->getCategoryName($_POST['category_id']);
+
            // 过滤post数组中的非数据表字段数据
            $Document->validate(true)->allowField(true)->save($_POST);
 		   $id= $Document->getLastInsID();
 		   $res=$Document->updatePost($id);
 	         if($res){
+                 //如果是知识百科就启用迅搜去做分词保存
+                 if($cageObj['title']=='知识百科')
+                 {
+                     $xunSearch=xunsearch\SoClass::getInstance();
+                     $data = array(
+                         'pid' =>$id, // 此字段为主键，必须指定
+                         'message' => $_POST['title'],
+                         'chrono' => time()
+                     );
+                     $xunSearch->add($data);//添加文档
+                     $xunSearch->addLogSearch($_POST['title']);
+                 }
+
 			  addUserLog("add_document",session_uid());
              $this->success('新增成功','Document/index');
 		  }else{
