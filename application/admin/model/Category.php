@@ -186,7 +186,8 @@ public function getfooter(){
 //获取分类的名字
 public function getCategoryName($id)
 {
-   return $this->where([['id']=>$id])->field('title')->select();
+    $list = $this->find($id)->toArray();
+    return $list['title'];
 }
 
 }

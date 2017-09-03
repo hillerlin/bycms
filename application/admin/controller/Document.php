@@ -88,10 +88,10 @@ class Document extends Admin{
            // 过滤post数组中的非数据表字段数据
            $Document->validate(true)->allowField(true)->save($_POST);
 		   $id= $Document->getLastInsID();
-		   $res=$Document->updatePost($id);
-	         if($res){
+		   //$res=$Document->updatePost($id);
+	         if($id){
                  //如果是知识百科就启用迅搜去做分词保存
-                 if($cageObj['title']=='知识百科')
+                 if($cageObj=='知识百科')
                  {
                      $xunSearch=xunsearch\SoClass::getInstance();
                      $data = array(
