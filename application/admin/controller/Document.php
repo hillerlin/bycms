@@ -40,11 +40,24 @@ class Document extends Admin{
 	}
 
    public function edit($id){   
-	    if($_POST){ 
+	    if($_POST){
+	       $_POST['description']=str_replace('，',',',$_POST['description']);//中英文逗号转换
 		   $Document = new \app\admin\model\Document;
            $Document->validate(true)->allowField(true)->save($_POST,['id' => input('id')]);
 		   $res=$Document->updatePost();
 	       if($res){
+               //如果是知识百科就启用迅搜去做分词保存
+               if($_POST['description'])
+               {
+                   $xunSearch=xunsearch\SoClass::getInstance();
+                   $data = array(
+                       'pid' =>$id, // 此字段为主键，必须指定
+                       'message' => $_POST['description'],
+                       'chrono' => time()
+                   );
+                   $xunSearch->add($data,'1');//添加文档
+                   $xunSearch->addLogSearch($_POST['title']);
+               }
 			   addUserLog("edit_document",session_uid());
 		      $this->success("更新成功！");
 		   }else{
@@ -82,21 +95,20 @@ class Document extends Admin{
     public function add($id=""){  
 	    if($_POST){
 		   $Document =  new \app\admin\model\Document;
-		   $Category= new \app\admin\model\Category;
-		   $cageObj=$Category->getCategoryName($_POST['category_id']);
-
+/*		   $Category= new \app\admin\model\Category;
+		   $cageObj=$Category->getCategoryName($_POST['category_id']);*/
+           $_POST['description']=str_replace('，',',',$_POST['description']);//中英文逗号转换
            // 过滤post数组中的非数据表字段数据
            $Document->validate(true)->allowField(true)->save($_POST);
 		   $id= $Document->getLastInsID();
-		   //$res=$Document->updatePost($id);
 	         if($id){
                  //如果是知识百科就启用迅搜去做分词保存
-                 if($cageObj=='知识百科')
+                 if($_POST['description'])
                  {
                      $xunSearch=xunsearch\SoClass::getInstance();
                      $data = array(
                          'pid' =>$id, // 此字段为主键，必须指定
-                         'message' => $_POST['title'],
+                         'message' => $_POST['description'],
                          'chrono' => time()
                      );
                      $xunSearch->add($data);//添加文档
@@ -120,11 +132,13 @@ class Document extends Admin{
 			    $ids=$Category->getParentId($pid);
 				array_push($ids,$pid);
 			    $this->assign("ids",$ids);
-            } 
+            }else
+             {
+                 exit;
+             }
 		    $map["id"]=$pid;
 			$cate =Db::name('category')->where($map)->find();
 			$this->assign("cate",$cate);
-			
 			unset($map);
             $Attributes=new \app\admin\model\Attributes;
 			$list = $Attributes->getData($cate["model_id"]);

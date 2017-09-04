@@ -1,24 +1,24 @@
  <!-- 头部 -->
 	{include file='public/sidebar'}
-<!-- 头部 --> 
+<!-- 头部 -->
 
-	<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>	
-	  <script type="text/javascript" src="__COMMON__/laydate/laydate.js"></script>	
+	<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>
+	  <script type="text/javascript" src="__COMMON__/laydate/laydate.js"></script>
 			<div class="content">
 			<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
-				<div class="edit_title"><i class="fa fa-map-marker"></i>当前位置:{foreach $ids as $vo}  
+				<div class="edit_title"><i class="fa fa-map-marker"></i>当前位置:{foreach $ids as $vo}
 			<a  class="cru_01" href="{:url('document/index?pid='.$vo)}">{$vo|get_category='title'}</a>>
 		{/foreach}{$meta_title|default=""}</div>
 				<div class="edit_box">
-					
+
 					<div class="edit_tab">
 						<div class="tab_option on">基础</div>
 						<div class="tab_option">高级</div>
 					</div>
 					<div class="edit_content">
 							 <form class="group-form"  action="{:url('')}" method="post">
-							
-							
+
+
 						    {foreach name="list" item="v" key="k"}
 							 <div class="edit_content_tab {if condition='$k eq 1'}none{/if}">
 							 {volist name="v['data']" id="vo"}
@@ -39,13 +39,13 @@
 								{/case}
 								{case value="editor"}
                                 <div class="input_title">{$vo.title}<span>({$vo.remark})</span></div>
-						  <textarea class="am-validate" id="content" name="{$vo.name}" required>{$vo.name|default=""}</textarea>		
+						  <textarea class="am-validate" id="content" name="{$vo.name}" required>{$vo.name|default=""}</textarea>
                                      <link rel="stylesheet" href="__COMMON__/kindeditor/default/default.css" />
 			<script charset="utf-8" src="__COMMON__/kindeditor/kindeditor-min.js"></script>
 			<script charset="utf-8" src="__COMMON__/kindeditor/zh_CN.js"></script>
 			<script type="text/javascript">
 				var editor_content;
-				
+
 				KindEditor.ready(function(K) {
 					editor_content = K.create('textarea[name="content"]', {
 						allowFileManager : false,
@@ -77,14 +77,14 @@
 								<div class="upload_imgs">
 								<input type="hidden" name="{$vo.name}"  value="{$info[$vo['name']]|default=''}"	>
 									<span class="upload_imgs_wrap upload-pre-img-{$vo.name}">
-									  
-									
+
+
 									</span>
-									
+
 								</div>
 							</div>
-														
-								<script type="text/javascript">
+
+<script type="text/javascript">
 				    /* 初始化上传插件 */
 					$("#{$vo.name}").uploadify({
 				        "height"          : 30,
@@ -110,7 +110,7 @@
 				        	);
 				        }
 				    }
-					</script>			
+					</script>
 								{/case}
 
 		{case value="photo"}
@@ -122,19 +122,19 @@
 								</div>
 								<div class="upload_imgs">
 								<input type="hidden" name="{$vo.name}"  value="{$info[$vo['name']]|default=''}"	>
-									
-								
+
+
 									<span class="upload_imgs_wrap {$vo.name}">
-									
-									
-									</span>	
-									
-									
+
+
+									</span>
+
+
 								</div>
 							</div>
-														
-								<script type="text/javascript">
-			
+
+<script type="text/javascript">
+
 				    /* 初始化上传插件 */
 					$("#{$vo.name}").uploadify({
 				        "height"          : 30,
@@ -154,13 +154,13 @@
                             picsbox = $(".{$vo.name}");
 							  picsbox.append(upload_img);
                              setVal();
-				        } 
+				        }
 				    },
 				        'onFallback' : function() {
 				            alert('未检测到兼容版本的Flash.');
 				        }
 				    });
-			
+
 
 		  function delPic(obj){ //删除
             $(obj).parent("div").remove();
@@ -175,16 +175,16 @@
            ids= result.join(',');
            $("input[name='{$vo.name}']").val(ids);
 	  }
-					</script>				
+</script>
 								{/case}
 									{case value="date"}
   				<div class="input_title">{$vo.title}<span>({$vo.remark})</span></div>
 							<input type="text" name="{$vo.name}" id="{$vo.name}" class="laydate-icon input_box" value="{notempty name='info.id'}{$info[$vo['name']]|time_format}{/notempty}"/>
-				 		
+
 				 	<script>
 laydate({
   elem: '#{$vo.name}',
-  format: 'YYYY-MM-DD hh:mm:ss', 
+  format: 'YYYY-MM-DD hh:mm:ss',
   min: laydate.now(), //设定最小日期为当前日期//目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
   event: 'focus' //响应事件。如果没有传入event，则按照默认的click
 });
@@ -194,27 +194,28 @@ laydate({
 								{/volist}
 								</div>
 								{/foreach}
-							
-				      
-						
-						
-					
-				
-						<div class="btn_group"> 
+
+
+
+
+								 <div class="input_title">文章标签<span>如有多个标签请用','号分开（例：大麦理财,互联网金融）</span></div>
+								 <input type="text" name="description" class="input_box" value=""/>
+
+						<div class="btn_group">
 						     <input type="hidden" name="category_id" value="{$info.category_id|default=""}">
 						    <input type="hidden" name="model_id" value="{$cate.model_id|default=""}">
 							<input type="hidden" name="id" value="{$info.id|default=""}">
 							<div class="confirm_btn">确认</div>
 							<div class="cancel_btn">返回</div>
 						</div>
-						</form> 
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-	
-	  
-	
+
+
+
 	  <script>
 			  $("select[name='position']").val("{$info.position|default='0'}");
 			$(function(){
@@ -224,13 +225,13 @@ laydate({
 				}
 				bindEvent();
 			});
-			
+
 			function initPage(){
-				
-				
+
+
 				$(".articlelist").attr("min-height",$(window).height() - 86);
 				$(".articlelist").css("min-height",($(window).height() - 86) + 'px');
-				
+
 				var currentRightHeight = $(".content").height();
 				var currentNavHeight = $(".nav_tree").height();
 				if(currentRightHeight < currentNavHeight){
@@ -239,10 +240,10 @@ laydate({
 				}else{
 					$(".nav_tree").css("min-height",currentRightHeight + 'px');
 				}
-				
-				
+
+
 			}
-			
+
 			function bindEvent(){
 				$(".tree_menue_first").on('click',function(){
 					if($(this).parent(".tree_menue").hasClass("down")){
@@ -252,7 +253,7 @@ laydate({
 						$(this).parent(".tree_menue").removeClass("up").addClass("down");
 						$(this).find("span").attr("class","folder_icon");
 					}
-					
+
 				});
 				$(".tree_menue_second").on("hover",function(){
 					if(!$(this).hasClass("checked")){
@@ -267,7 +268,7 @@ laydate({
 						//$(this).removeClass("checked");
 						//$(this).parent().removeClass("down").addClass("up");
 					}
-					
+
 				});
 				$(".tree_menue_third").on("click",function(){
 					if(!$(this).hasClass("checked")){
@@ -281,9 +282,9 @@ laydate({
 						$($(".edit_content_tab").get(index)).removeClass("none").siblings(".edit_content_tab").addClass("none");
 						$(this).addClass("on").siblings().removeClass("on");
 					}
-					
+
 				});
-				
+
 				/****树形菜单展开**/
 				$(".first_level .folder_icon").click(function(){
 					var parent= $(this).parents(".first_level_group").first();
@@ -293,7 +294,7 @@ laydate({
 						parent.removeClass("opened").addClass("closed");
 						parent.find(".second_level_group").removeClass("opened").addClass("closed");
 					}
-					
+
 				});
 				$(".second_level .folder_icon").click(function(){
 					var parent= $(this).parents(".second_level_group").first();
@@ -302,13 +303,13 @@ laydate({
 					}else if(parent.hasClass("opened")){
 						parent.removeClass("opened").addClass("closed");
 					}
-					
+
 				});
 			}
-			
-			
-			
-		</script>	
+
+
+
+		</script>
  <!-- 头部 -->
 	{include file='public/footer'}
-<!-- 头部 --> 
+<!-- 头部 -->
