@@ -51,6 +51,13 @@ class Article  extends Home{
 		if(!$info){
 		    $this->error('文章不存在！');
 		}
+		//添加标签点击量
+        if($info['description'])
+        {
+            $keyWordsObj=new \app\index\lib\keyWordLabel\keyWordsInterFace();
+            $keyWordsObj->addClick($info['description'],$info['view'],$info['category_id']);
+        }
+
 		$info["pictures"]=get_pictures($id); 
 		Db::name('document')->where('id',$id)->setInc('view');
 		$Category=new \app\index\model\Category;
