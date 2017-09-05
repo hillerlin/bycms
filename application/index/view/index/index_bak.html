@@ -1,0 +1,192 @@
+{include file="public/header" /} 
+
+
+
+		<div class="content">
+			<div class="content_in in_width">
+				<div class="fl main_left">
+					<!--热门新闻-->
+					<div class="fl content_left">
+						<div class="hot_news">
+							{By:pos position='1' name="vo"}
+							<a href="{:url('article/detail?id='.$vo['id'])}" class="hot_new_text">{$vo.title}</a>
+							<a href="{:url('article/detail?id='.$vo['id'])}" ><img src="{$vo.cover_id|get_cover_path}"/></a>
+							{/By:pos}
+						</div>
+						
+						<ul class="hot_news_list">
+							 {By:read  model_id="1" name="vo" order="view desc" limit="6"}
+						
+							<li class="detail_link {if condition="$i eq 1"}strong{/if}">
+								<a href="{:url('article/detail?id='.$vo['id'])}" class="main_link">{$vo.title}</a>
+								
+									{if condition="$i gt 1"}
+									<a href="{:url('article/detail?id='.$vo['id'])}" class="d_link">{$vo.title}</a>
+									{/if}
+							</li>
+							 {/By:read}
+						</ul>
+					</div>
+					<!--热门新闻 end-->
+					<!--轮播-->
+					<div class="fl content_center">
+						<div class="silder_wrapper">
+							<ul class="slider_imgwrap">
+								{By:slide  place="0" name="vo" order="sort desc" limit="5"}
+								<li>
+									<a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}"/></a>
+									<span class="img_title">{$vo.title}</span>
+								</li>
+								{/By:slide}	
+								
+							</ul>
+							<div class="slider_mask">
+								<span class="fl mask_title"></span>
+								<span class="silder_nums">
+									{By:slide  place="0" name="vo" order="sort desc" limit="5"}
+									<span class="slider_num {if condition="$i eq 1"}current{/if}">{$i}</span>
+									{/By:slide}	
+								</span>
+							</div>
+						</div>
+						<div class="hot_dis">
+						{By:pos position="3"  name="vo"}
+						<a class="hot_dis_main" href="{:url('article/detail?id='.$vo['id'])}">
+						   {$vo.title|substr_cn="49"}
+						{/By:pos}
+						{By:pos position="4"  name="vo"}
+						<a class="hot_dis_small" href="{:url('article/detail?id='.$vo['id'])}">
+						{$vo.title|substr_cn="49"}
+						{/By:pos}
+						
+						</div>
+						 {By:ad place='1' name="vo"}
+             		 <a href="{$vo.url|get_url}"class="main_img"> 
+					 <img src="{$vo.cover_id|get_cover_path}"></a>
+		             {/By:ad}
+					</div>
+					<!--轮播 end-->
+					<!--图片新闻-->
+					<div class="pic_news fl">
+						<div class="pic_news_title">图片新闻</div>
+						<div class="pic_news_content">
+							 {By:read  model_id="2" name="vo" order="view desc" limit="10"}
+							<div class="pic_news_img_wrap">
+								<a href="{:url('article/detail?id='.$vo['id'])}"><img src="{$vo.cover_id|get_cover_path}"/></a>
+								<a class="pic_news_link" href="{:url('article/detail?id='.$vo['id'])}">{$vo.title|substr_cn="39"}</a>
+							</div>
+						    {/By:read}
+						</div>
+					</div>
+					<!--图片新闻end-->
+					
+					<!--四大模块-->
+					<div class="four_module fl">
+						
+						{volist name="tree" id="vo"} 
+						<div class="module_wrapper">
+							<div class="module_title">
+								<span class="module_title_l">{$vo.title}</span>
+							    <a href="{:url('article/lists?id='.$vo['id'])}" class="module_title_more">更多<<</a>
+							</div>
+							
+							<ul class="module_news_list">
+								  {volist name="vo['item']" id="vo1"  }
+
+								     <li><a  class="active" href="{:url('article/detail?id='.$vo1['id'])}">{$vo1.title|substr_cn="59"}    </a>
+								   {/volist}
+							</ul> 
+							  
+		                 
+						</div>
+						 {/volist}
+						
+						
+						
+					</div>
+					<!--四大模块end-->
+					<div class="clear"></div>
+				</div>
+				<div class="fl content_right">
+					<div class="notice_div">
+						<div class="notice_title">公告</div>
+						<div class="notice_content">
+						{By:cate cate_id="181" order="id desc" limit="2" name="vo"}
+						<a href="{:url('article/detail?id='.$vo['id'])}">
+						{$vo.title|substr_cn="49"}
+						{/By:cate}</div>
+					</div>
+					<div class="ad_img">
+						
+	                 {By:ad place='2' name="vo"}
+             		 <a href="{$vo.url|get_url}" class="1"> 
+					 <img src="{$vo.cover_id|get_cover_path}"></a>
+		             {/By:ad}
+					</div>
+					<div class="rank_div">
+						<div class="rank_title">排行
+							
+						</div>
+						<ul class="rank_list">
+						  {By:read  model_id="1" name="vo" order="view desc" limit="10"}
+			              <li><a href="{:url('article/detail?id='.$vo['id'])}">{$vo.title|substr_cn="49"}    </a>
+				         </li>
+		                  {/By:read}
+						</ul>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="other_links_div">
+			<div class="other_links_title">
+				<span>友情链接</span>
+			
+			</div>
+			<div class="other_links_con">
+			   {By:link name="vo" order="id desc" limit="10"}
+			  <a  class="other_links_item"  href="{$vo.url|get_url}">{$vo.title}</a>
+               {/By:link}
+			</div>
+			<div class="clear"></div>
+		</div>	
+		{include file="public/footer" /}
+	</body>
+
+	<script>
+		$(function(){
+			//轮播初始化
+			var text = $($(".slider_imgwrap li").get(0)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			var interval = setInterval(sliderImg,3000);
+			//轮播点击页面跳转
+			$(".slider_num").click(function(){
+		        clearInterval(interval);
+				sliderImg(this);
+				interval = setInterval(sliderImg,3000);
+			})
+		});
+		function sliderImg(obj){
+			var index;
+			if(obj != null){
+				var $this = $(obj);
+				var index = $this.index(".slider_num");
+				showPageByIndex(index);
+			}else{
+				var index = $(".current").index(".slider_num");
+				var max = $(".slider_num").length;
+				var nextindex = (index +1)%max;
+				showPageByIndex(nextindex);
+			}
+		}
+		function showPageByIndex(index){
+			$($(".slider_num").get(index)).addClass("current").siblings().removeClass("current");
+			var width = $(".slider_imgwrap li img").width();
+			var left = index * (-width);
+			var text = $($(".slider_imgwrap li").get(index)).find("span.img_title").text();
+			$(".slider_mask .mask_title").text(text);
+			$(".slider_imgwrap").animate({"left":left + 'px'},1000);
+		}
+
+	</script>
+</html>
