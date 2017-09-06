@@ -1,5 +1,5 @@
 .list_left{
-  width: 818px;
+  width: 818px;margin-bottom: 20px;
   .nav{
     line-height: 40px;
     padding-left: 20px;
@@ -15,10 +15,10 @@
       .text{display: inline-block;width: 636px;height: 80px;line-height: 30px;padding: 10px 20px;background: #f6f6f6;vertical-align: middle;box-sizing: border-box;overflow: hidden;}
     }
     .news_box{width: 360px;margin-bottom: 5px;}
-    .news_box,ul{
+    .news_box,.news_list{
       h2{color: #155790;font-size: 18px;font-weight: normal;height: 24px;line-height: 24px;margin: 6px 0;overflow: hidden;}
       p{color: #515151;font-size: 12px;line-height: 24px;height: 48px;overflow: hidden;}
-      div{
+      .marks{
         margin: 5px 0;
         span,a,label{color: #f39801;font-size: 12px;line-height: 24px;margin-right: 10px;vertical-align: middle;}
         label{margin-right: 0;}
@@ -27,7 +27,7 @@
     .news_list{
       li{padding: 5px 0;border-top: 1px #eee dashed;}
     }
-    .news_title{color: #155790;font-size: 18px;font-weight: normal;height: 24px;line-height: 24px;margin: 10px 0;overflow: hidden;}
+    .news_title,.baike_title{color: #155790;font-size: 18px;font-weight: normal;height: 24px;line-height: 24px;margin: 10px 0;overflow: hidden;}
     .news_mark{
       margin: 10px 0;
       span,a,label{color: #f39801;font-size: 12px;line-height: 24px;margin-right: 10px;vertical-align: middle;}
@@ -45,9 +45,51 @@
       label{color: #f39801;font-size: 16px;}
       a{color: #888;font-size: 14px;margin-right: 10px;}
     }
+    .share{}
     .prev_next{
       padding: 10px 30px;border: 2px #f39801 solid;
       a,b{color: #555;}
+    }
+    .qa_nav{
+      padding: 5px 0;border-bottom: 1px #ccc solid;
+      a{float: left;color: #555;font-size: 15px;margin: 0 20px 20px 0;}
+    }
+    .qa_tips{
+      color: #555;font-size: 14px;padding: 20px 0;border-bottom: 1px #ccc solid;
+      span{color: #f39801;}
+    }
+    .qa_list{
+      li{
+        padding: 20px 0;border-bottom: 1px #ccc solid;
+        &:last-child{border-bottom: 0;}
+        h2{color: #3f9bff;font-weight: normal;font-size: 14px;}
+        p{color: #555;font-size: 13px;line-height: 24px;margin: 10px 0;}
+        .qa_mark{
+          a{color: #3f9bff;font-size: 12px;margin-right: 20px;}
+          label,span{color: #888;font-size: 12px;margin-right: 20px;}
+        }
+      }
+    }
+    .qa_share{}
+    .question,.answer{
+      h2{
+        color: #3f9bff;font-size: 14px;font-weight: normal;
+        i{display: inline-block;width: 28px;height: 21px;background: url(http://cdn1.damailicai.com/news/view.png);vertical-align: middle;margin-top: 3px;}
+        span{color: #555;font-size: 12px;vertical-align: middle;}
+      }
+      p{color: #484848;font-size: 13px;line-height: 26px;text-indent: 26px;margin: 10px 0;}
+    }
+    .answer{
+      border-top: 1px #ccc solid;margin: 15px 0;padding-top: 20px;
+      h2{color: #f39801;}
+    }
+    .baike_nav{
+      padding-top: 5px;
+      a{float: left;width: 32px;height: 32px;line-height: 32px;text-align: center;color: #313131;border:1px #f39801 solid;margin: 0 20px 20px 0;}
+    }
+    .baike_list{
+      padding-top: 10px;
+      a{float: left;color: #000;margin: 0 20px 20px 0;}
     }
   }
   .related{
@@ -67,7 +109,7 @@
     }
   }
   .related_mark{
-    padding: 20px 25px 5px;border: 1px #ccc solid;margin: 20px auto;
+    padding: 20px 25px 5px;border: 1px #ccc solid;margin: 20px auto 0;
     h2{font-size: 16px;font-weight:normal;height: 16px;line-height: 16px;padding-left: 10px;border-left: 4px #f39801 solid;margin-bottom: 20px;}
     ul{
       li{
@@ -79,7 +121,7 @@
 }
 .statement{
   padding: 20px 25px;border: 1px #ccc solid;margin: 20px auto;
-  h2{color: #f39801;font-size: 14px;line-height: 30px;}
+  h2{color: #f39801;font-size: 14px;line-height: 30px;font-weight: normal;}
   p{color: #515151;font-size: 13px;line-height: 28px;}
 }
 .list_right{
@@ -110,8 +152,13 @@
       }
     }
   }
+  .baike_bar{
+    padding: 20px 20px 5px;border: 1px #ccc solid;margin: 20px auto;
+    h2{font-size: 16px;font-weight:normal;height: 16px;line-height: 16px;padding-left: 10px;border-left: 4px #f39801 solid;margin-bottom: 20px;}
+    a{float: left;width: 32px;height: 32px;line-height: 32px;text-align: center;color: #313131;border:1px #f39801 solid;margin: 0 10px 10px 0;}
+  }
   .hot_mark{
-    padding: 20px 20px 5px;border: 1px #ccc solid;margin-top: 20px;
+    padding: 20px 20px 5px;border: 1px #ccc solid;margin: 20px auto;
     h2{font-size: 16px;font-weight:normal;height: 16px;line-height: 16px;padding-left: 10px;border-left: 4px #f39801 solid;margin-bottom: 20px;}
     ul{
       li{
