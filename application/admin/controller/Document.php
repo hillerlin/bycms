@@ -50,14 +50,6 @@ class Document extends Admin{
                //如果是知识百科就启用迅搜去做分词保存
                if($_POST['description'])
                {
-/*                   $xunSearch=xunsearch\SoClass::getInstance();
-                   $data = array(
-                       'pid' =>$id, // 此字段为主键，必须指定
-                       'message' => $_POST['description'],
-                       'chrono' => time()
-                   );
-                   $xunSearch->add($data,'1');//添加文档
-                   $xunSearch->addLogSearch($_POST['title']);*/
                    $xunsearchObj=new xunsearchDecorator(xunsearch\SoClass::getInstance());
                    $xunsearchObj->updata(['id'=>$id,'description'=>$_POST['description']]);
                }
@@ -108,14 +100,6 @@ class Document extends Admin{
                  //如果是知识百科就启用迅搜去做分词保存
                  if($_POST['description'])
                  {
-/*                     $xunSearch=xunsearch\SoClass::getInstance();
-                     $data = array(
-                         'pid' =>$id, // 此字段为主键，必须指定
-                         'message' => $_POST['description'],
-                         'chrono' => time()
-                     );
-                     $xunSearch->add($data);//添加文档
-                     $xunSearch->addLogSearch($_POST['title']);*/
                      $xunsearchObj=new xunsearchDecorator(xunsearch\SoClass::getInstance());
                      $xunsearchObj->add(['id'=>$id,'description'=>$_POST['description']]);
                  }
