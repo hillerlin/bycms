@@ -105,3 +105,9 @@ function  parseChannel($order,$limit){
 	$list=Db::name("Channel")->order($order)->limit($limit)->select();
     return $list;  
 }
+function get_document($id){
+
+    $map['id']=$id;
+    $info=Db::name("document")->where($map)->find();
+    return $info['title'];
+}

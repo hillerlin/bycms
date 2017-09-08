@@ -3,107 +3,85 @@
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
-    <div class="nav">当前位置：<a href="">大麦理财</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">资讯中心</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">行业资讯</a></div>
+    <div class="nav">当前位置：<a href="">首页</a>&nbsp;&nbsp;>&nbsp;&nbsp;
+      {foreach $ids as $vo}
+      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>    >
+      {/foreach}
+    </div>
     <div class="list_main">
       <div class="list_about">
-        <span class="title ft16">行业资讯</span>
-        <span class="text ft12">行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯行业资讯</span>
+        <span class="title ft16">{$info.title}</span>
+        <span class="text ft12">{$info.description}</span>
       </div>
       <div class="news_top clear">
         <div class="news_box fl">
-          <img src="http://cdn1.damailicai.com/news/04.png" width="360" height="240" alt="">
-          <h2>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
+          <img src="<?php echo get_cover($res['list'][0]["cover_id"], "path" );?>" width="360" height="240" alt="">
+          <h2>{$res.list.0.title}</h2>
+          <p>{$res.list.0.seo_description}</p>
           <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
+            <span>{$res.list.0.create_time|date="Y-m-d",###}</span>
+            <a href="" target="_blank">{$info.title}</a>
             <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
+            <a href="" target="_blank"><?php echo explode(',',$res['list'][0]['description'])[0]?></a>
           </div>
         </div>
         <div class="news_box fr">
-          <img src="http://cdn1.damailicai.com/news/04.png" width="360" height="240" alt="">
-          <h2>新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
+          <img src="<?php echo get_cover($res['list'][1]["cover_id"], "path" );?>" width="360" height="240" alt="">
+          <h2>{$res.list.1.title}</h2>
+          <p>{$res.list.1.seo_description}</p>
           <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
+            <span>{$res.list.1.create_time|date="Y-m-d",###}</span>
+            <a href="" target="_blank">{$info.title}</a>
             <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
+            <a href="" target="_blank"><?php echo explode(',',$res['list'][1]['description'])[0]?></a>
           </div>
         </div>
       </div>
       <ul class="news_list">
+          <?php for($i=2;$i<count($res['list']);$i++):?>
         <li>
-          <h2>新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
+          <h2><?php echo $res['list'][$i]['title']?></h2>
+          <p><?php echo $res['list'][$i]['seo_description']?></p>
           <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
+            <span><?php echo date('Y-m-d',$res['list'][$i]['create_time'])?></span>
+            <a href="" target="_blank">{$info.title}</a>
             <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
+            <a href="" target="_blank"><?php echo explode(',',$res['list'][$i]['description'])[0]?></a>
           </div>
         </li>
-        <li>
-          <h2>新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
-          <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
-            <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
-          </div>
-        </li>
-        <li>
-          <h2>新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
-          <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
-            <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
-          </div>
-        </li>
+          <?php endfor;?>
+
       </ul>
     </div>
     <div class="pageBox"></div>
     <div class="related clear">
       <div class="fl">
-        <h2>行业资讯相关文章</h2>
+        <h2>{$info.title}相关文章</h2>
         <ul>
-          <li><a href="" target="_blank"><span class="fl">新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
+          <?php if($list['relateArticles']):?>
+          <?php foreach($list['relateArticles'] as $key=>$value):?>
+          <li><a href="{:url('article/detail?id='.$key)}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
+          <?php endforeach;?>
+          <?php endif;?>
         </ul>
       </div>
       <div class="fr">
-        <h2>行业资讯相关问答</h2>
+        <h2>{$info.title}相关问答</h2>
         <ul>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
+          <?php if($list['relateQuestion']):?>
+          <?php foreach($list['relateQuestion'] as $key=>$value):?>
+          <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
+          <?php endforeach;?>
+          <?php endif;?>
         </ul>
       </div>
     </div>
     <div class="related_mark">
       <h2>行业资讯相关标签</h2>
       <ul class="clear">
-        <li><a href="" target="_blank">金融</a></li>
-        <li><a href="" target="_blank">互联网金融</a></li>
-        <li><a href="" target="_blank">理财</a></li>
-        <li><a href="" target="_blank">大麦理财</a></li>
-        <li><a href="" target="_blank">投资理财</a></li>
-        <li><a href="" target="_blank">投资</a></li>
-        <li><a href="" target="_blank">互金平台</a></li>
-        <li><a href="" target="_blank">理财平台</a></li>
-        <li><a href="" target="_blank">投资</a></li>
-        <li><a href="" target="_blank">投资理财</a></li>
-        <li><a href="" target="_blank">互金平台</a></li>
-        <li><a href="" target="_blank">理财平台</a></li>
+        <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
+        <li><a href="" target="_blank">{$value}</a></li>
+        <?php endforeach;?>
       </ul>
     </div>
   </div>
@@ -118,29 +96,21 @@
     <div class="hot_news">
       <h2>热门文章</h2>
       <div class="hot_top">
-        <h3>新闻标题</h3>
-        <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
+        <h3>{$list.hotNews.0.title}</h3>
+        <p>{$list.hotNews.0.seo_description}</p>
       </div>
       <ul>
-        <li><a href="" target="_blank">新闻标题新闻标题新闻标题新闻标题新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
+        <?php foreach($list['hotNews'] as $key=>$value):?>
+        <li><a href="{:url('article/list?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
+        <?php endforeach;?>
       </ul>
     </div>
     <div class="hot_mark">
       <h2>热门标签</h2>
       <ul class="clear">
-        <li><a href="" target="_blank">金融</a></li>
-        <li><a href="" target="_blank">互联网金融</a></li>
-        <li><a href="" target="_blank">理财</a></li>
-        <li><a href="" target="_blank">大麦理财</a></li>
-        <li><a href="" target="_blank">投资理财</a></li>
-        <li><a href="" target="_blank">投资</a></li>
-        <li><a href="" target="_blank">互金平台</a></li>
-        <li><a href="" target="_blank">理财平台</a></li>
+        <?php foreach($list['hotLabel'] as $key=>$value):?>
+        <li><a href="" target="_blank">{$key}</a></li>
+        <?php endforeach;?>
       </ul>
     </div>
   </div>

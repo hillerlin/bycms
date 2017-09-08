@@ -37,10 +37,12 @@
 							
 						</div>
 							 <div class="input_title">关键字<span>(大麦理财：填d)</span></div>
-							 <input type="text" name="keywords" class="input_box" value=''/>
+							 <input type="text" name="keywords" class="input_box" value='{$info.keywords}'/>
+							 <div class="input_title">分类描述<span>在分类列表上做展示</span></div>
+							 <input type="text" name="description" class="input_box" value='{$info.description}'/>
 
 					</div>
-				       <div class="edit_content_tab none">
+<!--				       <div class="edit_content_tab none">
 						   <div class="input_title">排序<span>(越小越靠前)</span></div>
 							<input type="text" name="sort" class="input_box" value="{$info.sort|default=""}"/>
 							<div class="input_title">列数<span>(列表页显示的文章数量)</span></div>
@@ -48,7 +50,7 @@
 							<div class="input_title">模板<span>(列表页显示的模板)</span></div>
 							<input type="text" name="template_lists" class="input_box" value="{$info.template_lists|default=""}"/>
 							
-						</div>
+						</div>-->
 						<div class="btn_group">
 						    <input type="hidden" name="id" value="{$info.id|default=""}">
 							<div class="confirm_btn">确认</div>

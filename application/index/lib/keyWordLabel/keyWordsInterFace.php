@@ -41,5 +41,10 @@ class keyWordsInterFace{
         arsort($list);
         return $list;
     }
+    //获取分类下的所有标签
+    public function getCategoryLabel($catagoryId)
+    {
+      return $keyList=$this->_redis->handler()->hKeys('newKeyWordsCategory:'.$catagoryId);
+    }
 
 }

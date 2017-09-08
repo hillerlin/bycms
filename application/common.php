@@ -6,6 +6,7 @@
 // +----------------------------------------------------------------------
 use think\Db;
 use think\AjaxPage;
+use think\cache\driver\Redis;
 function check_verify($verify) {
 	  $verify_code=session('verify');
       if($verify_code!=$verify){
@@ -242,8 +243,8 @@ function safe_replace($string) {
  * @return string
  */
 function getLists($model,$map="",$num="10",$listsort="id desc",$field=""){ 
-		 $res["list"]=Db::name($model)->where($map)->field($field)->order($listsort)->paginate($num);
-		 $res["page"]= $res["list"]->render();
+		 $res["list"]=Db::name($model)->where($map)->field($field)->order($listsort)->select();
+		 $res["page"]= count($res["list"]);
 		 $res["count"]=Db::name($model)->where($map)->field($field)->order($listsort)->count();
 		return $res;
 }
@@ -321,7 +322,7 @@ function get_cover($id){
 	
     $info = Db::name('Picture')->where(array('id'=>$id))->find();
 	$path=$info["path"];
-    return $path?site_url().$path:"__COMMON__/default.png";
+    return $path?$path:"__COMMON__/default.png";
 }
    /**
      * 获取指定分类的同级分类
@@ -410,3 +411,38 @@ function getParent($id = 0){
 	
 		return $temp;
     }
+    //找分类详情
+    function getCategoryInfoByWords($tree,$words)
+    {
+        foreach ($tree as $key=>$value)
+        {
+            if($value['title']==$words)
+            {
+                $list=$value;
+            }
+        }
+        return $list;
+    }
+    //获取热门标签
+    function getHotLabel()
+    {
+        $redis=new Redis();
+        $list=$redis->handler()->hGetAll('newKeyWords');
+        arsort($list);
+        return $list;
+
+    }
+    //分类下的相关标签
+    function getCategoryRelaLabel($categoryId)
+    {
+        $Category=new \app\index\model\Category;
+        $cid=$Category->getChildrenId($categoryId);
+        $cidImp=implode(',',$cid);
+        $sql="select GROUP_CONCAT(`description` SEPARATOR ',') as _join from bycms_document where `category_id` in($cidImp)";
+        $list=Db::query($sql);
+        return $list?$list[0]['_join']:null;
+
+    }
+    function change_to_quotes($str){
+    return sprintf("'%s'", $str);
+}

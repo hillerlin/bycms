@@ -7,8 +7,10 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
+use think\cache\driver\Redis;
 
 class Ad extends Admin{
+    protected $adList=['文章内页'];
     public function index(){     
         if(isset($_GET['title'])){
             $map['title']  = array('like', '%'.(string)input('title').'%');
@@ -29,6 +31,14 @@ class Ad extends Admin{
 		   $Ad = new \app\admin\model\Ad;
            $res=$Ad->validate(true)->allowField(true)->save($_POST,['id' => $_POST['id']]);
 	       if($res){
+               $redis= new Redis();
+               if(in_array($_POST['title'],$this->adList))
+               {
+                   $sql="select p.path,a.url from bycms_ad as a left join bycms_picture as p on a.cover_id=p.id where a.title='".$_POST['title']."' limit 1 ";
+                   $list=Db::query($sql);
+                   $redis->handler()->set('documentAd',json_encode($list));
+               }
+
 			  addUserLog("edit_ad",session_uid());
 		      $this->success("更新成功！");
 		   }else{
@@ -56,6 +66,13 @@ class Ad extends Admin{
             // 过滤post数组中的非数据表字段数据
           $res=$Ad->validate(true)->allowField(true)->save($_POST);
 	      if($res){
+              $redis= new Redis();
+              if(in_array($_POST['title'],$this->adList))
+              {
+                  $sql="select p.path,a.url from bycms_ad as a left join bycms_picture as p on a.cover_id=p.id where a.title='".$_POST['title']."' limit 1 ";
+                  $list=Db::query($sql);
+                  $redis->handler()->set('documentAd',json_encode($list));
+              }
 			   addUserLog("add_ad",session_uid());
 		      $this->success("新增成功！");
 		  }else{

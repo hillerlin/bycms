@@ -88,29 +88,29 @@ class Document extends Admin{
 	   }
 	}
     public function add($id=""){  
-	    if($_POST){
-		   $Document =  new \app\admin\model\Document;
-/*		   $Category= new \app\admin\model\Category;
-		   $cageObj=$Category->getCategoryName($_POST['category_id']);*/
-           $_POST['description']=str_replace('，',',',$_POST['description']);//中英文逗号转换
-           // 过滤post数组中的非数据表字段数据
-           $Document->validate(true)->allowField(true)->save($_POST);
-		   $id= $Document->getLastInsID();
-	         if($id){
-                 //如果是知识百科就启用迅搜去做分词保存
-                 if($_POST['description'])
-                 {
-                     $xunsearchObj=new xunsearchDecorator(xunsearch\SoClass::getInstance());
-                     $xunsearchObj->add(['id'=>$id,'description'=>$_POST['description']]);
-                 }
+	    if($_POST) {
+            $Document = new \app\admin\model\Document;
+            $_POST['description'] = str_replace('，', ',', $_POST['description']);//中英文逗号转换
+            // 过滤post数组中的非数据表字段数据
+            $Document->validate(true)->allowField(true)->save($_POST);
+            $id = $Document->getLastInsID();
+            if ($id) {
+                //如果是知识百科就启用迅搜去做分词保存
+                if ($_POST['description']) {
+                    $xunsearchObj = new xunsearchDecorator(xunsearch\SoClass::getInstance());
+                    $xunsearchObj->add(['id' => $id, 'description' => $_POST['description']]);
+                    //添加标签点击量
+                    $keyWordsObj = new \app\index\lib\keyWordLabel\keyWordsInterFace();
+                    $keyWordsObj->addClick($_POST['description'], $_POST['view'], $_POST['category_id']);
+                }
 
-			  addUserLog("add_document",session_uid());
-             $this->success('新增成功','Document/index');
-		  }else{
-			 $error=$Document->getError()?$Document->getError():"新增失败！";
-			    $this->error($error);
-		  } 
-	   }
+                addUserLog("add_document", session_uid());
+                $this->success('新增成功', 'Document/index');
+            } else {
+                $error = $Document->getError() ? $Document->getError() : "新增失败！";
+                $this->error($error);
+            }
+        }
 	  else{
 		    $pid=input('pid');
 		     if($pid){

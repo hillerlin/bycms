@@ -143,5 +143,10 @@ class Picture extends Model{
 	public function removeTrash($data){
 		Db::name('picture')->where(array('id'=>$data['id'],))->delete();
 	}
+	//查找相对应图片路径
+    public function getPicPath($id)
+    {
+        return Db::name('picture')->where(array('id'=>$id))->field('path')->find();
+    }
 
 }

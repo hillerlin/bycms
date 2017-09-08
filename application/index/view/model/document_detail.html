@@ -3,59 +3,60 @@
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
-    <div class="nav">当前位置：<a href="">大麦理财</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">资讯中心</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">行业资讯</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">新闻标题新闻标题</a></div>
+    <div class="nav">当前位置：<a href="{:url('index/index')}">首页</a>&nbsp;&nbsp;>
+      {foreach $pid as $vo}
+      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>    >
+      {/foreach}
+      <span>{$info.title}</span>
+    </div>
     <div class="list_main">
-      <div class="ct"><img src="http://cdn1.damailicai.com/news/05.png" alt=""></div>
-      <h2 class="news_title">新闻标题新闻标题</h2>
+      <div class="ct"><a href="<php echo $adList['url']>"><img src="http://59.110.136.193:9017/<?php echo $adList['path']?>" alt=""></a></div>
+      <h2 class="news_title">{$info.title}</h2>
 			<div class="news_mark">
-        <span>2017-09-05</span>
+        <span><?php echo date("Y-m-d",$info['create_time'])?></span>
         <label>分类：</label>
-        <a href="" target="_blank">行业新闻</a>
+        <a href="{:url('article/lists?id='.$pid[count($pid)-1])}" target="_blank">{$pid[count($pid)-1]|get_category_title}</a>
         <label>来源：</label>
-        <a href="" target="_blank">大麦理财</a>
+              <span>大麦理财</span>
       </div>
-      <div class="abstract">在2015年全国银行业监督管理工作会议上，银监会主席尚福林就盘活存量、加快林就盘活存量、加快信贷资产证券化常规化发展时，特别强调“要以新设立的银行信贷资产流转中心为主体”。</div>
+      <div class="abstract">{$info.seo_description}</div>
       <div class="news_detail">
-				<p>金融资产交易国家队来了。</p>
-				<p>据知情人士透露，在2015年全国银行业监督管理工作会议上，银监会主席尚福林就盘活存量、加快信贷资产证券化常规化发展时，特别强调“要以新设立的银行信贷资产流转中心为主体”。该人士并提及，该中心登记流转的资产并不会局限于信贷资产、信贷资产证券化产品，银行业的非标资产、网络借贷(P2P)资产均可能纳入该流转平台，未来可能成为金融资产交易平台中的国家队。</p>
-				<img src="http://cdn1.damailicai.com/news/06.png" alt="">
-				<p>澎湃新闻查询也发现，银行信贷资产流转中心目前已经公司化运作，全称为银行业信贷资产登记流转中心有限公司(以下简称“信贷资产流转中心”)。该公司注册于2014年6月，注册资本为3.5亿元，股东为中央国债登记结算有限责任公司(下称“中债登”)和中国农村金融杂志社，注册地为北京市丰台区丽泽路18号院1号楼金唐国际金融大厦。信贷资产流转中心法人代表、董事长为吕世蕴，水汝庆兼任董事和总裁，这两人分别是中债登董事长和总经理。</p>
-				<p>简单理解，信贷资产登记流转中心的交易品种不仅限于银行贷款，可能做的事情会很多，澎湃新闻查询到该公司的2015年招聘资料亦印证了这一点。该公司目前与中债登招聘一并进行，招聘岗位包括两类，一是金融业务类，岗位职责包括非标产品登记、结算，创新产品交易监测、市场推广等，第二类是信息技术类，岗位职责为P2P业务信息监测与管理。</p>
+      {$info.content}
 
       </div>
       <div class="news_marks">
 				<label>标签：</label>
-				<a href="" target="_blank">借贷</a>
-				<a href="" target="_blank">循环借贷</a>
-				<a href="" target="_blank">资金</a>
+                <?php foreach(explode(',',$info['description']) as $key=>$value):?>
+                <a href="" target="_blank"><?php echo $value?></a>
+                <?php endforeach;?>
 			</div>
 			<div class="share">
 				
 			</div>
 			<div class="prev_next clear">
-				<a href="" class="prev fl" target="_blank"><b>上一篇：</b>新闻标题新闻标题</a>
-				<a href="" class="next fr" target="_blank"><b>下一篇：</b>新闻标题新闻标题</a>
+				<a href="{:url('article/detail?id='.($info['id']-1))}" class="prev fl" target="_blank"><b>上一篇：</b>{$info.id-1|get_document}</a>
+				<a href="{:url('article/detail?id='.($info['id']+1))}" class="next fr" target="_blank"><b>下一篇：</b>{$info.id+1|get_document}</a>
 			</div>
     </div>
     <div class="related clear">
       <div class="fl">
-        <h2>行业资讯相关文章</h2>
+        <h2>{$info.category_title}相关文章</h2>
         <ul>
-          <li><a href="" target="_blank"><span class="fl">新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
+          <?php if($list['relateArticles']):?>
+          <?php foreach($list['relateArticles'] as $key=>$value):?>
+          <li><a href="{:url('article/detail?id='.$key)}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
+          <?php endforeach;?>
+          <?php endif;?>
         </ul>
       </div>
       <div class="fr">
-        <h2>行业资讯相关问答</h2>
+        <h2>{$info.category_title}相关问答</h2>
         <ul>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
+          <?php if($list['relateQuestion']):?>
+          <?php foreach($list['relateQuestion'] as $key=>$value):?>
+          <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
+          <?php endforeach;?>
+          <?php endif;?>
         </ul>
       </div>
     </div>
@@ -75,29 +76,21 @@
     <div class="hot_news">
       <h2>热门文章</h2>
       <div class="hot_top">
-        <h3>新闻标题</h3>
-        <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
+        <h3>{$list.hotNews.0.title}</h3>
+        <p>{$list.hotNews.0.seo_description}</p>
       </div>
       <ul>
-        <li><a href="" target="_blank">新闻标题新闻标题新闻标题新闻标题新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
+        <?php foreach($list['hotNews'] as $key=>$value):?>
+        <li><a href="{:url('article/list?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
+        <?php endforeach;?>
       </ul>
     </div>
     <div class="hot_mark">
       <h2>热门标签</h2>
       <ul class="clear">
-        <li><a href="" target="_blank">金融</a></li>
-        <li><a href="" target="_blank">互联网金融</a></li>
-        <li><a href="" target="_blank">理财</a></li>
-        <li><a href="" target="_blank">大麦理财</a></li>
-        <li><a href="" target="_blank">投资理财</a></li>
-        <li><a href="" target="_blank">投资</a></li>
-        <li><a href="" target="_blank">互金平台</a></li>
-        <li><a href="" target="_blank">理财平台</a></li>
+        <?php foreach($list['hotLabel'] as $key=>$value):?>
+        <li><a href="" target="_blank">{$key}</a></li>
+        <?php endforeach;?>
       </ul>
     </div>
   </div>

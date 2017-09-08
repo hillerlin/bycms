@@ -59,8 +59,12 @@ class Category extends Model{
 			$category [$k] ['doc'] = array ( );
 			$map['category_id']=array("in",$cid);
 			$map['model_id']=$model_id;
-			$category [$k]['item'] =Db::name('document')->where($map)->order("id desc")->limit(5)->select();
-			
+			$_cid=implode(',',$cid);
+			//$category [$k]['item'] =Db::name('document')->where($map)->order("id desc")->field('id,title,category_id,view')->limit(5)->select();
+			$category [$k]['item'] =Db::query("
+			select d.id,d.title as contents_title,d.category_id,d.description,d.cover_id,d.position,d.create_time,c.title as category_title  from bycms_document as d left join bycms_category as c on c.id=d.category_id where d.`category_id` in ($_cid) and d.`model_id`=$model_id
+			");
+
         }
         return $category;
 
@@ -100,16 +104,17 @@ class Category extends Model{
         /**分类列表文档**/
         $ids = $this->getChildrenId($cateid);    		
 		$map['category_id']=array("in",$ids);   
-		$map['status']=1;   
-		$list=Db::name( 'Document' )->where($map)->limit(10)->order("id desc")->select();         
+		//$map['status']=1;
+		$list=Db::name( 'Document' )->where($map)->limit(10)->field('id,create_time,cover_id,title,view')->order("id desc")->select();
 		foreach ($list as $k => $v ) {
 		   /**重组数据**/
 			$id=$v["id"];
-			$item[$id]["id"] =$id;    
-		    $item[$id]['url'] =U('Article/detail?id='.$id);
+			$item[$id]["id"] =$id;
+		    //$item[$id]['create_time'] =U('Article/detail?id='.$id);
+		    $item[$id]['create_time'] =date("Y-m-d",$v['create_time']);
+		    $item[$id]['view'] =$v['view'];
             $item[$id]['pic'] =get_cover( $v["cover_id"], "path" );
 			$item[$id]['title'] =$v["title"];
-			$item[$id]['price'] =$v["price"];
         }
        return $item;
      }
@@ -148,6 +153,25 @@ class Category extends Model{
 		   }
        return $list;
      }
+    //根据分类中文名和父类ID来获取详细信息
+    public function getCategoryIdByName($name = null,$pid)
+    {
+        $map['title']=$name;
+        $map['pid']=$pid;
+        return $list =Db::name('category')->where($map)->find();
+    }
+    //根据id范围获取分类详情
+    public function getCategoryInfoByIds($ids)
+    {
+        $map['id']=array('in',$ids);
+        return Db::name('category')->where($map)->select();
+    }
+    //根据首字符获取分类列表
+    public function getCategoryInfoByKeyword($keyword)
+    {
+        $map['keywords']=$keyword;
+        return Db::name('category')->where($map)->select();
+    }
 
 
 }

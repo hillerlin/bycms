@@ -29,4 +29,9 @@ class xunsearchDecorator extends xunsearchInterface{
        $this->_xunsearchObj->add($data,'1');//更新文档
        $this->_xunsearchObj->addLogSearch($params['title']);
    }
+   public function query($params, $num=10, $jump=0)
+   {
+       // TODO: Implement query() method.
+       return $this->_xunsearchObj->query($params,$num,$jump);
+   }
 }

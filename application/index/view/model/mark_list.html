@@ -3,60 +3,23 @@
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
-    <div class="nav">当前位置：<a href="">大麦理财</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">资讯中心</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">行业资讯</a></div>
+    <div class="nav">当前位置：<a href="{:url('index/index')}">大麦理财</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span>标签</span>&nbsp;&nbsp;>&nbsp;&nbsp;<span>{$list.keyword}</span></div>
     <div class="list_main">
-      <h1 class="mark_title">标签标题</h1>
+      <h1 class="mark_title">{$list.keyword}</h1>
       <ul class="news_list">
+        <?php foreach($list['list'] as $key=>$value):?>
         <li>
-          <h2>新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
+          <h2><a href="{:url('article/detail?id='.$value['id'])}" target="_blank">{$value.contents_title}</a></h2>
+          <p>{$value.seo_description}</p>
           <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
+            <span>{$value.create_time|date="Y-m-d",###}</span>
+            <a href="" target="_blank">{$value.category_title}</a>
             <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
+            <a href="" target="_blank"><?php echo explode(',',$value['description'])[0]?></a>
           </div>
         </li>
-        <li>
-          <h2>新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
-          <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
-            <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
-          </div>
-        </li>
-        <li>
-          <h2>新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
-          <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
-            <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
-          </div>
-        </li>
-        <li>
-          <h2>新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
-          <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
-            <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
-          </div>
-        </li>
-        <li>
-          <h2>新闻标题</h2>
-          <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
-          <div class="marks">
-            <span>2017-09-05</span>
-            <a href="" target="_blank">行业新闻</a>
-            <label>标签：</label>
-            <a href="" target="_blank">大麦理财</a>
-          </div>
-        </li>
+        <?php endforeach;?>
+
       </ul>
     </div>
     <div class="pageBox"></div>
@@ -72,29 +35,21 @@
     <div class="hot_news">
       <h2>热门文章</h2>
       <div class="hot_top">
-        <h3>新闻标题</h3>
-        <p>新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要新闻摘要</p>
+        <h3>{$list.hotNews.0.title}</h3>
+        <p>{$list.hotNews.0.seo_description}</p>
       </div>
       <ul>
-        <li><a href="" target="_blank">新闻标题新闻标题新闻标题新闻标题新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
-        <li><a href="" target="_blank">新闻标题</a></li>
+        <?php foreach($list['hotNews'] as $key=>$value):?>
+        <li><a href="{:url('article/list?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
+        <?php endforeach;?>
       </ul>
     </div>
     <div class="hot_mark">
       <h2>热门标签</h2>
       <ul class="clear">
-        <li><a href="" target="_blank">金融</a></li>
-        <li><a href="" target="_blank">互联网金融</a></li>
-        <li><a href="" target="_blank">理财</a></li>
-        <li><a href="" target="_blank">大麦理财</a></li>
-        <li><a href="" target="_blank">投资理财</a></li>
-        <li><a href="" target="_blank">投资</a></li>
-        <li><a href="" target="_blank">互金平台</a></li>
-        <li><a href="" target="_blank">理财平台</a></li>
+        <?php foreach($list['hotLabel'] as $key=>$value):?>
+        <li><a href="" target="_blank">{$key}</a></li>
+        <?php endforeach;?>
       </ul>
     </div>
   </div>

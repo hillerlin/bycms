@@ -2,6 +2,7 @@
 namespace app\admin\model;
 use think\Model;
 use think\Db;
+use think\cache\driver\Redis;
 /**
  * 分类模型
  */
@@ -33,7 +34,8 @@ class Document extends Model{
         /* 获取基础数据 */
 	
 		$map["id"]=$id;
-        $info =Db::name("Document")->where($map)->field(true)->find();
+		$sql="select d.*,c.title as category_title from bycms_document as d left join bycms_category as c on c.id=d.category_id where d.id=$id limit 1";
+        $info =Db::query($sql)[0];
         if(!(is_array($info) || 1 !== $info['status'])){
             $this->error('文档被禁用或已删除！');
             //return false;
@@ -91,5 +93,42 @@ class Document extends Model{
     public function getError(){
        
         return $this->error;
+    }
+    //点击+1
+    public function addClick($id)
+    {
+        Db::name('document')->where('id',$id)->setInc('view');
+    }
+    //获取文章广告
+    public function getDocumentAd($words)
+    {
+        $redis= new Redis();
+        //key:documentAd
+        $contents=$redis->handler()->get('documentAd');
+        if($contents)
+        {
+            return json_decode($contents,true);
+        }
+        else
+        {
+            $sql="select p.path,a.url from bycms_ad as a left join bycms_picture as p on a.cover_id=p.id where a.title='文章内页' limit 1 ";
+            $list=Db::query($sql);
+            if($list)
+            {
+                $redis->handler()->setNx('documentAd',json_encode($list));
+                return $list;
+            }
+
+        }
+    }
+    //获取热门文章
+    public function getHotNews()
+    {
+        return Db::name( 'Document' )->limit(7)->field('id,title,seo_description')->order("view desc")->select();
+    }
+    //获取分类id获取文章列表
+    public function getListByCategoryId($categoryId)
+    {
+        return Db::name('Document')->where(['category_id'=>$categoryId])->find();
     }
 }

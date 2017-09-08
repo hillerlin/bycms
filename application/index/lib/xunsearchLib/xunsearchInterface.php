@@ -15,4 +15,5 @@ abstract class xunsearchInterface{
     }
     abstract public function add($params);
     abstract public function updata($params);
+    abstract public function query($params,$num,$jump);
 }

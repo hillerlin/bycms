@@ -1,7 +1,12 @@
 <?php
 namespace app\index\controller;
+use app\index\model\Document;
 use think\Controller;
 use think\Db;
+use app\index\lib\contentsBuild\contentsRender;
+use app\index\lib\contentsBuild\detailPageContent;
+use xunsearch;
+use app\index\lib\xunsearchLib\xunsearchDecorator;
 class Article  extends Home{
 	//文章列表
 	public function lists($id=""){     
@@ -16,14 +21,21 @@ class Article  extends Home{
 		    $this->error('分类不存在！');
 		}
 		$Category=new \app\index\model\Category;
-		$cid=$Category->getChildrenId($id);	
+        $ids=$Category->getParentId($id);
+		$cid=$Category->getChildrenId($id);
 		$map['category_id']=array("in",$cid);
 		$num=$info["list_row"]?$info["list_row"]:10;
         $res=getLists('document',$map,$num,'id desc',"");
 	    $this->assign('res', $res);
-		
-		
-		$ids=$Category->getParentId($id);	
+        $contentsObj=new contentsRender();
+        count($ids)=='1'?$params=['category_id'=>$id,'category_title'=>'All']:$params=['category_id'=>$id,'category_title'=>$info['title']];//如果是顶级分类，问答就取知识百科所有的
+        $list=$contentsObj->render(new detailPageContent(),$params);
+        $Document=new \app\admin\model\Document;
+        $list['hotNews']=$Document->getHotNews();
+        $list['hotLabel']=getHotLabel();
+        $list['labelAll']=getCategoryRelaLabel(intval($id));
+        $this->assign("list",$list);
+		$ids=array_merge($ids,[$id]);
 		$this->assign("ids",$ids);
 	   //网站标题
 		$meta_title=$info["title"];  
@@ -57,15 +69,27 @@ class Article  extends Home{
             $keyWordsObj=new \app\index\lib\keyWordLabel\keyWordsInterFace();
             $keyWordsObj->addClick($info['description'],$info['view'],$info['category_id']);
         }
+        $Document->addClick($id);//更新数据库点击量+1
+		$info["pictures"]=get_pictures($id);
 
-		$info["pictures"]=get_pictures($id); 
-		Db::name('document')->where('id',$id)->setInc('view');
 		$Category=new \app\index\model\Category;
-        $pid=$Category->getParentId($info["category_id"]);	
+        $pid=$Category->getParentId($info["category_id"]);
+        $info['parentId']=$pid[0];
+        //数据合成
+        $contentsObj=new contentsRender();
+        $list=$contentsObj->render(new detailPageContent(),$info);
+        $list['hotNews']=$Document->getHotNews();
+        $list['hotLabel']=getHotLabel();
+        $this->assign("list",$list);
+
+        $pid=array_merge($pid,[$info["category_id"]]);
 		$this->assign("pid",$pid);	
-		
+		//获取文章广告
+        $adList=$Document->getDocumentAd('文章内页');
+        $this->assign('adList', $adList[0]);
 		$meta_title=$info["title"];  
 		$this->assign('meta_title', $meta_title);
+
 		$map["doc_id"]=$id;
 		$res=getLists('comment',$map,10,'id desc',"");
 	    $this->assign('res', $res);
@@ -108,5 +132,36 @@ class Article  extends Home{
 		$tpl="model/".$name."_search";
 		return $this->fetch($tpl);
 	}
+
+	//标签列表
+    public function labellist($keyword="")
+    {
+        $_keyword=input('keyword',$keyword);
+        $page=input('page',0);
+        $limit=10;
+        $pageNum=$page>1?$limit*$page:0;
+        $xunsearchObj = new xunsearchDecorator(xunsearch\SoClass::getInstance());
+        $listTotal=$xunsearchObj->query($_keyword,10,$pageNum);
+        $idAttr=array_column($listTotal['data'],'pid');
+        $ids=implode(',',array_map('change_to_quotes',$idAttr));
+        $document=new Document();
+        $Document=new \app\admin\model\Document;
+        $list=$document->getByIds($ids);
+        //$list=$document->getByIds("251,250");
+        if($_POST){
+            return json($list);
+        }else
+        {
+            $meta_title=$keyword;
+            $this->assign('meta_title', $meta_title);
+            $tpl='model/mark_list';
+            $list['keyword']=$_keyword;
+            $list['hotNews']=$Document->getHotNews();
+            $list['hotLabel']=getHotLabel();
+            $this->assign('list',$list);
+            return $this->fetch($tpl);
+        }
+
+    }
 	
 }
