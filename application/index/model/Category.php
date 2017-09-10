@@ -172,6 +172,12 @@ class Category extends Model{
         $map['keywords']=$keyword;
         return Db::name('category')->where($map)->select();
     }
+    //根据id获取分类详情
+    public function getCategoryInfoById($id)
+    {
+        $map['id']=$id;
+        return Db::name('category')->where($map)->find();
+    }
 
 
 }

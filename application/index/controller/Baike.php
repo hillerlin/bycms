@@ -55,11 +55,27 @@ class Baike extends Home{
     public function detail()
     {
         $Document=new \app\admin\model\Document;
+        $Category=new \app\index\model\Category;
         $categoryId=input('categoryId');
         //获取文章广告
         $adList=$Document->getDocumentAd('文章内页');
         $this->assign('adList', $adList[0]);
-        $list=$Document->getListByCategoryId($categoryId);
+
+        $info=$Category->getCategoryInfoById($categoryId);
+        $meta_title=$info["title"];
+        $this->assign('meta_title', $meta_title);
+        $pid=$Category->getParentId($info["id"]);
+        $pid=array_merge($pid,[$info["id"]]);
+        $this->assign("pid",$pid);
+        $contentsObj=new contentsRender();
+        $params=['category_title'=>$info['title']];
+        $list=$contentsObj->render(new detailPageContent(),$params);
+        $list['list']=$Document->getListByCategoryId($categoryId);
+        $list['info']=$info;
+        $list['hotLabel']=getHotLabel();
+        $tpl='model/baike_detail';
+        $this->assign('list',$list);
+        return $this->fetch($tpl);
 
 
     }

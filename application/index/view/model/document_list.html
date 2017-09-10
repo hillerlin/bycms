@@ -3,10 +3,15 @@
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
-    <div class="nav">当前位置：<a href="">首页</a>&nbsp;&nbsp;>&nbsp;&nbsp;
-      {foreach $ids as $vo}
-      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>    >
-      {/foreach}
+    <div class="nav">当前位置:&nbsp;
+      <?php foreach($ids as $key=>$vo):?>
+      <?php if(count($ids)-1>$key):?>
+      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a> >
+      <?php else:?>
+      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>
+      <?php endif;?>
+      <?php endforeach;?>
+
     </div>
     <div class="list_main">
       <div class="list_about">

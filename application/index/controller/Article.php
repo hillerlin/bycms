@@ -74,7 +74,7 @@ class Article  extends Home{
 
 		$Category=new \app\index\model\Category;
         $pid=$Category->getParentId($info["category_id"]);
-        $info['parentId']=$pid[0];
+        //$info['parentId']=$pid[0];
         //数据合成
         $contentsObj=new contentsRender();
         $list=$contentsObj->render(new detailPageContent(),$info);

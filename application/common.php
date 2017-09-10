@@ -378,7 +378,7 @@ function substr_cn($str, $len=29) {
  * @return object 
  */
 function getParent($id = 0){
-	    $data= Db::name("category")->field("id,pid")->select();
+	    $data= Db::name("category")->field("id,pid")->where('title','NEQ','大麦理财')->select();
 		$arr = array( ); 
 		$temp = array();
 		   foreach ( $data as $key => $v ) {

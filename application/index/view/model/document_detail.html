@@ -3,7 +3,7 @@
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
-    <div class="nav">当前位置：<a href="{:url('index/index')}">首页</a>&nbsp;&nbsp;>
+    <div class="nav">当前位置:
       {foreach $pid as $vo}
       <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>    >
       {/foreach}

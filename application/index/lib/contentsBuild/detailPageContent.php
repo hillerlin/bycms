@@ -16,7 +16,7 @@ class detailPageContent implements contentInterface{
     {
           $this->redis=new Redis();
         // TODO: Implement joinData() method.
-         $this->list['relateArticles']=$this->relateArticles($params['parentId'],'行业资讯');
+         $this->list['relateArticles']=$this->relateArticles('191',$params['category_title']);
          $this->list['relateQuestion']=$params['category_title']=='All'?$this->relateQuestionAll():$this->relateQuestion('193',$params['category_title']);//目前相关问答id:190,以后基本不会变
 
     }
@@ -66,7 +66,7 @@ class detailPageContent implements contentInterface{
         }
     }
     //相关行业问答--全部
-    protected function relateQuestionAll()
+    public function relateQuestionAll()
     {
 
         $list=$this->redis->handler()->get('getCategoryQuestionListById:All');
