@@ -23,7 +23,7 @@
       <ul class="qa_list">
         <?php foreach($res['list'] as $key=>$value):?>
         <li>
-          <h2>{$value.title}</h2>
+          <h2><a href="{:url('question/detail?id='.$value['id'])}">{$value.title}</a></h2>
           <p>{$value.seo_description}</p>
           <div class="qa_mark">
             <a href="" target="_blank">{$value.category_id|get_category_title}</a>
@@ -79,7 +79,7 @@
       </ul>
     </div>
     <div class="hot_mark">
-      <h2>行业资讯相关标签</h2>
+      <h2>热门标签</h2>
       <ul class="clear">
         <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
         <li><a href="" target="_blank">{$value}</a></li>

@@ -16,14 +16,23 @@ class questionContent implements contentInterface {
     {
         $this->redis=new Redis();
         // TODO: Implement joinData() method.
+        $detailPageObj=new detailPageContent();
+        $this->list['relateArticles']=isset($params['category_id'])?$detailPageObj->relateArticles('191',$params['category_title']):null;
         $this->list['hotQuestion']=$this->hotQuestion();
-        $this->list['relateQuestion']=$params['keyWord']=='all'?$this->relateQuestionAll():$this->relateQuestion('193',$params['keyWord']);
-
+        $this->list['relateQuestion']=isset($params['keyWord'])?($params['keyWord']=='all'?$this->relateQuestionAll():$this->relateQuestion('193',$params['keyWord'])):null;
+        $this->list['relateQuestionByCategory']=isset($params['category_id'])?$this->relateQuestionByCategory($params['category_id']):null;
     }
     public function getData()
     {
         // TODO: Implement getData() method.
         return $this->list;
+    }
+    //
+    public function relateQuestionByCategory($categoryId)
+    {
+        $map['category_id']=$categoryId;
+        $list=Db::name('document')->where($map)->order("id desc")->field('id,title,category_id,view,create_time')->limit(5)->select();
+        return $list;
     }
     public function relateQuestionAll()
     {

@@ -3,39 +3,44 @@
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
-    <div class="nav">当前位置：<a href="">大麦理财</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">大麦问答</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="">问答详情</a></div>
+    <div class="nav">当前位置：
+      {foreach $pid as $vo}
+      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>    >
+      {/foreach}
+      <span>{$info.title}</span>
+    </div>
     <div class="list_main">
       <div class="qa_share">
         
       </div>
       <div class="question">
-        <h2>问答标题 <i></i><span>120</span></h2>
-        <p>大麦理财正式宣布与中科院旗下Italk沙龙达成合作。由大麦理财独家冠名Italk沙龙的每期活动。 Italk沙龙由中科院计算所上海分所所长孔华威先生发起创办，从IT起步，拓展为搭建创新生态之家，为主流人群、技术、企业的科技金融创新提供交流场地。大麦理财正式宣布与中科院旗下Italk沙龙达成合作。</p>
+        <h2>{$info.title} <i></i><span>{$info.view}</span></h2>
+        <p>{$info.content}</p>
       </div>
-      <div class="answer">
+<!--      <div class="answer">
         <h2>回答</h2>
         <p>要看一个理财公司哪家好，首先要看公司的背景实力以及风控方面做的怎样，这都关系着你投资的资金安全度高不高。</p>
-      </div>
+      </div>-->
     </div>
     <div class="related clear">
       <div class="fl">
-        <h2>相关文章</h2>
+        <h2>{$info.category_title}相关文章</h2>
         <ul>
-          <li><a href="" target="_blank"><span class="fl">新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
+          <?php if($list['relateArticles']):?>
+          <?php foreach($list['relateArticles'] as $key=>$value):?>
+          <li><a href="{:url('article/detail?id='.$key)}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
+          <?php endforeach;?>
+          <?php endif;?>
         </ul>
       </div>
       <div class="fr">
-        <h2>相关问答</h2>
+        <h2>{$info.category_title}相关问答</h2>
         <ul>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
-          <li><a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a></li>
+          <?php if($list['relateQuestionByCategory']):?>
+          <?php foreach($list['relateQuestionByCategory'] as $key=>$value):?>
+          <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
+          <?php endforeach;?>
+          <?php endif;?>
         </ul>
       </div>
     </div>
@@ -51,14 +56,9 @@
     <div class="hot_mark">
       <h2>热门标签</h2>
       <ul class="clear">
-        <li><a href="" target="_blank">金融</a></li>
-        <li><a href="" target="_blank">互联网金融</a></li>
-        <li><a href="" target="_blank">理财</a></li>
-        <li><a href="" target="_blank">大麦理财</a></li>
-        <li><a href="" target="_blank">投资理财</a></li>
-        <li><a href="" target="_blank">投资</a></li>
-        <li><a href="" target="_blank">互金平台</a></li>
-        <li><a href="" target="_blank">理财平台</a></li>
+        <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
+        <li><a href="" target="_blank">{$value}</a></li>
+        <?php endforeach;?>
       </ul>
     </div>
   </div>

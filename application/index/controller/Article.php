@@ -90,9 +90,9 @@ class Article  extends Home{
 		$meta_title=$info["title"];  
 		$this->assign('meta_title', $meta_title);
 
-		$map["doc_id"]=$id;
+/*		$map["doc_id"]=$id;
 		$res=getLists('comment',$map,10,'id desc',"");
-	    $this->assign('res', $res);
+	    $this->assign('res', $res);*/
 		$this->assign("info",$info);
 	
 	    $name=get_models($info['model_id'],'name');

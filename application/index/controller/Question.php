@@ -57,4 +57,51 @@ class Question extends Home{
         $tpl="model/qa_list";
         return $this->fetch($tpl);
     }
+    //详情
+    public function detail()
+    {
+        $id=input('id');
+        if(!($id && is_numeric($id))){
+            $this->error('分类ID错误！');
+        }else{
+            $where["id"]=$id;
+        }
+        $Document=new \app\admin\model\Document;
+        $info=$Document->getInfo($id);
+        if(!$info){
+            $this->error('文章不存在！');
+        }
+        //添加标签点击量
+        if($info['description'])
+        {
+            $keyWordsObj=new \app\index\lib\keyWordLabel\keyWordsInterFace();
+            $keyWordsObj->addClick($info['description'],$info['view'],$info['category_id']);
+        }
+        $Document->addClick($id);//更新数据库点击量+1
+        //$info["pictures"]=get_pictures($id);
+
+        $Category=new \app\index\model\Category;
+        $pid=$Category->getParentId($info["category_id"]);
+        //数据合成
+        $contentsObj=new contentsRender();
+        $list=$contentsObj->render(new questionContent(),$info);
+        $list['hotNews']=$Document->getHotNews();
+        $list['hotLabel']=getHotLabel();
+        $list['labelAll']=getCategoryRelaLabel(intval($info['category_id']));
+        $this->assign("list",$list);
+
+        $pid=array_merge($pid,[$info["category_id"]]);
+        $this->assign("pid",$pid);
+/*        //获取文章广告
+        $adList=$Document->getDocumentAd('文章内页');
+        $this->assign('adList', $adList[0]);*/
+        $meta_title=$info["title"];
+        $this->assign('meta_title', $meta_title);
+        $this->assign("info",$info);
+        $tpl="model/qa_detail";
+
+        return $this->fetch($tpl);
+
+    }
+
 }

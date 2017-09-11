@@ -31,7 +31,7 @@ class detailPageContent implements contentInterface{
         return $this->list;
     }
     //相关文章
-    protected function relateArticles($parentCategoryId,$name)
+    public function relateArticles($parentCategoryId,$name)
     {
         $Category=new \app\index\model\Category;
         $categoryId=$Category->getCategoryIdByName($name,$parentCategoryId)['id'];
