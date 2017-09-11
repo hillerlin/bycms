@@ -18,11 +18,14 @@ class indexContent implements contentInterface{
         //行业资讯
         $this->list['industry']=$this->industryNew($tree['_'],'行业资讯');
         //行业资讯标签
-        $this->list['industryLabel']=$this->showCategoryLabel($this->list['industry'][0]['category_id']);
+        $this->list['industryLabel']=$this->showCategoryLabel('191');
         //知识百科
         $this->list['knowledgebase']=$this->industryNew($tree['_'],'知识百科');
         //知识百科标签
-        $this->list['knowledgebaseLabel']=$this->showCategoryLabel($this->list['knowledgebase'][0]['category_id']);
+        $this->list['knowledgebaseLabel']=$this->showCategoryLabel('190');
+        //大麦问答
+        $this->list['question']=$this->industryNew($tree['_'],'大麦问答');
+        $this->list['questionLabel']=$this->showCategoryLabel('193');
         return $this;
     }
     public function getData()
@@ -93,10 +96,10 @@ class indexContent implements contentInterface{
         return $list;
     }
     //标签展示
-    protected function showCategoryLabel($categoryId)
+    protected function showCategoryLabel($parentCategoryId)
     {
         $keyWordsObj = new \app\index\lib\keyWordLabel\keyWordsInterFace();
-        return  $keyWordsObj->getCategoryLabel($categoryId);
+        return  $keyWordsObj->getCategoryLabel($parentCategoryId);
 
     }
 }

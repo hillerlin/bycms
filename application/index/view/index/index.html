@@ -142,7 +142,7 @@
 				<ul>
 					<?php
 					count($list['knowledgebase'])>10?$count=10:$count=count($list['knowledgebase']);
-					for($_j=0;$_j<$count;$_j++):?>
+					for($_j=5;$_j<$count;$_j++):?>
 					<li>
 						<a href="{:url('article/detail?id='.$list['knowledgebase'][$_j]['id'])}" target="_blank"><span class="fl"><?php echo $list['knowledgebase'][$_j]['title']?></span><span class="fr"><?php echo $list['knowledgebase'][$_j]['create_time']?></span></a>
 					</li>
@@ -169,73 +169,52 @@
 			<h2 class="ft16">大麦问答</h2>
 			<div class="news_box fl">
 				<div class="news_top clear">
-					<a href="" target="_blank"><img src="http://cdn1.damailicai.com/news/02.png" alt="" class="fl"></a>
+					<a href="{:url('article/list?id='.$list['question'][0]['category_id'])}" target="_blank"><img style="max-width: 120px;max-height: 80px;" src="http://59.110.136.193:9017/<?php echo $list['question'][0]['pic']?>" alt="" class="fl"></a>
 					<div class="news_info fr">
-						<a href="" class="newsTitle" target="_blank">新闻标题</a>
-						<a href="" class="newsCate" target="_blank">金融理财 2017-09-05</a>
-						<p>新闻详情新闻详情新闻详情新闻详情新闻详情新闻详情</p>
+						<a href="{:url('article/detail?id='.$list['question'][0]['id'])}" class="newsTitle" target="_blank"><?php echo $list['question'][0]['title']?></a>
+						<a href="{:url('article/detail?id='.$list['question'][0]['id'])}" class="newsCate" target="_blank"><?php echo $list['question'][0]['description']?>   <?php echo $list['question'][0]['create_time']?></a>
+						<p><?php echo $list['question'][0]['seo_description']?></p>
 					</div>
 				</div>
 				<ul>
+					<?php
+					count($list['question'])>5?$count=5:$count=count($list['question']);
+					for($j=0;$j<$count;$j++):?>
 					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
+						<a href="{:url('article/detail?id='.$list['question'][$j]['id'])}" target="_blank"><span class="fl"><?php echo $list['question'][$j]['title']?></span><span class="fr"><?php echo $list['question'][$j]['create_time']?></span></a>
 					</li>
-					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
-					</li>
-					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
-					</li>
-					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
-					</li>
-					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
-					</li>
+					<?php endfor;?>
 				</ul>
 			</div>
 			<div class="news_box fl">
 				<div class="news_top clear">
-					<a href="" target="_blank"><img src="http://cdn1.damailicai.com/news/02.png" alt="" class="fl"></a>
+					<a href="{:url('article/list?id='.$list['question'][1]['category_id'])}" target="_blank"><img style="max-width: 120px;max-height: 80px;" src="http://59.110.136.193:9017/<?php echo $list['question'][1]['pic']?>" alt="" class="fl"></a>
 					<div class="news_info fr">
-						<a href="" class="newsTitle" target="_blank">新闻标题</a>
-						<a href="" class="newsCate" target="_blank">金融理财 2017-09-05</a>
-						<p>新闻详情新闻详情新闻详情新闻详情新闻详情新闻详情</p>
+						<a href="{:url('article/detail?id='.$list['question'][1]['id'])}" class="newsTitle" target="_blank"><?php echo $list['question'][1]['title']?></a>
+						<a href="{:url('article/detail?id='.$list['question'][1]['id'])}" class="newsCate" target="_blank"><?php echo $list['question'][1]['description']?>   <?php echo $list['question'][1]['create_time']?></a>
+						<p><?php echo $list['question'][1]['seo_description']?></p>
 					</div>
 				</div>
 				<ul>
+					<?php
+					count($list['question'])>10?$count=10:$count=count($list['question']);
+					for($j=5;$j<$count;$j++):?>
 					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
+						<a href="{:url('article/detail?id='.$list['question'][$j]['id'])}" target="_blank"><span class="fl"><?php echo $list['question'][$j]['title']?></span><span class="fr"><?php echo $list['question'][$j]['create_time']?></span></a>
 					</li>
-					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
-					</li>
-					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
-					</li>
-					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
-					</li>
-					<li>
-						<a href="" target="_blank"><span class="fl">新闻标题</span><span class="fr">2017-09-05</span></a>
-					</li>
+					<?php endfor;?>
 				</ul>
-			</div>
 		</div>
 		<div class="news_cate fl">
 			<h3>问答分类</h3>
 			<ul>
-				<li><a href="" target="_blank">金融理财</a></li>
-				<li><a href="" target="_blank">金融理财</a></li>
-				<li><a href="" target="_blank">金融理财</a></li>
-				<li><a href="" target="_blank">金融理财</a></li>
-				<li><a href="" target="_blank">金融理财</a></li>
-				<li><a href="" target="_blank">金融理财</a></li>
-				<li><a href="" target="_blank">金融理财</a></li>
-				<li><a href="" target="_blank">金融理财</a></li>
+				<?php foreach($list['questionLabel'] as $kkey=>$kvalue):?>
+				<li><a href="{:url('/index/article/labellist/keyword/'.$kvalue)}" target="_blank"><?php echo $kvalue?></a></li>
+				<?php endforeach;?>
 			</ul>
 		</div>
 	</div>
+</div>
 </div>
 <script type="text/javascript" src="/public/index/js/index.js"></script>
 {include file="public/footer" /}
