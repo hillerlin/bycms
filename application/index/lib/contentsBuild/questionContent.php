@@ -17,7 +17,7 @@ class questionContent implements contentInterface {
         $this->redis=new Redis();
         // TODO: Implement joinData() method.
         $this->list['hotQuestion']=$this->hotQuestion();
-        $this->list['relateQuestion']=$params['keyWord']=='All'?$this->relateQuestionAll():$this->relateQuestion('193',$params['keyWord']);
+        $this->list['relateQuestion']=$params['keyWord']=='all'?$this->relateQuestionAll():$this->relateQuestion('193',$params['keyWord']);
 
     }
     public function getData()
@@ -33,7 +33,7 @@ class questionContent implements contentInterface {
     //
     public function relateQuestion($categoryParentId,$keyWord)
     {
-        $sql="select id from bycms_category where pid=$categoryParentId and description like %$keyWord%";
+        $sql="select id from bycms_category where pid=$categoryParentId and description like '%$keyWord%'";
         $sqlRuslt=Db::query($sql);
         if(!$sqlRuslt)
             return null;
@@ -47,7 +47,7 @@ class questionContent implements contentInterface {
         {
             $map['category_id']=array('in',$categoryId);
             $list=Db::name('document')->where($map)->order("id desc")->field('id,title,category_id,view,create_time')->limit(5)->select();
-            $this->redis->handler()->setEx('getCategoryQuestionListByName:'.$keyWord,300,json_encode($list));
+            $this->redis->handler()->setEx('getCategoryQuestionListByName:'.$keyWord,5,json_encode($list));
             return $list;
         }
 

@@ -15,17 +15,16 @@
     </div>
     <div class="list_main">
       <div class="qa_nav clear">
-        <a href="" target="_blank">个人理财</a>
         <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
-        <li><a href="" target="_blank">{$value}</a></li>
+        <li><a href="{:url('/index/question/lists/keyWord/'.$value)}" target="_blank">{$value}</a></li>
         <?php endforeach;?>
       </div>
-      <p class="qa_tips">为你找到 count($res['list']) 个<span>资金监督</span>的问题</p>
+      <p class="qa_tips">为你找到 <?php echo count($res['list'])?> 个<span>资金监督</span>的问题</p>
       <ul class="qa_list">
         <?php foreach($res['list'] as $key=>$value):?>
         <li>
           <h2>{$value.title}</h2>
-          <p>{$value.content}</p>
+          <p>{$value.seo_description}</p>
           <div class="qa_mark">
             <a href="" target="_blank">{$value.category_id|get_category_title}</a>
             <label>浏览：{$value.view}</label>
@@ -79,7 +78,7 @@
         <?php endforeach;?>
       </ul>
     </div>
-    <div class="related_mark">
+    <div class="hot_mark">
       <h2>行业资讯相关标签</h2>
       <ul class="clear">
         <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>

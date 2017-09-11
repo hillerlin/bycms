@@ -105,7 +105,7 @@ class Category extends Model{
         $ids = $this->getChildrenId($cateid);    		
 		$map['category_id']=array("in",$ids);   
 		//$map['status']=1;
-		$list=Db::name( 'Document' )->where($map)->limit(10)->field('id,create_time,cover_id,title,view')->order("id desc")->select();
+		$list=Db::name( 'Document' )->where($map)->limit(5)->field('id,create_time,cover_id,title,view')->order("id desc")->select();
 		foreach ($list as $k => $v ) {
 		   /**重组数据**/
 			$id=$v["id"];

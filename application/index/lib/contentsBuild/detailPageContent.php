@@ -12,9 +12,14 @@ class detailPageContent implements contentInterface{
     protected $rule=['行业资讯'];
     protected $list=[];
     protected $redis;
+    public function __construct()
+    {
+        $this->redis=new Redis();
+    }
+
     public function joinData($params)
     {
-          $this->redis=new Redis();
+
         // TODO: Implement joinData() method.
          $this->list['relateArticles']=$this->relateArticles('191',$params['category_title']);
          $this->list['relateQuestion']=$params['category_title']=='All'?$this->relateQuestionAll():$this->relateQuestion('193',$params['category_title']);//目前相关问答id:190,以后基本不会变

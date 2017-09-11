@@ -23,19 +23,26 @@ class Question extends Home{
         if(!$info){
             $this->error('分类不存在！');
         }
-        $ids=$Category->getParentId($id);
+        $keyWord=input('keyWord');
+        $contentsObj=new contentsRender();
+        $_GET?$params=['keyWord'=>$keyWord]:$params=['keyWord'=>'all'];
+        $list=$contentsObj->render(new questionContent(),$params);
         $cid=$Category->getChildrenId($id);
         $map['category_id']=array("in",$cid);
+        if($_POST)
+        {
+            $page=input('page','0');
+            $num=10;
+            $pageNum=$page>1?($page-1)*$num:0;
+            $res=getLists('document',$map,$num,'id desc',"",$pageNum);
+            return json(['list'=>$res]);
+        }
+        $ids=$Category->getParentId($id);
         $num=$info["list_row"]?$info["list_row"]:10;
         $res=getLists('document',$map,$num,'id desc',"");
         $this->assign('res', $res);
-        $contentsObj=new contentsRender();
-        $_POST?$params=['keyword'=>$_POST['keyword']]:$params=['keyword'=>'all'];
-        $list=$contentsObj->render(new questionContent(),$params);
-        if($_POST)
-        {
-            return json(['list'=>$list,'res'=>$res]);
-        }
+
+
         $Document=new \app\admin\model\Document;
         $list['labelAll']=getCategoryRelaLabel(intval($id));
         $list['hotNews']=$Document->getHotNews();

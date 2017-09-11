@@ -242,8 +242,8 @@ function safe_replace($string) {
  * @param string $field   查询的字段
  * @return string
  */
-function getLists($model,$map="",$num="10",$listsort="id desc",$field=""){ 
-		 $res["list"]=Db::name($model)->where($map)->field($field)->order($listsort)->select();
+function getLists($model,$map="",$num="10",$listsort="id desc",$field="",$pageNum=0){
+		 $res["list"]=Db::name($model)->where($map)->limit("$pageNum,$num")->field($field)->order($listsort)->select();
 		 $res["page"]= count($res["list"]);
 		 $res["count"]=Db::name($model)->where($map)->field($field)->order($listsort)->count();
 		return $res;
