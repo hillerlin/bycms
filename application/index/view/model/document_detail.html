@@ -10,7 +10,7 @@
       <span>{$info.title}</span>
     </div>
     <div class="list_main">
-      <div class="ct"><a href="<php echo $adList['url']>"><img src="http://59.110.136.193:9017/<?php echo $adList['path']?>" alt=""></a></div>
+      <div class="ct"><a href="<?php echo $adList['url']?>"><img src="http://59.110.136.193:9017/<?php echo $adList['path']?>" alt=""></a></div>
       <h2 class="news_title">{$info.title}</h2>
 			<div class="news_mark">
         <span><?php echo date("Y-m-d",$info['create_time'])?></span>
@@ -22,7 +22,6 @@
       <div class="abstract">{$info.seo_description}</div>
       <div class="news_detail">
       {$info.content}
-
       </div>
       <div class="news_marks">
 				<label>标签：</label>
