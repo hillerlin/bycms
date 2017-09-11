@@ -9,7 +9,6 @@ use app\index\lib\contentsBuild\contentsRender;
 class Index extends Home{
     
 	public function index(){
-
 	    $ids=['123','1143'];
 	    $list=array_map('change_to_quotes',$ids);
         $lists= implode(',',array_map('change_to_quotes',$ids));

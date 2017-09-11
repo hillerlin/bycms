@@ -90,16 +90,16 @@ class Article  extends Home{
 		$meta_title=$info["title"];  
 		$this->assign('meta_title', $meta_title);
 
-/*		$map["doc_id"]=$id;
+		$map["doc_id"]=$id;
 		$res=getLists('comment',$map,10,'id desc',"");
-	    $this->assign('res', $res);*/
+	    $this->assign('res', $res);
 		$this->assign("info",$info);
 	
 	    $name=get_models($info['model_id'],'name');
 		
 		$tpl="model/".$name."_detail";
 		//$tpl=$info["template_detail"]?$info["template_detail"]:$tpl;
-		if($info['model_id']="2"){
+/*		if($info['model_id']="2"){
 			unset($map);
 			$map['model_id']="2";
 			$map["id"]=array("lt",$id);
@@ -109,7 +109,7 @@ class Article  extends Home{
             $map["id"]=array("gt",$id);
             $next= Db::name('document')->where($map)->order("id asc")->find();
 		    $this->assign("next",$next);
-		}
+		}*/
 		return $this->fetch($tpl);
 	}
 
