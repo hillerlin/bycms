@@ -42,9 +42,20 @@ class keyWordsInterFace{
         return $list;
     }
     //获取分类下的所有标签
-    public function getCategoryLabel($catagoryId)
+    public function getCategoryLabel($parentCatagoryId)
     {
-      return $keyList=$this->_redis->handler()->hKeys('newKeyWordsCategory:'.$catagoryId);
+      $Category=new \app\index\model\Category;
+      $cid=$Category->getChildrenId($parentCatagoryId);
+      $list=[];
+      foreach ($cid as $key=>$value)
+      {
+          $redisList=$this->_redis->handler()->hKeys('newKeyWordsCategory:'.$value);
+           if($redisList)
+           {
+               $list=array_merge($list,$redisList);
+           }
+      }
+      return array_unique($list);
     }
 
 }

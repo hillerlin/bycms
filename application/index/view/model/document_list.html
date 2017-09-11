@@ -21,7 +21,7 @@
       <div class="news_top clear">
         <div class="news_box fl">
           <img src="<?php echo get_cover($res['list'][0]["cover_id"], "path" );?>" width="360" height="240" alt="">
-          <h2>{$res.list.0.title}</h2>
+          <h2><a href="{:url('article/detail?id='.$res['list'][0]['id'])}">{$res.list.0.title}</a></h2>
           <p>{$res.list.0.seo_description}</p>
           <div class="marks">
             <span>{$res.list.0.create_time|date="Y-m-d",###}</span>
@@ -32,7 +32,7 @@
         </div>
         <div class="news_box fr">
           <img src="<?php echo get_cover($res['list'][1]["cover_id"], "path" );?>" width="360" height="240" alt="">
-          <h2>{$res.list.1.title}</h2>
+          <h2><a href="{:url('article/detail?id='.$res['list'][1]['id'])}">{$res.list.1.title}</a></h2>
           <p>{$res.list.1.seo_description}</p>
           <div class="marks">
             <span>{$res.list.1.create_time|date="Y-m-d",###}</span>
@@ -45,7 +45,7 @@
       <ul class="news_list">
           <?php for($i=2;$i<count($res['list']);$i++):?>
         <li>
-          <h2><?php echo $res['list'][$i]['title']?></h2>
+          <h2><a href="{:url('article/detail?id='.$res['list'][$i]['id'])}"><?php echo $res['list'][$i]['title']?></a></h2>
           <p><?php echo $res['list'][$i]['seo_description']?></p>
           <div class="marks">
             <span><?php echo date('Y-m-d',$res['list'][$i]['create_time'])?></span>
@@ -106,7 +106,7 @@
       </div>
       <ul>
         <?php foreach($list['hotNews'] as $key=>$value):?>
-        <li><a href="{:url('article/list?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
+        <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
         <?php endforeach;?>
       </ul>
     </div>
