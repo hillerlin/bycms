@@ -82,7 +82,7 @@
       <h2>热门标签</h2>
       <ul class="clear">
         <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
-        <li><a href="" target="_blank">{$value}</a></li>
+        <li><a href="{:url('/index/article/labellist/keyword/'.$value)}" target="_blank">{$value}</a></li>
         <?php endforeach;?>
       </ul>
     </div>

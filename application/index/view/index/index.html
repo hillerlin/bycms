@@ -5,22 +5,14 @@
 		<div class="banner fl">
 			<div class="slide_show relative">
 				<ul class="slide_box">
+					<?php foreach($list['showCarousel'] as $key=>$value):?>
 					<li>
-						<a href="" target="_blank">
-							<img src="http://cdn1.damailicai.com/news/01.png" alt="">
-							<span class="title">互联网圈那些塞翁失马的故事lmj</span></a></li>
-					<li>
-						<a href="" target="_blank">
-							<img src="http://cdn1.damailicai.com/news/01.png" alt="">
-							<span class="title">互联网圈那些塞翁失马的故事2</span></a></li>
-					<li>
-						<a href="" target="_blank">
-							<img src="http://cdn1.damailicai.com/news/01.png" alt="">
-							<span class="title">互联网圈那些塞翁失马的故事3</span></a></li>
-					<li>
-						<a href="" target="_blank">
-							<img src="http://cdn1.damailicai.com/news/01.png" alt="">
-							<span class="title">互联网圈那些塞翁失马的故事4</span></a></li>
+						<a href="{$value.url}" target="_blank">
+							<img src="http://59.110.136.193:9017/{$value.cover_id|get_cover}" alt="">
+							<span class="title">{$value.meta_title}</span>
+						</a>
+					</li>
+					<?php endforeach;?>
 				</ul>
 				<ul class="slidebar clear">
 					<li class="current"></li>
@@ -59,7 +51,7 @@
 	</div>
 	<div class="news_div clear">
 		<div class="fl">
-			<h2 class="ft16">行业资讯</h2>
+			<h2 class="ft16"><a href="{:url('article/lists?id=191')}">行业资讯</a></h2>
 			<div class="news_box fl">
 				<div class="news_top clear">
 					<a href="{:url('article/list?id='.$list['industry'][0]['category_id'])}" target="_blank"><img style="max-width: 120px;max-height: 80px;" src="http://59.110.136.193:9017/<?php echo $list['industry'][0]['pic']?>" alt="" class="fl"></a>
@@ -103,14 +95,14 @@
 			<h3>资讯分类</h3>
 			<ul>
 				<?php foreach($list['industryLabel'] as $ikey=>$ivalue):?>
-				<li><a href="" target="_blank"><?php echo $ivalue?></a></li>
+				<li><a href="{:url('/index/article/labellist/keyword/'.$ivalue)}" target="_blank"><?php echo $ivalue?></a></li>
 				<?php endforeach;?>
 			</ul>
 		</div>
 	</div>
 	<div class="news_div clear">
 		<div class="fl">
-			<h2 class="ft16">知识百科</h2>
+			<h2 class="ft16"><a href="{:url('article/lists?id=190')}">知识百科</a></h2>
 			<div class="news_box fl">
 				<div class="news_top clear">
 					<a href="{:url('article/list?id='.$list['knowledgebase'][0]['category_id'])}" target="_blank"><img style="max-width: 120px;max-height: 80px;" src="http://59.110.136.193:9017/<?php echo $list['knowledgebase'][0]['pic']?>" alt="" class="fl"></a>
@@ -154,7 +146,7 @@
 			<h3>百科分类</h3>
 			<ul>
 				<?php foreach($list['knowledgebaseLabel'] as $kkey=>$kvalue):?>
-				<li><a href="" target="_blank"><?php echo $kvalue?></a></li>
+				<li><a href="{:url('/index/article/labellist/keyword/'.$kvalue)}" target="_blank"><?php echo $kvalue?></a></li>
 				<?php endforeach;?>
 			</ul>
 		</div>
@@ -166,7 +158,7 @@
 	</div>
 	<div class="news_div clear">
 		<div class="fl">
-			<h2 class="ft16">大麦问答</h2>
+			<h2 class="ft16"><a href="{:url('article/lists?id=193')}">大麦问答</a></h2>
 			<div class="news_box fl">
 				<div class="news_top clear">
 					<a href="{:url('article/list?id='.$list['question'][0]['category_id'])}" target="_blank"><img style="max-width: 120px;max-height: 80px;" src="http://59.110.136.193:9017/<?php echo $list['question'][0]['pic']?>" alt="" class="fl"></a>
