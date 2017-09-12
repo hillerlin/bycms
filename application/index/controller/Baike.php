@@ -11,6 +11,7 @@ use think\Controller;
 use think\Db;
 use app\index\lib\contentsBuild\contentsRender;
 use app\index\lib\contentsBuild\detailPageContent;
+use think\exception\ErrorException;
 use xunsearch;
 use app\index\lib\xunsearchLib\xunsearchDecorator;
 class Baike extends Home{
@@ -21,9 +22,17 @@ class Baike extends Home{
         $Category=new \app\index\model\Category;
         if($_POST)
         {
-            $keyword=input('keyword');
-            $list=$Category->getCategoryInfoByKeyword($keyword);
-            return json($list);
+            try {
+                $keyword = input('keyword');
+                $_list = $Category->getCategoryInfoByKeyword($keyword);
+                $list['statusCode'] = 0;
+                $list['list'] = $_list;
+                return json($list);
+            }
+            catch (ErrorException $e)
+            {
+                return json(['statusCode'=>'1','message'=>$e->getMessage()]);
+            }
 
         }
         $Document=new \app\admin\model\Document;

@@ -30,7 +30,18 @@ class Article  extends Home{
         $res=getLists('document',$map,$num,'id desc',"",$pageNum);
         if($_POST)
         {
-            return json($res);
+            $res['statusCode'] = 0;
+            try{
+                foreach ($res['list'] as $key=>&$value)
+                {
+                    $value['pic']=get_cover($value['cover_id']);
+                }
+                return json($res);
+
+            }catch (Exception $e){
+                return json(['statusCode'=>1,'message'=>$e->getMessage()]);
+            }
+
         }
 	    $this->assign('res', $res);
         $contentsObj=new contentsRender();

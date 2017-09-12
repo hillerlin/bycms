@@ -12,6 +12,7 @@ use think\Controller;
 use think\Db;
 use app\index\lib\contentsBuild\contentsRender;
 use app\index\lib\contentsBuild\detailPageContent;
+use think\exception\ErrorException;
 use xunsearch;
 use app\index\lib\xunsearchLib\xunsearchDecorator;
 class Question extends Home{
@@ -31,11 +32,21 @@ class Question extends Home{
         $map['category_id']=array("in",$cid);
         if($_POST)
         {
-            $page=input('page','0');
-            $num=10;
-            $pageNum=$page>1?($page-1)*$num:0;
-            $res=getLists('document',$map,$num,'id desc',"",$pageNum);
-            return json(['list'=>$res]);
+            try{
+                $page=input('page','0');
+                $num=10;
+                $pageNum=$page>1?($page-1)*$num:0;
+                $res=getLists('document',$map,$num,'id desc',"",$pageNum);
+                $res['statusCode'] = 0;
+                foreach ($res['list'] as $key=>$value)
+                {
+                    $value['category_title']=get_category_title($value['category_id']);
+                }
+                return json($res);
+            }catch (ErrorException $e){
+                return json(['statusCode'=>'1','message'=>$e->getMessage()]);
+            }
+
         }
         $ids=$Category->getParentId($id);
         $num=$info["list_row"]?$info["list_row"]:10;

@@ -11,34 +11,33 @@
       </div>
       <h2 class="baike_title">按字母检索</h2>
       <div class="baike_nav clear">
-        <a href="{:url('baike/lists?keyword=s')}">A</a>
-        <a href="">B</a>
-        <a href="">C</a>
-        <a href="">D</a>
-        <a href="">E</a>
-        <a href="">F</a>
-        <a href="">G</a>
-        <a href="">H</a>
-        <a href="">I</a>
-        <a href="">J</a>
-        <a href="">K</a>
-        <a href="">L</a>
-        <a href="">M</a>
-        <a href="">N</a>
-        <a href="">O</a>
-        <a href="">P</a>
-        <a href="">Q</a>
-        <a href="">R</a>
-        <a href="">S</a>
-        <a href="">T</a>
-        <a href="">U</a>
-        <a href="">V</a>
-        <a href="">W</a>
-        <a href="">X</a>
-        <a href="">Y</a>
-        <a href="">Z</a>
-        <a href="">0-9</a>
-        <a href="">ALL</a>
+        <a href="javascript:;">A</a>
+        <a href="javascript:;">B</a>
+        <a href="javascript:;">C</a>
+        <a href="javascript:;">D</a>
+        <a href="javascript:;">E</a>
+        <a href="javascript:;">F</a>
+        <a href="javascript:;">G</a>
+        <a href="javascript:;">H</a>
+        <a href="javascript:;">I</a>
+        <a href="javascript:;">J</a>
+        <a href="javascript:;">K</a>
+        <a href="javascript:;">L</a>
+        <a href="javascript:;">M</a>
+        <a href="javascript:;">N</a>
+        <a href="javascript:;">O</a>
+        <a href="javascript:;">P</a>
+        <a href="javascript:;">Q</a>
+        <a href="javascript:;">R</a>
+        <a href="javascript:;">S</a>
+        <a href="javascript:;">T</a>
+        <a href="javascript:;">U</a>
+        <a href="javascript:;">V</a>
+        <a href="javascript:;">W</a>
+        <a href="javascript:;">X</a>
+        <a href="javascript:;">Y</a>
+        <a href="javascript:;">Z</a>
+        <a href="javascript:;" class="on">ALL</a>
       </div>
       <div class="baike_list clear">
         {foreach $list.list as $vo}
@@ -46,7 +45,6 @@
         {/foreach}
       </div>
     </div>
-    <div class="pageBox"></div>
   </div>
   <div class="list_right fr">
     <div class="demo_box">
@@ -78,6 +76,7 @@
     </div>
   </div>
 </div>
+<script type="text/javascript" src="__COMMON__/baike_list.js"></script>
 {include file="public/footer" /}
 </body>
 </html>
