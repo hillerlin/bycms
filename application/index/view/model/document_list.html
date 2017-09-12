@@ -1,5 +1,9 @@
 {include file="public/header" /}
+<title>{$info.meta_title}</title>
+<meta name="keywords" content="{$info.keywords}"/>
+<meta name="description" content="{$info.description}"/>
 <link rel="stylesheet" href="__CSS__/list.css" />
+<link rel="stylesheet" href="__CSS__/paging.css" />
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
@@ -55,7 +59,6 @@
           </div>
         </li>
           <?php endfor;?>
-
       </ul>
     </div>
     <div class="pageBox"></div>
@@ -65,7 +68,7 @@
         <ul>
           <?php if($list['relateArticles']):?>
           <?php foreach($list['relateArticles'] as $key=>$value):?>
-          <li><a href="{:url('article/detail?id='.$key)}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
+          <li><a href="{:url('article/detail?id='.$key)}" class="clear" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
           <?php endforeach;?>
           <?php endif;?>
         </ul>
@@ -120,7 +123,8 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="__COMMON__/page.min.js"></script>
+<input type="hidden" class="totalRows" name="totalRows" value="<?php echo $res['count'];?>" data-perpage="3">
+<script type="text/javascript" src="__COMMON__/paging.js"></script>
 <script type="text/javascript" src="__COMMON__/doc_list.min.js"></script>
 {include file="public/footer" /}
 </body>
