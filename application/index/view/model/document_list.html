@@ -88,7 +88,7 @@
       <h2>行业资讯相关标签</h2>
       <ul class="clear">
         <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
-        <li><a href="" target="_blank">{$value}</a></li>
+        <li><a href="{:url('/index/article/labellist/keyword/'.$value)}" target="_blank">{$value}</a></li>
         <?php endforeach;?>
       </ul>
     </div>
@@ -117,7 +117,7 @@
       <h2>热门标签</h2>
       <ul class="clear">
         <?php foreach($list['hotLabel'] as $key=>$value):?>
-        <li><a href="" target="_blank">{$key}</a></li>
+        <li><a href="{:url('/index/article/labellist/keyword/'.$key)}" target="_blank">{$key}</a></li>
         <?php endforeach;?>
       </ul>
     </div>

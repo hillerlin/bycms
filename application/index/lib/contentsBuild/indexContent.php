@@ -6,6 +6,8 @@
  * Time: 下午 2:32
  */
 namespace app\index\lib\contentsBuild;
+use think\cache\driver\Redis;
+use think\Db;
 class indexContent implements contentInterface{
     protected $list;
     public function joinData($tree)
@@ -26,6 +28,8 @@ class indexContent implements contentInterface{
         //大麦问答
         $this->list['question']=$this->industryNew($tree['_'],'大麦问答');
         $this->list['questionLabel']=$this->showCategoryLabel('193');
+        //首页轮播
+        $this->list['showCarousel']=$this->showCarousel();
         return $this;
     }
     public function getData()
@@ -101,5 +105,21 @@ class indexContent implements contentInterface{
         $keyWordsObj = new \app\index\lib\keyWordLabel\keyWordsInterFace();
         return  $keyWordsObj->getCategoryLabel($parentCategoryId);
 
+    }
+    //获取广告
+    protected function showCarousel()
+    {
+        $redis=new Redis();
+        $list=$redis->handler()->get('getShowCarousel');
+        if($list)
+        {
+            return json_decode($list,true);
+        }else
+        {
+            $sql="select * from bycms_ad where title='首页公告' order by place DESC ";
+            $list=Db::query($sql);
+            $redis->handler()->setEx('getShowCarousel',100,json_encode($list));
+            return $list;
+        }
     }
 }
