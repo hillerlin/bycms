@@ -20,12 +20,18 @@ class Article  extends Home{
 		if(!$info){
 		    $this->error('分类不存在！');
 		}
+		$page=input('page','0');
 		$Category=new \app\index\model\Category;
         $ids=$Category->getParentId($id);
 		$cid=$Category->getChildrenId($id);
 		$map['category_id']=array("in",$cid);
 		$num=$info["list_row"]?$info["list_row"]:10;
-        $res=getLists('document',$map,$num,'id desc',"");
+		$pageNum=$page>1?($page-1)*$num:0;
+        $res=getLists('document',$map,$num,'id desc',"",$pageNum);
+        if($_POST)
+        {
+            return json($res);
+        }
 	    $this->assign('res', $res);
         $contentsObj=new contentsRender();
         count($ids)=='1'?$params=['category_id'=>$id,'category_title'=>'All']:$params=['category_id'=>$id,'category_title'=>$info['title']];//如果是顶级分类，问答就取知识百科所有的
