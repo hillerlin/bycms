@@ -36,6 +36,9 @@ class Index extends Home{
         //数据合成
         $contentsObj=new contentsRender();
         $list=$contentsObj->render(new indexContent(),$damaiTotal);
+        $where["id"]='189';
+        $info= Db::name('Category')->where($where)->find();
+        $this->assign('info',['title'=>$info['title'],'keyword'=>$info['title'],'description'=>$info['description']]);
 		$this->assign ( 'list', $list );
 		
 		//统计

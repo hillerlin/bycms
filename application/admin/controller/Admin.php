@@ -71,7 +71,8 @@ class Admin extends Controller{
 		
 		if(C('ISDES')){
           $map['group_id']=$group_id;
-		  $group=Db::name('group')->order('sort asc')->select();
+
+		  $group=Db::name('group')->order('sort asc')->where(['status'=>1])->select();
 		  $this->assign('group', $group);
 		}
         $side=Db::name('Module')->where($map)->order('sort desc')->field("id,title,pid,font")->select();

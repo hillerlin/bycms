@@ -44,7 +44,7 @@ class Login extends Controller {
 				$Member=new \app\admin\model\UcenterMember;
 				if($Member->login($uid)){ //登录用户
 					//TODO:跳转到登录前页面            
-					 $url= url('index/index');
+					 $url= url('document/index');
 				     $data['url']=$url;
                      $data['status']=1;
 				    return $data;

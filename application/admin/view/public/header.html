@@ -145,7 +145,7 @@ tr th {
 		<div class="top">
 			<div class="logo"></div>
 			<ul class="main_links">
-		           	<li><a href="{:url('index/index')}" >首页 </a></li> {present name="group"}    
+		           {present name="group"}
                         <!-- 欢迎语 -->
 						   {volist name="group" id="vo" empty=""}
                             <li><a href="{$vo.id|get_group_url}">{$vo.title|default=""} </a>

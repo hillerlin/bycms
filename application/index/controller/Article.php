@@ -45,7 +45,7 @@ class Article  extends Home{
         }
 	    $this->assign('res', $res);
         $contentsObj=new contentsRender();
-        count($ids)=='1'?$params=['category_id'=>$id,'category_title'=>'All']:$params=['category_id'=>$id,'category_title'=>$info['title']];//如果是顶级分类，问答就取知识百科所有的
+        count($ids)=='1'|| count($ids)=='0'?$params=['category_id'=>$id,'category_title'=>'All']:$params=['category_id'=>$id,'category_title'=>$info['title']];//如果是顶级分类，问答就取知识百科所有的
         $list=$contentsObj->render(new detailPageContent(),$params);
         $Document=new \app\admin\model\Document;
         $list['hotNews']=$Document->getHotNews();

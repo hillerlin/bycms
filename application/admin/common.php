@@ -171,7 +171,8 @@ function exportExcel($expTitle,$expCellName,$expTableData){
  * @return string 
  */
 function get_group_url($id){
-	 $where["id"]=$id; 
+	 $where["id"]=$id;
+	 $where['status']=1;
 	 $info =Db::name('group')->where($where)->order("sort desc")->find();
 	 if($info["url"]){
 		 $map['url']=$info["url"];   
