@@ -1,11 +1,11 @@
 /*切换翻页*/
 $(function(){
   $('.qa_nav').find('a').on('click',function(){
-    $('.qa_nav a').removeClass('on');
+    $('.qa_nav a').removeClass('on')
     $(this).addClass('on');
-    var type = $(this).html();
-    $('.qa_tips label').html(type);
+    $('.qa_tips label').html($(this).html());
     var page = 1;
+    var type = $(this).data('id');
     get_page_list(page,type);
   })
 })
@@ -17,11 +17,11 @@ function get_page_list(page,type){
     cache: true, 
     async: false,
     url:'/index/question/lists',
-    data: {'page':page,'keyWord':type},
+    data: {'page':page,'id':type},
     dataType: "json",
     success: function (data){
       if(data.statusCode == 0){
-        $('.qa_tips span').html(data.count);
+        $('.qa_tips').show().children('span').html(data.count);
         var html = '';
         var list = data.list;
         if(list.length != 0){

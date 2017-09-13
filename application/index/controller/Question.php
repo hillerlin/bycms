@@ -19,12 +19,7 @@ class Question extends Home{
     public function lists()
     {
         $Category=new \app\index\model\Category;
-        $info= $Category->getCategoryIdByName('大麦问答','189');
-        $id=$info['id'];
-        if(!$info){
-            $this->error('分类不存在！');
-        }
-        //$keyWord=input('keyWord');
+        $id=input('id','193');
         $contentsObj=new contentsRender();
         $cid=$Category->getChildrenId($id);
         $map['category_id']=array("in",$cid);
@@ -45,6 +40,11 @@ class Question extends Home{
                 return json(['statusCode'=>'1','message'=>$e->getMessage()]);
             }
 
+        }
+        $info= $Category->getCategoryIdByName('大麦问答','189');
+        $id=$info['id'];
+        if(!$info){
+            $this->error('分类不存在！');
         }
         $params=['keyWord'=>'all'];
         $list=$contentsObj->render(new questionContent(),$params);
