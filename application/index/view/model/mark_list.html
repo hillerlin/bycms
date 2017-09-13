@@ -1,5 +1,6 @@
 {include file="public/header" /}
 <link rel="stylesheet" href="__CSS__/list.css" />
+<link rel="stylesheet" href="__CSS__/paging.css" />
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
@@ -19,7 +20,6 @@
           </div>
         </li>
         <?php endforeach;?>
-
       </ul>
     </div>
     <div class="pageBox"></div>
@@ -54,6 +54,10 @@
     </div>
   </div>
 </div>
+<input type="hidden" class="pageType" data-type="<?php echo $info['id'];?>">
+<input type="hidden" class="totalRows" name="totalRows" value="<?php echo $res['count'];?>" data-perpage="10">
+<script type="text/javascript" src="__COMMON__/paging.min.js"></script>
+<script type="text/javascript" src="__COMMON__/mark_list.min.js"></script>
 {include file="public/footer" /}
 </body>
 </html>
