@@ -57,7 +57,9 @@ class Article  extends Home{
 	   //网站标题
 		$meta_title=$info["title"];  
 		$this->assign('meta_title', $meta_title);
-		$info['keyword']=$info['title'];
+		$info['seo_keywords']=$info['title'];
+		$info['seo_title']=$info['title'];
+		$info['seo_description']=$info['description'];
 		$this->assign("info",$info);
 		//列表页模板
 		$name=get_models($info['model_id'],'name');

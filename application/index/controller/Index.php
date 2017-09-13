@@ -38,7 +38,7 @@ class Index extends Home{
         $list=$contentsObj->render(new indexContent(),$damaiTotal);
         $where["id"]='189';
         $info= Db::name('Category')->where($where)->find();
-        $this->assign('info',['title'=>$info['title'],'keyword'=>$info['title'],'description'=>$info['description']]);
+        $this->assign('info',['seo_title'=>$info['title'],'seo_keywords'=>$info['title'],'seo_description'=>$info['description']]);
 		$this->assign ( 'list', $list );
 		
 		//统计
