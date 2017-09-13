@@ -24,10 +24,8 @@ class Question extends Home{
         if(!$info){
             $this->error('分类不存在！');
         }
-        $keyWord=input('keyWord');
+        //$keyWord=input('keyWord');
         $contentsObj=new contentsRender();
-        $_POST?$params=['keyWord'=>$keyWord]:$params=['keyWord'=>'all'];
-        $list=$contentsObj->render(new questionContent(),$params);
         $cid=$Category->getChildrenId($id);
         $map['category_id']=array("in",$cid);
         if($_POST)
@@ -48,6 +46,8 @@ class Question extends Home{
             }
 
         }
+        $params=['keyWord'=>'all'];
+        $list=$contentsObj->render(new questionContent(),$params);
         $ids=$Category->getParentId($id);
         $num=$info["list_row"]?$info["list_row"]:10;
         $res=getLists('document',$map,$num,'id desc',"");
@@ -60,6 +60,7 @@ class Question extends Home{
         $list['hotLabel']=getHotLabel();
         $this->assign("list",$list);
         $ids=array_merge($ids,[$id]);
+        $this->assign('cid',$cid);
         $this->assign("ids",$ids);
         //网站标题
         $meta_title=$info["title"];
