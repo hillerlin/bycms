@@ -36,7 +36,7 @@ class Question extends Home{
                 $pageNum=$page>1?($page-1)*$num:0;
                 $res=getLists('document',$map,$num,'id desc',"",$pageNum);
                 $res['statusCode'] = 0;
-                foreach ($res['list'] as $key=>$value)
+                foreach ($res['list'] as $key=>&$value)
                 {
                     $value['category_title']=get_category_title($value['category_id']);
                 }
