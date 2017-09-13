@@ -7,8 +7,8 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
-class Category extends Admin{ 
-   
+class Category extends Admin{
+    protected $limitDelet=['189','190','191','193'];
     public function index(){     
 		$list=$this->getCategory();
 	    $this->assign('list', $list);
@@ -103,6 +103,10 @@ class Category extends Admin{
 		if(!$map["id"]){
 			 $this->error("未选择数据！");
 		}
+		if(in_array($id,$this->limitDelet))
+        {
+             $this->error('该分类不能删除');
+        }
 		$res=Db::name("category")->where($map)->delete();
 		if($res){
 			addUserLog("del_category",session_uid());

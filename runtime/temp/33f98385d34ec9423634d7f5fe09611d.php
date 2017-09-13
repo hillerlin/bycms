@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:60:"D:\wamp\www\bycms/application/admin\view\category\index.html";i:1499586040;s:59:"D:\wamp\www\bycms/application/admin\view\public\header.html";i:1501572622;s:59:"D:\wamp\www\bycms/application/admin\view\public\footer.html";i:1501271148;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:60:"D:\wamp\www\bycms/application/admin\view\category\index.html";i:1499586040;s:59:"D:\wamp\www\bycms/application/admin\view\public\header.html";i:1505294625;s:59:"D:\wamp\www\bycms/application/admin\view\public\footer.html";i:1501271148;}*/ ?>
  <!-- 头部 -->
 	<!DOCTYPE html>
 <html>
@@ -42,7 +42,7 @@
 			}
 		}
    </style>
-<script src="__JS__/dialog.js"></script>	
+<script src="__JS__/dialog.js"></script>
 <?php endif; ?>
 <style>
 .top{
@@ -147,16 +147,15 @@ tr th {
 		<div class="top">
 			<div class="logo"></div>
 			<ul class="main_links">
-		           	<li><a href="<?php echo url('index/index'); ?>" >首页 </a></li> <?php if(isset($group)): ?>    
-                        <!-- 欢迎语 -->
+
 						   <?php if(is_array($group) || $group instanceof \think\Collection || $group instanceof \think\Paginator): $i = 0; $__LIST__ = $group;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                             <li><a href="<?php echo get_group_url($vo['id']); ?>"><?php echo (isset($vo['title']) && ($vo['title'] !== '')?$vo['title']:""); ?> </a>
-							
+
 							</li>
-					<?php endforeach; endif; else: echo "" ;endif; ?>  
-							
+					<?php endforeach; endif; else: echo "" ;endif; ?>
+
 			  <li><a href="<?php echo site_url(); ?>" target="_blank">前台</a></li>
-                <?php endif; ?>
+
 			</ul>	
 			<div class="user_info">
 			<span class="user_info_desc"><span class="user_name cur"><?php echo get_username(); ?></span><span>欢迎你</span></span>

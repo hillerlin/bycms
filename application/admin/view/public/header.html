@@ -40,7 +40,7 @@
 			}
 		}
    </style>
-<script src="__JS__/dialog.js"></script>	
+<script src="__JS__/dialog.js"></script>
 {/if}
 <style>
 .top{
@@ -143,18 +143,16 @@ tr th {
 	</head>
 	<body>
 		<div class="top">
-			<div class="logo"></div>
 			<ul class="main_links">
-		           {present name="group"}
-                        <!-- 欢迎语 -->
+
 						   {volist name="group" id="vo" empty=""}
                             <li><a href="{$vo.id|get_group_url}">{$vo.title|default=""} </a>
-							
+
 							</li>
-					{/volist}  
-							
+					{/volist}
+
 			  <li><a href="{:site_url()}" target="_blank">前台</a></li>
-                {/present}
+
 			</ul>	
 			<div class="user_info">
 			<span class="user_info_desc"><span class="user_name cur">{:get_username()}</span><span>欢迎你</span></span>
