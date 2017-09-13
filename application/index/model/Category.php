@@ -170,6 +170,7 @@ class Category extends Model{
     public function getCategoryInfoByKeyword($keyword)
     {
         $map['keywords']=$keyword;
+        $map['pid']='190';
         return Db::name('category')->where($map)->select();
     }
     //根据id获取分类详情
