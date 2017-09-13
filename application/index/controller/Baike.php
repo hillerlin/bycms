@@ -35,6 +35,11 @@ class Baike extends Home{
             }
 
         }
+        $info= Db::name('Category')->where(['id'=>190])->find();
+        $info['seo_keywords']=$info['title'];
+        $info['seo_title']=$info['title'];
+        $info['seo_description']=$info['description'];
+        $this->assign('info',$info);
         $Document=new \app\admin\model\Document;
         $cid=$Category->getChildrenId(190);
         $meta_title='知识百科';
@@ -71,6 +76,10 @@ class Baike extends Home{
         $this->assign('adList', $adList[0]);
 
         $info=$Category->getCategoryInfoById($categoryId);
+        $info['seo_keywords']=$info['title'];
+        $info['seo_title']=$info['title'];
+        $info['seo_description']=$info['description'];
+        $this->assign('info',$info);
         $meta_title=$info["title"];
         $this->assign('meta_title', $meta_title);
         $pid=$Category->getParentId($info["id"]);

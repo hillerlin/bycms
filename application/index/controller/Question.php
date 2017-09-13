@@ -42,6 +42,10 @@ class Question extends Home{
 
         }
         $info= $Category->getCategoryIdByName('大麦问答','189');
+        $info['seo_keywords']=$info['title'];
+        $info['seo_title']=$info['title'];
+        $info['seo_description']=$info['description'];
+        $this->assign('info',$info);
         $id=$info['id'];
         if(!$info){
             $this->error('分类不存在！');
