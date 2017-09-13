@@ -54,7 +54,8 @@
 			<h2 class="ft16"><a href="{:url('article/lists?id=191')}" target="_blank">行业资讯</a></h2>
 			<div class="news_box fl">
 				<div class="news_top clear">
-					<a href="{:url('article/list?id='.$list['industry'][0]['category_id'])}" target="_blank"><img src="http://59.110.136.193:9017/<?php echo $list['industry'][0]['pic']?>" width="120" height="80" alt="" class="fl"></a>
+					<a href="{:url('article/lists?id='.$list['industry'][0]['category_id'])}" target="_blank"><img
+							src="http://59.110.136.193:9017/<?php echo $list['industry'][0]['pic']?>" width="120" height="80" alt="" class="fl"></a>
 					<div class="news_info fr">
 						<a href="{:url('article/detail?id='.$list['industry'][0]['id'])}" class="newsTitle" title="<?php echo $list['industry'][0]['title']?>" target="_blank"><?php echo $list['industry'][0]['title']?></a>
 						<a href="{:url('article/detail?id='.$list['industry'][0]['id'])}" class="newsCate" target="_blank"><?php echo $list['industry'][0]['description']?>   <?php echo $list['industry'][0]['create_time']?></a>
@@ -73,7 +74,8 @@
 			</div>
 			<div class="news_box fl">
 				<div class="news_top clear">
-					<a href="{:url('article/list?id='.$list['industry'][1]['category_id'])}" target="_blank"><img src="http://59.110.136.193:9017/<?php echo $list['industry'][1]['pic']?>" width="120" height="80" alt="" class="fl"></a>
+					<a href="{:url('article/lists?id='.$list['industry'][1]['category_id'])}" target="_blank"><img
+							src="http://59.110.136.193:9017/<?php echo $list['industry'][1]['pic']?>" width="120" height="80" alt="" class="fl"></a>
 					<div class="news_info fr">
 						<a href="{:url('article/detail?id='.$list['industry'][1]['id'])}" class="newsTitle" title="<?php echo $list['industry'][1]['title']?>" target="_blank"><?php echo $list['industry'][1]['title']?></a>
 						<a href="{:url('article/detail?id='.$list['industry'][1]['id'])}" class="newsCate" target="_blank"><?php echo $list['industry'][1]['description']?>   <?php echo $list['industry'][1]['create_time']?></a>
@@ -105,7 +107,7 @@
 			<h2 class="ft16"><a href="{:url('index/baike/lists')}" target="_blank">知识百科</a></h2>
 			<div class="news_box fl">
 				<div class="news_top clear">
-					<a href="{:url('article/list?id='.$list['knowledgebase'][0]['category_id'])}" target="_blank"><img src="http://59.110.136.193:9017/<?php echo $list['knowledgebase'][0]['pic']?>" width="120" height="80" alt="" class="fl"></a>
+					<a href="{:url('baike/lists?id='.$list['knowledgebase'][0]['category_id'])}" target="_blank"><img src="http://59.110.136.193:9017/<?php echo $list['knowledgebase'][0]['pic']?>" width="120" height="80" alt="" class="fl"></a>
 					<div class="news_info fr">
 						<a href="{:url('article/detail?id='.$list['knowledgebase'][0]['id'])}" class="newsTitle" title="<?php echo $list['knowledgebase'][0]['title']?>" target="_blank"><?php echo $list['knowledgebase'][0]['title']?></a>
 						<a href="{:url('article/detail?id='.$list['knowledgebase'][0]['id'])}" class="newsCate" target="_blank"><?php echo $list['knowledgebase'][0]['description']?>   <?php echo $list['knowledgebase'][0]['create_time']?></a>
@@ -124,7 +126,7 @@
 			</div>
 			<div class="news_box fl">
 				<div class="news_top clear">
-					<a href="{:url('article/list?id='.$list['knowledgebase'][1]['category_id'])}" target="_blank"><img src="http://59.110.136.193:9017/<?php echo $list['knowledgebase'][1]['pic']?>" width="120" height="80" alt="" class="fl"></a>
+					<a href="{:url('baike/lists?id='.$list['knowledgebase'][1]['category_id'])}" target="_blank"><img src="http://59.110.136.193:9017/<?php echo $list['knowledgebase'][1]['pic']?>" width="120" height="80" alt="" class="fl"></a>
 					<div class="news_info fr">
 						<a href="{:url('article/detail?id='.$list['knowledgebase'][1]['id'])}" class="newsTitle" title="<?php echo $list['knowledgebase'][1]['title']?>" target="_blank"><?php echo $list['knowledgebase'][1]['title']?></a>
 						<a href="{:url('article/detail?id='.$list['knowledgebase'][1]['id'])}" class="newsCate" target="_blank"><?php echo $list['knowledgebase'][1]['description']?>   <?php echo $list['knowledgebase'][1]['create_time']?></a>
@@ -161,10 +163,11 @@
 			<h2 class="ft16"><a href="{:url('question/lists?id=193')}" target="_blank">大麦问答</a></h2>
 			<div class="news_box fl">
 				<div class="news_top clear">
-					<a href="{:url('article/list?id='.$list['question'][0]['category_id'])}" target="_blank"><img src="http://59.110.136.193:9017/<?php echo $list['question'][0]['pic']?>" width="120" height="80" alt="" class="fl"></a>
+					<a href="{:url('question/lists?id='.$list['question'][0]['category_id'])}" target="_blank"><img
+							src="http://59.110.136.193:9017/<?php echo $list['question'][0]['pic']?>" width="120" height="80" alt="" class="fl"></a>
 					<div class="news_info fr">
-						<a href="{:url('article/detail?id='.$list['question'][0]['id'])}" class="newsTitle" title="<?php echo $list['question'][0]['title']?>" target="_blank"><?php echo $list['question'][0]['title']?></a>
-						<a href="{:url('article/detail?id='.$list['question'][0]['id'])}" class="newsCate" target="_blank"><?php echo $list['question'][0]['description']?>   <?php echo $list['question'][0]['create_time']?></a>
+						<a href="{:url('question/detail?id='.$list['question'][0]['id'])}" class="newsTitle" title="<?php echo $list['question'][0]['title']?>" target="_blank"><?php echo $list['question'][0]['title']?></a>
+						<a href="{:url('question/detail?id='.$list['question'][0]['id'])}" class="newsCate" target="_blank"><?php echo $list['question'][0]['description']?>   <?php echo $list['question'][0]['create_time']?></a>
 						<p><?php echo $list['question'][0]['seo_description']?></p>
 					</div>
 				</div>
@@ -173,17 +176,18 @@
 					count($list['question'])>5?$count=5:$count=count($list['question']);
 					for($j=0;$j<$count;$j++):?>
 					<li>
-						<a href="{:url('article/detail?id='.$list['question'][$j]['id'])}" class="clear" target="_blank"><span class="fl"><?php echo $list['question'][$j]['title']?></span><span class="fr"><?php echo $list['question'][$j]['create_time']?></span></a>
+						<a href="{:url('question/detail?id='.$list['question'][$j]['id'])}" class="clear" target="_blank"><span class="fl"><?php echo $list['question'][$j]['title']?></span><span class="fr"><?php echo $list['question'][$j]['create_time']?></span></a>
 					</li>
 					<?php endfor;?>
 				</ul>
 			</div>
 			<div class="news_box fl">
 				<div class="news_top clear">
-					<a href="{:url('article/list?id='.$list['question'][1]['category_id'])}" target="_blank"><img src="http://59.110.136.193:9017/<?php echo $list['question'][1]['pic']?>" width="120" height="80" alt="" class="fl"></a>
+					<a href="{:url('question/lists?id='.$list['question'][1]['category_id'])}" target="_blank"><img
+							src="http://59.110.136.193:9017/<?php echo $list['question'][1]['pic']?>" width="120" height="80" alt="" class="fl"></a>
 					<div class="news_info fr">
-						<a href="{:url('article/detail?id='.$list['question'][1]['id'])}" class="newsTitle" title="<?php echo $list['question'][1]['title']?>" target="_blank"><?php echo $list['question'][1]['title']?></a>
-						<a href="{:url('article/detail?id='.$list['question'][1]['id'])}" class="newsCate" target="_blank"><?php echo $list['question'][1]['description']?>   <?php echo $list['question'][1]['create_time']?></a>
+						<a href="{:url('question/detail?id='.$list['question'][1]['id'])}" class="newsTitle" title="<?php echo $list['question'][1]['title']?>" target="_blank"><?php echo $list['question'][1]['title']?></a>
+						<a href="{:url('question/detail?id='.$list['question'][1]['id'])}" class="newsCate" target="_blank"><?php echo $list['question'][1]['description']?>   <?php echo $list['question'][1]['create_time']?></a>
 						<p><?php echo $list['question'][1]['seo_description']?></p>
 					</div>
 				</div>
@@ -192,7 +196,7 @@
 					count($list['question'])>10?$count=10:$count=count($list['question']);
 					for($j=5;$j<$count;$j++):?>
 					<li>
-						<a href="{:url('article/detail?id='.$list['question'][$j]['id'])}" class="clear" target="_blank"><span class="fl"><?php echo $list['question'][$j]['title']?></span><span class="fr"><?php echo $list['question'][$j]['create_time']?></span></a>
+						<a href="{:url('question/detail?id='.$list['question'][$j]['id'])}" class="clear" target="_blank"><span class="fl"><?php echo $list['question'][$j]['title']?></span><span class="fr"><?php echo $list['question'][$j]['create_time']?></span></a>
 					</li>
 					<?php endfor;?>
 				</ul>

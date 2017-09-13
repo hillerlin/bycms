@@ -113,6 +113,9 @@ class Question extends Home{
         $this->assign('adList', $adList[0]);*/
         $meta_title=$info["title"];
         $this->assign('meta_title', $meta_title);
+        $info['seo_keywords']=$info['title'];
+        $info['seo_title']=$info['title'];
+        $info['seo_description']=$info['description'];
         $this->assign("info",$info);
         $tpl="model/qa_detail";
 

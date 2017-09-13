@@ -108,6 +108,9 @@ class Article  extends Home{
         $this->assign('adList', $adList[0]);
 		$meta_title=$info["title"];  
 		$this->assign('meta_title', $meta_title);
+        $info['seo_keywords']=$info['title'];
+        $info['seo_title']=$info['title'];
+        $info['seo_description']=$info['description'];
 		$this->assign("info",$info);
 		$tpl="model/document_detail";
 		return $this->fetch($tpl);
@@ -155,6 +158,10 @@ class Article  extends Home{
             $meta_title=$keyword;
             $this->assign('meta_title', $meta_title);
             $tpl='model/mark_list';
+            $info['seo_keywords']=$keyword;
+            $info['seo_title']=$keyword;
+            $info['seo_description']=$keyword;
+            $this->assign("info",$info);
             $list['keyword']=$_keyword;
             $list['hotNews']=$Document->getHotNews();
             $list['hotLabel']=getHotLabel();
