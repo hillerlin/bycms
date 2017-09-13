@@ -26,7 +26,7 @@ class Question extends Home{
         }
         $keyWord=input('keyWord');
         $contentsObj=new contentsRender();
-        $_GET?$params=['keyWord'=>$keyWord]:$params=['keyWord'=>'all'];
+        $_POST?$params=['keyWord'=>$keyWord]:$params=['keyWord'=>'all'];
         $list=$contentsObj->render(new questionContent(),$params);
         $cid=$Category->getChildrenId($id);
         $map['category_id']=array("in",$cid);
@@ -38,7 +38,7 @@ class Question extends Home{
                 $pageNum=$page>1?($page-1)*$num:0;
                 $res=getLists('document',$map,$num,'id desc',"",$pageNum);
                 $res['statusCode'] = 0;
-                foreach ($res['list'] as $key=>$value)
+                foreach ($res['list'] as $key=>&$value)
                 {
                     $value['category_title']=get_category_title($value['category_id']);
                 }
