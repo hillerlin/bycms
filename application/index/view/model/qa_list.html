@@ -15,8 +15,8 @@
     </div>
     <div class="list_main">
       <div class="qa_nav clear">
-        <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
-        <li><a href="javascript:;" title="{:url('/index/question/lists/keyWord/'.$value)}" target="_blank">{$value}</a></li>
+        <?php foreach($cid as $key=>$value):?>
+        <li><a href="javascript:;" title="{:url('/index/question/lists/keyWord/'.$value)}" target="_blank">{$value|get_category_title}</a></li>
         <?php endforeach;?>
       </div>
       <p class="qa_tips">为你找到 <span><?php echo count($res['list'])?></span> 个 <label>相关</label> 的问题</p>
