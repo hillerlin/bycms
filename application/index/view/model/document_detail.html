@@ -26,14 +26,14 @@
       <div class="news_detail">
       {$info.content}
       </div>
+      <div class="share clear">
+        <div class="bshare-custom icon-medium fr"><a href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=4f5c0e4c-69ca-477d-8ac5-c1af6cdc7ad5&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+      </div>
       <div class="news_marks">
 				<label>标签：</label>
                 <?php foreach(explode(',',$info['description']) as $key=>$value):?>
                 <a href="" target="_blank"><?php echo $value?></a>
                 <?php endforeach;?>
-			</div>
-			<div class="share">
-				
 			</div>
 			<div class="prev_next clear">
 				<a href="{:url('article/detail?id='.($info['id']-1))}" class="prev fl" target="_blank"><b>上一篇：</b>{$info.id-1|get_document}</a>

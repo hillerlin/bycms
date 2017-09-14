@@ -13,7 +13,7 @@
       <?php endforeach;?>
     </div>
     <div class="list_main">
-      <div class="ct"><a href="<php echo $adList['url']>"><img src="http://59.110.136.193:9017/<?php echo $adList['path']?>" alt=""></a></div>
+      <div class="ct"><a href="<?php echo $adList['url'];?>"><img src="http://59.110.136.193:9017/<?php echo $adList['path']?>" alt=""></a></div>
       <h2 class="news_title">{$list.list.title}</h2>
       <div class="news_mark">
         <span>{$list.list.create_time||date="Y-m-d",###}</span>
@@ -22,10 +22,9 @@
       </div>
       <div class="news_detail">
       {$list.list.content}
-
       </div>
-      <div class="share">
-
+      <div class="share clear">
+        <div class="bshare-custom icon-medium fr"><a href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=4f5c0e4c-69ca-477d-8ac5-c1af6cdc7ad5&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
       </div>
     </div>
   </div>
