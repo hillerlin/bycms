@@ -30,7 +30,7 @@
 		<div class="main_news fl">
 			<div class="top_news">
 				<h2>头条新闻</h2>
-				<p>{$list.topNew.contents_title}</p>
+				<p><a href="{:url('article/detail?id='.$list['topNew']['id'])}">{$list.topNew.contents_title}</a></p>
 			</div>
 			<ul>
 				<?php foreach($list['topNewList'] as $key=>$value):?>
@@ -46,7 +46,7 @@
 			<p class="yearrate ct">11%</p>
 			<p class="ct lh30 ft20">注册送 <span class="ft20 ft-f39700">10,000元</span> 体验金</p>
 			<p class="ct lh30 ft20">再送 <span class="ft20 ft-f39700">388元</span> 红包</p>
-			<a class="login_btn" href="/register/index">立即领取</a>
+			<a class="login_btn" href="https://www.damailicai.com/register/index">立即领取</a>
 		</div>
 	</div>
 	<div class="news_div clear">

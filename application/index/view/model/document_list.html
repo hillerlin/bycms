@@ -101,7 +101,7 @@
     <div class="hot_news">
       <h2>热门文章</h2>
       <div class="hot_top">
-        <h3>{$list.hotNews.0.title}</h3>
+        <h3><a href="{:url('article/detail?id='.$list['hotNews'][0]['id'])}">{$list.hotNews.0.title}</a></h3>
         <p>{$list.hotNews.0.seo_description}</p>
       </div>
       <ul>
