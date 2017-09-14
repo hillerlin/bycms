@@ -230,6 +230,8 @@ laydate({
 						 <input type="text" name="seo_keywords" class="input_box" value="{$info.seo_keywords|default=""}"/>
 						 <div class="input_title">SEO-description<span>网页descrition</span></div>
 						 <input type="text" name="seo_description" class="input_box" value="{$info.seo_description|default=""}"/>
+						 <div class="input_title">置顶（指定为头条新闻）<span>输入：9999,即可置顶</span></div>
+						 <input type="text" name="position" class="input_box" value="{$info.position|default="0"}" placeholder="输入：9999,即可以变成置顶新闻"/>
 						<div class="btn_group"> 
 					      <input type="hidden" name="category_id" value="{$info.category_id|default=""}">
 						    <input type="hidden" name="model_id" value="{$info.model_id|default=""}">

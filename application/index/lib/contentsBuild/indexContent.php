@@ -52,14 +52,14 @@ class indexContent implements contentInterface{
     //头条新闻
     protected function getTopNew($params)
     {
-        return array_reduce($params,function ($v,$w){
-            static $find;
-            $v?$find=$v:null;
-            if($w['position']==$find)
+        foreach ($params as $key=>$value)
+        {
+            if($value['position']=='9999')
             {
-                return $w;
+                return $value;
             }
-        },'9999');
+        }
+        return null;
     }
     //头条新闻列表
     protected function getTopNewList($params)
