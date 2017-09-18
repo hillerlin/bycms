@@ -15,7 +15,7 @@ class Article  extends Home{
 		   $this->error('分类ID错误！');
 		}else{
 		   $where["id"]=$id;
-		}	
+		}
 		$info= Db::name('Category')->where($where)->find();
 		if(!$info){
 		    $this->error('分类不存在！');
@@ -90,6 +90,7 @@ class Article  extends Home{
         }
         $Document->addClick($id);//更新数据库点击量+1
 		$info["pictures"]=get_pictures($id);
+		$info['content']=str_replace('<img src="','<img src="/zixun',$info['content']);
 
 		$Category=new \app\index\model\Category;
         $pid=$Category->getParentId($info["category_id"]);
@@ -108,9 +109,9 @@ class Article  extends Home{
         $this->assign('adList', $adList[0]);
 		$meta_title=$info["title"];  
 		$this->assign('meta_title', $meta_title);
-        $info['seo_keywords']=$info['title'];
-        $info['seo_title']=$info['title'];
-        $info['seo_description']=$info['description'];
+        $info['seo_keywords']=$info['seo_keywords'];
+        $info['seo_title']=$info['seo_title'];
+        $info['seo_description']=$info['seo_description'];
 		$this->assign("info",$info);
 		$tpl="model/document_detail";
 		return $this->fetch($tpl);

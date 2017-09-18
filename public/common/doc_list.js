@@ -7,7 +7,7 @@ function get_page_list(page,type){
     type: "post",
     cache: true, 
     async: false,
-    url:'/index/article/lists',
+    url:'/zixun/lists',
     data: {'page':page,'id':type},
     dataType: "json",
     success: function (data){
@@ -21,12 +21,12 @@ function get_page_list(page,type){
               html1 += '<div class="news_box ';
               if(k == 0) html1 += 'fl';
               else html1 += 'fr';
-              html1 += '"><img src="'+v.pic+'" width="360" height="240" alt=""><h2><a href="/index/article/detail?id='+
+              html1 += '"><img src="/zixun/'+v.pic+'" width="360" height="240" alt=""><h2><a href="/zixun/detail/'+
                 v.id+'">'+v.title+'</a></h2><p>'+v.seo_description+'</p><div class="marks"><span>'+
                 formatDate_ymd(v.create_time)+'</span><a href="javascript:;" target="_blank">'+
                 title+'</a><label>标签：</label><a href="javascript:;" target="_blank">'+v.description+'</a></div></div>';
             }else{
-              html2 += '<li><h2><a href="/index/article/detail?id='+v.id+'">'+v.title+'</a></h2><p>'+v.seo_description+'</p><div class="marks">'+formatDate_ymd(v.create_time)+'<span></span><a href="javascript:;" target="_blank">'+title+'</a><label>标签：</label><a href="javascript:;" target="_blank">'+v.description+'</a></div></li>';
+              html2 += '<li><h2><a href="/zixun/detail/'+v.id+'">'+v.title+'</a></h2><p>'+v.seo_description+'</p><div class="marks">'+formatDate_ymd(v.create_time)+'<span></span><a href="javascript:;" target="_blank">'+title+'</a><label>标签：</label><a href="javascript:;" target="_blank">'+v.description+'</a></div></li>';
             }
           });
           $('.news_top').html(html1);

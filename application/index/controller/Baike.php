@@ -70,7 +70,7 @@ class Baike extends Home{
     {
         $Document=new \app\admin\model\Document;
         $Category=new \app\index\model\Category;
-        $categoryId=input('categoryId');
+        $categoryId=input('categoryid');
         //获取文章广告
         $adList=$Document->getDocumentAd('文章内页');
         $this->assign('adList', $adList[0]);

@@ -6,9 +6,9 @@
     <div class="nav">当前位置:
       <?php foreach($pid as $key=>$vo):?>
       <?php if(count($pid)-1>$key):?>
-      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a> >
+      <a href="<?php echo config('proxyList').$vo;?>">{$vo|get_category_title}</a> >
       <?php else:?>
-      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>
+      <a href="<?php echo config('proxyList').$vo;?>">{$vo|get_category_title}</a>
       <?php endif;?>
       <?php endforeach;?>
     </div>
@@ -73,7 +73,7 @@
       <h2>热门标签</h2>
       <ul class="clear">
         <?php foreach($list['hotLabel'] as $key=>$value):?>
-        <li><a href="{:url('/index/article/labellist/keyword/'.$key)}" target="_blank">{$key}</a></li>
+        <li><a href="<?php echo config('proxyLabel').$key;?>" target="_blank">{$key}</a></li>
         <?php endforeach;?>
       </ul>
     </div>

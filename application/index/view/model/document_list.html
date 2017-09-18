@@ -7,9 +7,9 @@
     <div class="nav">当前位置:&nbsp;
       <?php foreach($ids as $key=>$vo):?>
       <?php if(count($ids)-1>$key):?>
-      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a> >
+      <a href="<?php echo config('proxyList').$vo;?>">{$vo|get_category_title}</a> >
       <?php else:?>
-      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>
+      <a href="<?php echo config('proxyList').$vo;?>">{$vo|get_category_title}</a>
       <?php endif;?>
       <?php endforeach;?>
 
@@ -21,8 +21,8 @@
       </div>
       <div class="news_top clear">
         <div class="news_box fl">
-          <img src="<?php echo get_cover($res['list'][0]["cover_id"], "path" );?>" width="360" height="240" alt="">
-          <h2><a href="{:url('article/detail?id='.$res['list'][0]['id'])}">{$res.list.0.title}</a></h2>
+          <img src="<?php echo "/zixun/".get_cover($res['list'][0]["cover_id"], "path" );?>" width="360" height="240" alt="">
+          <h2><a href="{:url(config('proxyDetail').$res['list'][0]['id'])}">{$res.list.0.title}</a></h2>
           <p>{$res.list.0.seo_description}</p>
           <div class="marks">
             <span>{$res.list.0.create_time|date="Y-m-d",###}</span>
@@ -32,8 +32,8 @@
           </div>
         </div>
         <div class="news_box fr">
-          <img src="<?php echo get_cover($res['list'][1]["cover_id"], "path" );?>" width="360" height="240" alt="">
-          <h2><a href="{:url('article/detail?id='.$res['list'][1]['id'])}">{$res.list.1.title}</a></h2>
+          <img src="<?php echo "/zixun/".get_cover($res['list'][1]["cover_id"], "path" );?>" width="360" height="240" alt="">
+          <h2><a href="{:url(config('proxyDetail').$res['list'][1]['id'])}">{$res.list.1.title}</a></h2>
           <p>{$res.list.1.seo_description}</p>
           <div class="marks">
             <span>{$res.list.1.create_time|date="Y-m-d",###}</span>
@@ -46,7 +46,7 @@
       <ul class="news_list">
           <?php for($i=2;$i<count($res['list']);$i++):?>
         <li>
-          <h2><a href="{:url('article/detail?id='.$res['list'][$i]['id'])}"><?php echo $res['list'][$i]['title']?></a></h2>
+          <h2><a href="{:url(config('proxyDetail').$res['list'][$i]['id'])}"><?php echo $res['list'][$i]['title']?></a></h2>
           <p><?php echo $res['list'][$i]['seo_description']?></p>
           <div class="marks">
             <span><?php echo date('Y-m-d',$res['list'][$i]['create_time'])?></span>
@@ -65,7 +65,7 @@
         <ul>
           <?php if($list['relateArticles']):?>
           <?php foreach($list['relateArticles'] as $key=>$value):?>
-          <li><a href="{:url('article/detail?id='.$key)}" class="clear" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
+          <li><a href="<?php echo config('proxyDetail').$key;?>" class="clear" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
           <?php endforeach;?>
           <?php endif;?>
         </ul>
@@ -75,7 +75,7 @@
         <ul>
           <?php if($list['relateQuestion']):?>
           <?php foreach($list['relateQuestion'] as $key=>$value):?>
-          <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
+          <li><a href="<?php echo config('proxyDetail').$value['id'];?>" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
           <?php endforeach;?>
           <?php endif;?>
         </ul>
@@ -85,7 +85,7 @@
       <h2>行业资讯相关标签</h2>
       <ul class="clear">
         <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
-        <li><a href="{:url('/index/article/labellist/keyword/'.$value)}" target="_blank">{$value}</a></li>
+        <li><a href="<?php echo config('proxyLabel').$value;?>" target="_blank">{$value}</a></li>
         <?php endforeach;?>
       </ul>
     </div>
@@ -101,12 +101,12 @@
     <div class="hot_news">
       <h2>热门文章</h2>
       <div class="hot_top">
-        <h3><a href="{:url('article/detail?id='.$list['hotNews'][0]['id'])}">{$list.hotNews.0.title}</a></h3>
+        <h3><a href="<?php echo config('proxyDetail').$list['hotNews'][0]['id'];?>">{$list.hotNews.0.title}</a></h3>
         <p>{$list.hotNews.0.seo_description}</p>
       </div>
       <ul>
         <?php foreach($list['hotNews'] as $key=>$value):?>
-        <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
+        <li><a href="<?php echo config('proxyDetail').$value['id'];?>" target="_blank">{$value.title}</a></li>
         <?php endforeach;?>
       </ul>
     </div>
@@ -114,7 +114,7 @@
       <h2>热门标签</h2>
       <ul class="clear">
         <?php foreach($list['hotLabel'] as $key=>$value):?>
-        <li><a href="{:url('/index/article/labellist/keyword/'.$key)}" target="_blank">{$key}</a></li>
+        <li><a href="<?php echo config('proxyLabel').$key;?>" target="_blank">{$key}</a></li>
         <?php endforeach;?>
       </ul>
     </div>

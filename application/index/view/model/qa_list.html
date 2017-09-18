@@ -7,9 +7,9 @@
     <div class="nav">当前位置：
       <?php foreach($ids as $key=>$vo):?>
       <?php if(count($ids)-1>$key):?>
-      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a> >
+      <a href="<?php echo config('proxyList').$vo;?>">{$vo|get_category_title}</a> >
       <?php else:?>
-      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>
+      <a href="<?php echo config('proxyList').$vo;?>">{$vo|get_category_title}</a>
       <?php endif;?>
       <?php endforeach;?>
     </div>
@@ -23,7 +23,7 @@
       <ul class="qa_list">
         <?php foreach($res['list'] as $key=>$value):?>
         <li>
-          <h2><a href="{:url('question/detail?id='.$value['id'])}">{$value.title}</a></h2>
+          <h2><a href="<?php echo config('proxyQa').$value['id']?>">{$value.title}</a></h2>
           <p>{$value.seo_description}</p>
           <div class="qa_mark">
             <a href="javascript:;" target="_blank">{$value.category_id|get_category_title}</a>
@@ -41,7 +41,7 @@
         <ul>
           <?php if($list['hotQuestion']):?>
           <?php foreach($list['hotQuestion'] as $key=>$value):?>
-          <li><a href="{:url('article/detail?id='.$key)}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
+          <li><a href="<?php echo config('proxyQa').$key?>" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
           <?php endforeach;?>
           <?php endif;?>
         </ul>
@@ -51,7 +51,7 @@
         <ul>
           <?php if($list['relateQuestion']):?>
           <?php foreach($list['relateQuestion'] as $key=>$value):?>
-          <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
+          <li><a href="<?php echo config('proxyQa').$value['id']?>" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
           <?php endforeach;?>
           <?php endif;?>
         </ul>
@@ -69,20 +69,20 @@
     <div class="hot_news">
       <h2>热门文章</h2>
       <div class="hot_top">
-        <h3><a href="{:url('article/detail?id='.$list['hotNews'][0]['id'])}">{$list.hotNews.0.title}</a></h3>
+        <h3><a href="<?php echo config('proxyDetail').$list['hotNews'][0]['id'];?>">{$list.hotNews.0.title}</a></h3>
         <p>{$list.hotNews.0.seo_description}</p>
       </div>
       <ul>
         <?php foreach($list['hotNews'] as $key=>$value):?>
-        <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
+        <li><a href="<?php echo config('proxyDetail').$value['id'];?>" target="_blank">{$value.title}</a></li>
         <?php endforeach;?>
       </ul>
     </div>
     <div class="hot_mark">
       <h2>热门标签</h2>
       <ul class="clear">
-        <?php foreach(array_unique(explode(',',$list['labelAll'])) as $key=>$value):?>
-        <li><a href="{:url('/index/article/labellist/keyword/'.$value)}" target="_blank">{$value}</a></li>
+        <?php foreach($list['hotLabel'] as $key=>$value):?>
+        <li><a href="<?php echo config('proxyLabel').$key;?>" target="_blank">{$key}</a></li>
         <?php endforeach;?>
       </ul>
     </div>
@@ -91,7 +91,7 @@
 <input type="hidden" class="pageType" data-type="<?php echo $info['id'];?>">
 <input type="hidden" class="totalRows" name="totalRows" value="<?php echo $res['count'];?>" data-perpage="10">
 <script type="text/javascript" src="__COMMON__/paging.min.js"></script>
-<script type="text/javascript" src="__COMMON__/qa_list.min.js?20170914"></script>
+<script type="text/javascript" src="__COMMON__/qa_list.js?2017091421"></script>
 {include file="public/footer" /}
 </body>
 </html>

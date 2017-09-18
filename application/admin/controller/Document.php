@@ -176,8 +176,13 @@ class Document extends Admin{
 		if(!$map["id"]){
 			 $this->error("未选择数据！");
 		}
+        $docObj=new \app\admin\model\Document();
+        $docInfo=$docObj->getInfo($id);
+		$keyWordObj=new \app\index\lib\keyWordLabel\keyWordsInterFace();
+		$keyWordObj->delLabelByDocumentId($docInfo['description'],$docInfo['category_id']);
 		$res=Db::name("Document")->where($map)->delete();
 		if($res){
+
 			 addUserLog("del_document",session_uid());
 		   $this->success("删除成功！");
 		}else{

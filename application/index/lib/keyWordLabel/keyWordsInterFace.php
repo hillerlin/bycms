@@ -57,5 +57,31 @@ class keyWordsInterFace{
       }
       return array_unique($list);
     }
+    //删除文章时，把相对应分类和总标签删除
+    public function delLabelByDocumentId($keyWords,$categoryId)
+    {
+        $listTotalFormat=$this->_redis->handler()->hGetAll('newKeyWords');
+       // $listTotalFormat=json_decode($listTotal,true);
+        $listCategoryTotalFormat=$this->_redis->handler()->hGetAll('newKeyWordsCategory:'.$categoryId);
+       // $listCategoryTotalFormat=json_decode($listCategoryTotal,true);
+        foreach (explode(',',$keyWords) as $key=>$value)
+        {
+            if($listTotalFormat[$keyWords])
+            {
+                unset($listTotalFormat[$keyWords]);
+            }
+            if($listCategoryTotalFormat[$keyWords])
+            {
+                unset($listCategoryTotalFormat[$keyWords]);
+            }
+
+        }
+        $this->_redis->handler()->delete('newKeyWords');
+        $this->_redis->handler()->delete('newKeyWordsCategory:'.$categoryId);
+        $this->_redis->handler()->hMSet('newKeyWords',$listTotalFormat);
+        $this->_redis->handler()->hMSet('newKeyWordsCategory:'.$categoryId,$listCategoryTotalFormat);
+
+
+    }
 
 }

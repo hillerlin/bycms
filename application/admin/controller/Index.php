@@ -12,8 +12,7 @@ use think\Db;
 use think\Config;
 
 class Index extends Admin{ 
-  public function index() {    
-
+  public function index() {
 	       $this->meta_title="首页";
 		   $this->assign('meta_title', $this->meta_title);
 		   $info["category"]=Db::name('Document')->field("id")->count();      

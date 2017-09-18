@@ -3,7 +3,7 @@
 <div class="bk20"></div>
 <div class="mcenter clear">
   <div class="list_left fl">
-    <div class="nav">当前位置：<a href="{:url('index/index')}">大麦理财</a>&nbsp;&nbsp;>&nbsp;<span>知识百科</span></div>
+    <div class="nav">当前位置：<a href="/zixun/lists/189">大麦理财</a>&nbsp;&nbsp;>&nbsp;<span>知识百科</span></div>
     <div class="list_main">
       <div class="list_about">
         <span class="title ft16">知识百科</span>
@@ -41,7 +41,7 @@
       </div>
       <div class="baike_list clear">
         {foreach $list.list as $vo}
-        <a href="{:url('baike/detail?categoryId='.$vo['id'])}" target="_blank">{$vo.title}</a>
+        <a href="<?php echo config('proxyBkList').$vo['id']?>" target="_blank">{$vo.title}</a>
         {/foreach}
       </div>
     </div>
@@ -57,12 +57,12 @@
     <div class="hot_news">
       <h2>热门文章</h2>
       <div class="hot_top">
-        <h3><a href="{:url('article/detail?id='.$list['hotNews'][0]['id'])}">{$list.hotNews.0.title}</a></h3>
+        <h3><a href="<?php echo config('proxyDetail').$list['hotNews'][0]['id'];?>">{$list.hotNews.0.title}</a></h3>
         <p>{$list.hotNews.0.seo_description}</p>
       </div>
       <ul>
         <?php foreach($list['hotNews'] as $key=>$value):?>
-        <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
+        <li><a href="<?php echo config('proxyDetail').$value['id'];?>" target="_blank">{$value.title}</a></li>
         <?php endforeach;?>
       </ul>
     </div>
@@ -70,7 +70,7 @@
       <h2>热门标签</h2>
       <ul class="clear">
         <?php foreach($list['hotLabel'] as $key=>$value):?>
-        <li><a href="{:url('/index/article/labellist/keyword/'.$key)}" target="_blank">{$key}</a></li>
+        <li><a href="<?php echo config('proxyLabel').$key;?>" target="_blank">{$key}</a></li>
         <?php endforeach;?>
       </ul>
     </div>

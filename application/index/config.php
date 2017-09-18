@@ -201,11 +201,11 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [ 
-	'__COMMON__'=>INSTALL_PATH.'public/common',
+	'__COMMON__'=>INSTALL_PATH.'zixun/public/common',
     '__ROOT__' => '/',
-	'__CSS__'=>INSTALL_PATH.'public/index/css',
-	'__JS__'=>INSTALL_PATH.'public/index/js',
-	'__IMG__'=>INSTALL_PATH.'public/index/images',
+	'__CSS__'=>INSTALL_PATH.'zixun/public/index/css',
+	'__JS__'=>INSTALL_PATH.'zixun/public/index/js',
+	'__IMG__'=>INSTALL_PATH.'zixun/public/index/images',
 	],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => APP_PATH . 'index' . DS . 'view/public/success.tpl',
@@ -303,4 +303,24 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    //自定义
+    'customConfig'=>'11111',
+    //分类详情
+    'oldList'=>'article/lists?id=',
+    'proxyList'=>'/zixun/lists/',
+    //新闻详情页
+    'oldDetail'=>'article/detail?id=',
+    'proxyDetail'=>'/zixun/detail/',
+    //标签详情页
+    'oldLabel'=>'/index/article/labellist/keyword/',
+    'proxyLabel'=>'/zixun/tag/',
+    //问答详情页
+    'oldQa'=>'question/lists?id=',
+    'proxyQa'=>'/zixun/wd/detail/',
+    //问答分类列表
+    'oldQaList'=>'question/lists?id=',
+    'proxyQaList'=>'/zixun/wd/lists/',
+    //百科列表
+    'oldBkList'=>'baike/detail?categoryId=',
+    'proxyBkList'=>'/zixun/bk/detail/',
 ];

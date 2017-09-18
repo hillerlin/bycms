@@ -8,17 +8,17 @@
   <div class="list_left fl">
     <div class="nav">当前位置:
       {foreach $pid as $vo}
-      <a href="{:url('article/lists?id='.$vo)}">{$vo|get_category_title}</a>    >
+      <a href="<?php echo config('proxyList').$vo;?>">{$vo|get_category_title}</a>    >
       {/foreach}
       <span>{$info.title}</span>
     </div>
     <div class="list_main">
-      <div class="ct"><a href="<?php echo $adList['url']?>"><img src="http://59.110.136.193:9017/<?php echo $adList['path']?>" alt=""></a></div>
+      <div class="ct"><a href="<?php echo $adList['url']?>"><img src="/zixun/<?php echo $adList['path']?>" alt=""></a></div>
       <h2 class="news_title">{$info.title}</h2>
 			<div class="news_mark">
         <span><?php echo date("Y-m-d",$info['create_time'])?></span>
         <label>分类：</label>
-        <a href="{:url('article/lists?id='.$pid[count($pid)-1])}" target="_blank">{$pid[count($pid)-1]|get_category_title}</a>
+        <a href="{:url(config('proxyList').$pid[count($pid)-1])}" target="_blank">{$pid[count($pid)-1]|get_category_title}</a>
         <label>来源：</label>
               <span>大麦理财</span>
       </div>
@@ -36,8 +36,8 @@
                 <?php endforeach;?>
 			</div>
 			<div class="prev_next clear">
-				<a href="{:url('article/detail?id='.($info['id']-1))}" class="prev fl" target="_blank"><b>上一篇：</b>{$info.id-1|get_document}</a>
-				<a href="{:url('article/detail?id='.($info['id']+1))}" class="next fr" target="_blank"><b>下一篇：</b>{$info.id+1|get_document}</a>
+				<a href="{:url(config('proxyDetail').($info['id']-1))}" class="prev fl" target="_blank"><b>上一篇：</b>{$info.id-1|get_document}</a>
+				<a href="{:url(config('proxyDetail').($info['id']+1))}" class="next fr" target="_blank"><b>下一篇：</b>{$info.id+1|get_document}</a>
 			</div>
     </div>
     <div class="related clear">
@@ -46,7 +46,7 @@
         <ul>
           <?php if($list['relateArticles']):?>
           <?php foreach($list['relateArticles'] as $key=>$value):?>
-          <li><a href="{:url('article/detail?id='.$key)}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
+          <li><a href="<?php echo config('proxyDetail').$key;?>" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time}</span></a></li>
           <?php endforeach;?>
           <?php endif;?>
         </ul>
@@ -56,7 +56,7 @@
         <ul>
           <?php if($list['relateQuestion']):?>
           <?php foreach($list['relateQuestion'] as $key=>$value):?>
-          <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
+          <li><a href="<?php echo config('proxyDetail').$value['id'];?>" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
           <?php endforeach;?>
           <?php endif;?>
         </ul>
@@ -78,12 +78,12 @@
     <div class="hot_news">
       <h2>热门文章</h2>
       <div class="hot_top">
-        <h3><a href="{:url('article/detail?id='.$list['hotNews'][0]['id'])}">{$list.hotNews.0.title}</a></h3>
+        <h3><a href="<?php echo config('proxyDetail').$list['hotNews'][0]['id'];?>">{$list.hotNews.0.title}</a></h3>
         <p>{$list.hotNews.0.seo_description}</p>
       </div>
       <ul>
         <?php foreach($list['hotNews'] as $key=>$value):?>
-        <li><a href="{:url('article/detail?id='.$value['id'])}" target="_blank">{$value.title}</a></li>
+        <li><a href="<?php echo config('proxyDetail').$value['id'];?>" target="_blank">{$value.title}</a></li>
         <?php endforeach;?>
       </ul>
     </div>
@@ -91,7 +91,7 @@
       <h2>热门标签</h2>
       <ul class="clear">
         <?php foreach($list['hotLabel'] as $key=>$value):?>
-        <li><a href="{:url('/index/article/labellist/keyword/'.$key)}" target="_blank">{$key}</a></li>
+        <li><a href="<?php echo config('proxyLabel').$key;?>" target="_blank">{$key}</a></li>
         <?php endforeach;?>
       </ul>
     </div>

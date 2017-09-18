@@ -11,22 +11,22 @@ $(function(){
 })
 function get_page_list(page,type){
   var perpage = $('.totalRows').data('perpage');//每页条数
-  var pagecount = Math.ceil(Number($('.totalRows').val())/perpage);
   $.ajax({
     type: "post",
     cache: true, 
     async: false,
-    url:'/index/question/lists',
+    url:'/zixun/wd/ajax',
     data: {'page':page,'id':type},
     dataType: "json",
     success: function (data){
       if(data.statusCode == 0){
+        pagecount = Math.ceil(data.count/perpage);
         $('.qa_tips').show().children('span').html(data.count);
         var html = '';
         var list = data.list;
         if(list.length != 0){
           $.each(list,function(k,v){
-            html += '<li><h2><a href="/index/question/detail?id='+v.id+'">'+v.title+'</a></h2><p>'+v.seo_description+'</p><div class="qa_mark"><a href="javascript:;" target="_blank">'+v.category_title+'</a><label>浏览：'+v.view+'</label><span>'+formatDate_ymd(v.create_time)+'</span></div></li>';
+            html += '<li><h2><a href="/zixun/detail/'+v.id+'">'+v.title+'</a></h2><p>'+v.seo_description+'</p><div class="qa_mark"><a href="javascript:;" target="_blank">'+v.category_title+'</a><label>浏览：'+v.view+'</label><span>'+formatDate_ymd(v.create_time)+'</span></div></li>';
           });
           $('.qa_list').html(html);
           /*分页模块*/

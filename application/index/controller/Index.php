@@ -10,14 +10,17 @@ class Index extends Home{
     
 	public function index(){
         //$aa=config('customConfig');
-	    $ids=['123','1143'];
+/*	    $ids=['123','1143'];
 	    $list=array_map('change_to_quotes',$ids);
-        $lists= implode(',',array_map('change_to_quotes',$ids));
-/*        $xunsearchObj = new xunsearchDecorator(xunsearch\SoClass::getInstance());
+        $lists= implode(',',array_map('change_to_quotes',$ids));*/
+/*        $xun=xunsearch\SoClass::getInstance();
+        $xun->clearIndex();
+        $xunsearchObj = new xunsearchDecorator(xunsearch\SoClass::getInstance());
 	    $sql="select id,description from bycms_document where description <>''";
 	    $list=Db::query($sql);
 	    foreach ($list as $key=>$value)
         {
+            var_dump($value['description']);
             $xunsearchObj->add(['id' => intval($value['id']), 'description' => $value['description']]);
         }*/
         //var_dump($xunsearchObj->query('',100,0));

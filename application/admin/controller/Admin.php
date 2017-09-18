@@ -67,6 +67,7 @@ class Admin extends Controller{
 		$this->assign('now', $now); 
 		
         $map['pid']=0;
+        $map['status']=1;
 		$group_id=$group_id?$group_id:1;
 		
 		if(C('ISDES')){
@@ -75,7 +76,7 @@ class Admin extends Controller{
 		  $group=Db::name('group')->order('sort asc')->where(['status'=>1])->select();
 		  $this->assign('group', $group);
 		}
-        $side=Db::name('Module')->where($map)->order('sort desc')->field("id,title,pid,font")->select();
+        $side=Db::name('Module')->where($map)->order('sort desc')->field("id,title,pid,font,status")->select();
         foreach( $side as $n=> $val ){
 				$map2["pid"]=$val['id'];
 			    $side[$n]['sid']=Db::name('Module')->where($map2)->field("id,title,pid,font")->order('sort desc')->select( );

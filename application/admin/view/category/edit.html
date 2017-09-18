@@ -37,9 +37,9 @@
 							
 						</div>
 							 <div class="input_title">关键字<span>(大麦理财：填d)</span></div>
-							 <input type="text" name="keywords" class="input_box" value='{$info.keywords}'/>
+							 <input type="text" name="keywords" class="input_box" value='{$info.keywords|default=""}'/>
 							 <div class="input_title">分类描述<span>在分类列表上做展示</span></div>
-							 <input type="text" name="description" class="input_box" value='{$info.description}'/>
+							 <input type="text" name="description" class="input_box" value='{$info.description|default=""}'/>
 
 					</div>
 <!--				       <div class="edit_content_tab none">
