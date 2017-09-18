@@ -39,6 +39,7 @@
           <?php if($list['relateQuestionByCategory']):?>
           <?php foreach($list['relateQuestionByCategory'] as $key=>$value):?>
           <li><a href="<?php echo config('proxyQa').$value['id']?>" target="_blank"><span class="fl">{$value.title}</span><span class="fr">{$value.create_time|date="Y-m-d",###}</span></a></li>
+
           <?php endforeach;?>
           <?php endif;?>
         </ul>

@@ -97,7 +97,7 @@
 			<h3>资讯分类</h3>
 			<ul>
 				<?php foreach($list['industryLabel'] as $ikey=>$ivalue):?>
-				<li><a href="<?php echo config('proxyLabel').$ivalue;?>" target="_blank"><?php echo $ivalue?></a></li>
+				<li><a href="<?php echo config('proxyLabel').$ivalue;?>" target="_blank" title="<?php echo $ivalue?>"><?php echo $ivalue?></a></li>
 				<?php endforeach;?>
 			</ul>
 		</div>
@@ -148,7 +148,7 @@
 			<h3>百科分类</h3>
 			<ul>
 				<?php foreach($list['knowledgebaseLabel'] as $kkey=>$kvalue):?>
-				<li><a href="<?php echo config('proxyLabel').$kvalue;?>" target="_blank"><?php echo $kvalue?></a></li>
+				<li><a href="<?php echo config('proxyLabel').$kvalue;?>" target="_blank" title="<?php echo $kvalue?>"><?php echo $kvalue?></a></li>
 				<?php endforeach;?>
 			</ul>
 		</div>
@@ -205,7 +205,7 @@
 			<h3>问答分类</h3>
 			<ul>
 				<?php foreach($list['questionLabel'] as $kkey=>$kvalue):?>
-				<li><a href="<?php echo config('proxyLabel').$kvalue;?>" class="clear" target="_blank"><?php echo $kvalue?></a></li>
+				<li><a href="<?php echo config('proxyLabel').$kvalue;?>" class="clear" target="_blank" title="<?php echo $kvalue?>"><?php echo $kvalue?></a></li>
 				<?php endforeach;?>
 			</ul>
 		</div>
