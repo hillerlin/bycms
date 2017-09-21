@@ -93,7 +93,7 @@ class Document extends Model{
 
     public function getByIds($ids,$jumpNum=0,$limit=10)
     {
-        $sql="select d.id,d.title as contents_title,d.create_time,d.description,d.seo_description,c.title as category_title 
+        $sql="select d.id,d.category_id,d.title as contents_title,d.create_time,d.description,d.seo_description,c.title as category_title 
               from bycms_document as d 
               left join bycms_category as c 
               on c.id=d.category_id where d.id in($ids) order by d.id ";

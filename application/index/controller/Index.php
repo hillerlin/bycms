@@ -13,7 +13,7 @@ class Index extends Home{
 /*	    $ids=['123','1143'];
 	    $list=array_map('change_to_quotes',$ids);
         $lists= implode(',',array_map('change_to_quotes',$ids));*/
-/*        $xun=xunsearch\SoClass::getInstance();
+/*       $xun=xunsearch\SoClass::getInstance();
         $xun->clearIndex();
         $xunsearchObj = new xunsearchDecorator(xunsearch\SoClass::getInstance());
 	    $sql="select id,description from bycms_document where description <>''";
